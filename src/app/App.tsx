@@ -884,13 +884,13 @@ export default function App() {
           <div style={{ maxWidth: 1200, margin: "0 auto", padding: "100px 64px" }}>
 
             {/* Heading block */}
-            <div style={{ maxWidth: 720, margin: "0 0 48px" }}>
+            <div style={{ maxWidth: 900, margin: "0 0 24px" }}>
               <h2 style={{
                 fontFamily: "'Switzer', sans-serif",
                 fontWeight: 600,
-                fontSize: "clamp(1.6rem, 2.4vw, 2.1rem)",
-                letterSpacing: "-0.01em",
-                lineHeight: 1.35,
+                fontSize: "clamp(1.35rem, 2vw, 1.75rem)",
+                letterSpacing: "-0.015em",
+                lineHeight: 1.2,
                 margin: 0,
                 color: C.charcoal,
               }}>
@@ -899,10 +899,10 @@ export default function App() {
               <p style={{
                 fontFamily: "'Switzer', sans-serif",
                 fontWeight: 400,
-                fontSize: "clamp(1.6rem, 2.4vw, 2.1rem)",
-                letterSpacing: "-0.01em",
-                lineHeight: 1.35,
-                margin: "4px 0 0",
+                fontSize: "clamp(1.35rem, 2vw, 1.75rem)",
+                letterSpacing: "-0.015em",
+                lineHeight: 1.2,
+                margin: "2px 0 0",
                 color: C.charcoalFaint,
               }}>
                 From upload to expert advice, all the way through.
