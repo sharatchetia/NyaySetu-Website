@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import { Briefcase, Home, Users, Building2, Scale, Shield, FileText, Bot, Tag, UserCheck, Heart } from "lucide-react";
 import tableUploadImg from "../assets/table-upload.png";
 import howItWorksVideo from "../assets/hero-bg.mp4";
 import bentoPlaceholderVideo from "../assets/hero-bg.mp4";
@@ -47,12 +48,12 @@ const docTypes = [
 
 /* ─── legal specializations (marketplace bento) ───── */
 const specializations = [
-  { id: "employment", label: "Employment",  blurb: "Contracts, disputes, workplace rights", icon: "💼", bg: "#DBEAFE", fg: "#1E40AF", col: "1 / 7",  row: "1 / 3", video: bentoPlaceholderVideo },
-  { id: "property",   label: "Property",    blurb: "Leases, sale deeds, disputes",           icon: "🏠", bg: "#FFEDD5", fg: "#9A3412", col: "7 / 12", row: "1 / 2" },
-  { id: "family",      label: "Family",      blurb: "Divorce, custody, inheritance",          icon: "👨‍👩‍👧", bg: "#FCE7F3", fg: "#9D174D", col: "7 / 12", row: "2 / 3", video: bentoPlaceholderVideo },
-  { id: "corporate",   label: "Corporate",   blurb: "Incorporation, compliance, M&A",         icon: "🏢", bg: "#D1FAE5", fg: "#065F46", col: "1 / 5",  row: "3 / 4" },
-  { id: "criminal",    label: "Criminal",    blurb: "Defense, bail, appeals",                 icon: "⚖️", bg: "#EDE9FE", fg: "#5B21B6", col: "5 / 9",  row: "3 / 4" },
-  { id: "insurance",   label: "Insurance",   blurb: "Claims, denials, disputes",              icon: "🛡️", bg: "#CFFAFE", fg: "#155E75", col: "9 / 12", row: "3 / 4" },
+  { id: "employment", label: "Employment",  blurb: "Contracts, disputes, workplace rights", icon: Briefcase, bg: "#DBEAFE", fg: "#1E40AF", col: "1 / 7",  row: "1 / 3", video: bentoPlaceholderVideo },
+  { id: "property",   label: "Property",    blurb: "Leases, sale deeds, disputes",           icon: Home, bg: "#FFEDD5", fg: "#9A3412", col: "7 / 12", row: "1 / 2" },
+  { id: "family",      label: "Family",      blurb: "Divorce, custody, inheritance",          icon: Users, bg: "#FCE7F3", fg: "#9D174D", col: "7 / 12", row: "2 / 3", video: bentoPlaceholderVideo },
+  { id: "corporate",   label: "Corporate",   blurb: "Incorporation, compliance, M&A",         icon: Building2, bg: "#D1FAE5", fg: "#065F46", col: "1 / 5",  row: "3 / 4" },
+  { id: "criminal",    label: "Criminal",    blurb: "Defense, bail, appeals",                 icon: Scale, bg: "#EDE9FE", fg: "#5B21B6", col: "5 / 9",  row: "3 / 4" },
+  { id: "insurance",   label: "Insurance",   blurb: "Claims, denials, disputes",              icon: Shield, bg: "#CFFAFE", fg: "#155E75", col: "9 / 12", row: "3 / 4" },
 ];
 
 /* ─── testimonials ────────────────────────────────── */
@@ -223,6 +224,7 @@ function SpecCard({ s }: { s: typeof specializations[0] & { video?: string } }) 
   const [hov, setHov] = useState(false);
   const isTall = parseInt(s.row.split(" / ")[1]) - parseInt(s.row.split(" / ")[0]) >= 2;
   const hasVideo = Boolean(s.video);
+  const IconComponent = s.icon;
 
   return (
     <div
@@ -290,9 +292,11 @@ function SpecCard({ s }: { s: typeof specializations[0] & { video?: string } }) 
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          fontSize: isTall ? "1.5rem" : "1.2rem",
+          color: hasVideo ? "#fff" : s.fg,
           flexShrink: 0,
-        }}>{s.icon}</div>
+        }}>
+          <IconComponent size={isTall ? 22 : 18} />
+        </div>
         <div style={{
           width: 32, height: 32,
           borderRadius: 9,
@@ -369,7 +373,7 @@ function PipelineDemo() {
         {/* Step 1: Document */}
         <div style={{ ...stepStyle(1), flex: 1 }}>
           <StepCard
-            icon="📄"
+            icon={<FileText size={15} color={C.charcoalSoft} />}
             label="Document"
             content={
               <div style={{
@@ -396,7 +400,7 @@ function PipelineDemo() {
         {/* Step 2: AI */}
         <div style={{ ...stepStyle(2), flex: 1 }}>
           <StepCard
-            icon="🤖"
+            icon={<Bot size={15} color={C.burgundy} />}
             label="NyaySetu AI"
             content={
               <div style={{
@@ -438,7 +442,7 @@ function PipelineDemo() {
         {/* Step 3: Category */}
         <div style={{ ...stepStyle(3), flex: 1 }}>
           <StepCard
-            icon="🏷️"
+            icon={<Tag size={15} color="#1E40AF" />}
             label="Classification"
             content={
               <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
@@ -456,7 +460,7 @@ function PipelineDemo() {
                   color: C.charcoalSoft,
                   padding: "0 2px",
                 }}>
-                  ⚠ Clause 7.3 — non-compete unusually broad
+                  Risk: Clause 7.3 — non-compete broad
                 </div>
               </div>
             }
@@ -469,7 +473,7 @@ function PipelineDemo() {
         {/* Step 4: Lawyer */}
         <div style={{ ...stepStyle(4), flex: 1 }}>
           <StepCard
-            icon="👩‍⚖️"
+            icon={<UserCheck size={15} color={C.charcoal} />}
             label="Suggested"
             content={
               <div style={{
@@ -482,7 +486,7 @@ function PipelineDemo() {
                   Ananya Sharma
                 </div>
                 <div style={{ color: "#1E40AF", fontSize: "0.76rem", marginBottom: 6 }}>
-                  Employment Law · ⭐ 4.9
+                  Employment Law · 4.9 Rating
                 </div>
                 <div style={{
                   background: "#1E40AF",
@@ -524,7 +528,7 @@ function PipelineDemo() {
   );
 }
 
-function StepCard({ icon, label, content }: { icon: string; label: string; content: React.ReactNode }) {
+function StepCard({ icon, label, content }: { icon: React.ReactNode; label: string; content: React.ReactNode }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
       <div style={{
@@ -1100,7 +1104,7 @@ export default function App() {
             textAlign: "center",
             border: `1px solid ${C.beigeAlpha}`,
           }}>
-            <div style={{ fontSize: "2.4rem", marginBottom: 16 }}>⚖️</div>
+            <div style={{ display: "flex", justifyContent: "center", marginBottom: 16 }}><Scale size={38} color={C.burgundy} /></div>
             <h2 style={{
               fontFamily: "'Switzer', sans-serif",
               fontWeight: 600,
@@ -1170,7 +1174,7 @@ export default function App() {
           </div>
           <div style={{ paddingTop: 32, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <span style={{ color: "rgba(255,255,255,0.28)", fontSize: "0.82rem" }}>© 2025 NyaySetu. All rights reserved.</span>
-            <span style={{ color: "rgba(255,255,255,0.28)", fontSize: "0.82rem" }}>Made with ♥ for India</span>
+            <span style={{ color: "rgba(255,255,255,0.28)", fontSize: "0.82rem", display: "inline-flex", alignItems: "center", gap: 4 }}>Made with <Heart size={12} color="#8C3D46" fill="#8C3D46" /> for India</span>
           </div>
         </div>
       </footer>
