@@ -832,29 +832,50 @@ export default function App() {
         </div>
         <Section bg="transparent">
           <div style={{ maxWidth: 1100, margin: "0 auto", textAlign: "left" }}>
-            <div style={{ margin: "0 0 48px" }}>
-              <h2 style={{
-                fontFamily: "'Switzer', sans-serif",
+            <div style={{
+              display: "flex",
+              alignItems: "flex-end",
+              justifyContent: "space-between",
+              gap: 32,
+              margin: "0 0 48px",
+            }}>
+              <div>
+                <h2 style={{
+                  fontFamily: "'Switzer', sans-serif",
+                  fontWeight: 600,
+                  fontSize: "clamp(1.35rem, 2vw, 1.75rem)",
+                  letterSpacing: "-0.015em",
+                  lineHeight: 1.2,
+                  margin: 0,
+                  color: C.charcoal,
+                }}>
+                  Once we understand your document,
+                </h2>
+                <p style={{
+                  fontFamily: "'Switzer', sans-serif",
+                  fontWeight: 400,
+                  fontSize: "clamp(1.35rem, 2vw, 1.75rem)",
+                  letterSpacing: "-0.015em",
+                  lineHeight: 1.2,
+                  margin: "2px 0 0",
+                  color: C.charcoalFaint,
+                }}>
+                  we find who can act on it.
+                </p>
+              </div>
+              <button style={{
+                background: C.burgundy,
+                color: "#fbf3ee",
+                border: "none",
+                borderRadius: R.btn,
+                padding: "14px 30px",
+                fontSize: "0.98rem",
                 fontWeight: 600,
-                fontSize: "clamp(1.35rem, 2vw, 1.75rem)",
-                letterSpacing: "-0.015em",
-                lineHeight: 1.2,
-                margin: 0,
-                color: C.charcoal,
-              }}>
-                Once we understand your document,
-              </h2>
-              <p style={{
-                fontFamily: "'Switzer', sans-serif",
-                fontWeight: 400,
-                fontSize: "clamp(1.35rem, 2vw, 1.75rem)",
-                letterSpacing: "-0.015em",
-                lineHeight: 1.2,
-                margin: "2px 0 0",
-                color: C.charcoalFaint,
-              }}>
-                we find who can act on it.
-              </p>
+                fontFamily: "inherit",
+                cursor: "pointer",
+                whiteSpace: "nowrap",
+                flexShrink: 0,
+              }}>Browse Marketplace →</button>
             </div>
 
             <div style={{
@@ -875,22 +896,11 @@ export default function App() {
                 letterSpacing: "-0.015em",
                 lineHeight: 1.2,
                 color: C.charcoalSoft,
-                margin: "0 0 24px",
+                margin: 0,
                 maxWidth: 800,
               }}>
                 Every specialization, every city, matched to exactly what your document needs. Not a directory to scroll through.
               </p>
-              <button style={{
-                background: C.burgundy,
-                color: "#fbf3ee",
-                border: "none",
-                borderRadius: R.btn,
-                padding: "14px 30px",
-                fontSize: "0.98rem",
-                fontWeight: 600,
-                fontFamily: "inherit",
-                cursor: "pointer",
-              }}>Browse Marketplace →</button>
             </div>
           </div>
         </Section>
