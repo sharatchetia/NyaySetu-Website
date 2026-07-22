@@ -235,7 +235,7 @@ function SpecCard({ s }: { s: typeof specializations[0] & { video?: string } }) 
         gridColumn: s.col,
         gridRow: s.row,
         background: s.bg,
-        borderRadius: R.card,
+        borderRadius: 0,
         overflow: "hidden",
         padding: hasVideo ? 0 : (isTall ? "32px 28px" : "26px 24px"),
         display: "flex",
@@ -489,8 +489,8 @@ function PipelineDemo() {
                   Employment Law · 4.9 Rating
                 </div>
                 <div style={{
-                  background: "#1E40AF",
-                  color: "#fff",
+                  background: "#000000",
+                  color: "#ffffff",
                   borderRadius: 8,
                   padding: "6px 12px",
                   fontSize: "0.76rem",
@@ -509,8 +509,8 @@ function PipelineDemo() {
           onClick={run}
           disabled={running}
           style={{
-            background: running ? C.beige : C.burgundy,
-            color: running ? C.charcoalSoft : "#fbf3ee",
+            background: running ? C.beige : "#000000",
+            color: running ? C.charcoalSoft : "#ffffff",
             border: "none",
             borderRadius: R.btn,
             padding: "12px 32px",
@@ -698,7 +698,7 @@ export default function App() {
         }}>
           <div style={{ maxWidth: 1200, margin: "0 auto", width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 24px", height: "100%", pointerEvents: "auto" }}>
             <div style={{ display: "flex", alignItems: "center", gap: 10, fontFamily: "'Switzer', sans-serif", fontWeight: 700, fontSize: "1.05rem", color: C.charcoal }}>
-              <div style={{ width: 26, height: 26, borderRadius: 9, background: C.burgundy, color: "#fbf3ee", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.85rem", fontWeight: 700, transform: "rotate(-6deg)" }}>N</div>
+              <div style={{ width: 26, height: 26, borderRadius: 8, background: "#000000", color: "#ffffff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.85rem", fontWeight: 700, transform: "rotate(-6deg)" }}>N</div>
               NyaySetu
             </div>
             <div style={{ display: "flex", gap: 36, fontSize: "0.9rem", color: C.charcoalSoft, alignItems: "center" }}>
@@ -706,7 +706,7 @@ export default function App() {
                 <a key={l} href="#" style={{ textDecoration: "none", color: "inherit", fontWeight: 500 }}>{l}</a>
               ))}
             </div>
-            <button style={{ display: "flex", alignItems: "center", justifyContent: "center", background: C.burgundy, color: "#fbf3ee", border: "none", borderRadius: R.btn, height: 40, padding: "0 20px", fontSize: "0.88rem", fontWeight: 600, cursor: "pointer", fontFamily: "inherit" }}>
+            <button style={{ display: "flex", alignItems: "center", justifyContent: "center", background: "#000000", color: "#ffffff", border: "none", borderRadius: R.btn, height: 40, padding: "0 20px", fontSize: "0.88rem", fontWeight: 600, cursor: "pointer", fontFamily: "inherit" }}>
               Get Started
             </button>
           </div>
@@ -864,11 +864,15 @@ export default function App() {
                 </p>
               </div>
               <button style={{
-                background: C.burgundy,
-                color: "#fbf3ee",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                height: 52,
+                background: "#000000",
+                color: "#ffffff",
                 border: "none",
                 borderRadius: R.btn,
-                padding: "14px 30px",
+                padding: "0 34px",
                 fontSize: "0.98rem",
                 fontWeight: 600,
                 fontFamily: "inherit",
@@ -1114,7 +1118,7 @@ export default function App() {
             textAlign: "center",
             border: `1px solid ${C.beigeAlpha}`,
           }}>
-            <div style={{ display: "flex", justifyContent: "center", marginBottom: 16 }}><Scale size={38} color={C.burgundy} /></div>
+            <div style={{ display: "flex", justifyContent: "center", marginBottom: 16 }}><Scale size={38} color={C.charcoal} /></div>
             <h2 style={{
               fontFamily: "'Switzer', sans-serif",
               fontWeight: 600,
@@ -1128,26 +1132,34 @@ export default function App() {
             </p>
             <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
               <button style={{
-                background: C.burgundy,
-                color: "#fbf3ee",
+                background: "#000000",
+                color: "#ffffff",
                 border: "none",
                 borderRadius: R.btn,
-                padding: "14px 36px",
+                height: 48,
+                padding: "0 36px",
                 fontSize: "1rem",
                 fontWeight: 600,
                 fontFamily: "inherit",
                 cursor: "pointer",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
               }}>Analyze Your Document →</button>
               <button style={{
                 background: "transparent",
-                color: C.charcoalSoft,
-                border: `1px solid ${C.beigeAlpha}`,
+                color: "#000000",
+                border: "1px solid #000000",
                 borderRadius: R.btn,
-                padding: "14px 28px",
+                height: 48,
+                padding: "0 28px",
                 fontSize: "1rem",
                 fontWeight: 500,
                 fontFamily: "inherit",
                 cursor: "pointer",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
               }}>Browse Lawyers</button>
             </div>
           </div>
@@ -1160,7 +1172,7 @@ export default function App() {
           <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 48, paddingBottom: 48, borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
             <div>
               <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16, fontFamily: "'Switzer', sans-serif", fontWeight: 700, fontSize: "1.1rem", color: "#fbf3ee" }}>
-                <div style={{ width: 26, height: 26, borderRadius: 8, background: C.burgundy, color: "#fbf3ee", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.85rem", fontWeight: 700, transform: "rotate(-6deg)" }}>N</div>
+                <div style={{ width: 26, height: 26, borderRadius: 8, background: "#000000", color: "#ffffff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.85rem", fontWeight: 700, transform: "rotate(-6deg)" }}>N</div>
                 NyaySetu
               </div>
               <p style={{ color: "rgba(255,255,255,0.45)", fontSize: "0.92rem", lineHeight: 1.7, maxWidth: 280, margin: 0 }}>
