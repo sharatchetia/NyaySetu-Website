@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import tableUploadImg from "../assets/table-upload.png";
 import howItWorksVideo from "../assets/hero-bg.mp4";
+import bentoPlaceholderVideo from "../assets/hero-bg.mp4";
 
 /* ─── palette ─────────────────────────────────────── */
 const C = {
@@ -46,9 +47,9 @@ const docTypes = [
 
 /* ─── legal specializations (marketplace bento) ───── */
 const specializations = [
-  { id: "employment", label: "Employment",  blurb: "Contracts, disputes, workplace rights", icon: "💼", bg: "#DBEAFE", fg: "#1E40AF", col: "1 / 7",  row: "1 / 3" },
+  { id: "employment", label: "Employment",  blurb: "Contracts, disputes, workplace rights", icon: "💼", bg: "#DBEAFE", fg: "#1E40AF", col: "1 / 7",  row: "1 / 3", video: bentoPlaceholderVideo },
   { id: "property",   label: "Property",    blurb: "Leases, sale deeds, disputes",           icon: "🏠", bg: "#FFEDD5", fg: "#9A3412", col: "7 / 12", row: "1 / 2" },
-  { id: "family",      label: "Family",      blurb: "Divorce, custody, inheritance",          icon: "👨‍👩‍👧", bg: "#FCE7F3", fg: "#9D174D", col: "7 / 12", row: "2 / 3" },
+  { id: "family",      label: "Family",      blurb: "Divorce, custody, inheritance",          icon: "👨‍👩‍👧", bg: "#FCE7F3", fg: "#9D174D", col: "7 / 12", row: "2 / 3", video: bentoPlaceholderVideo },
   { id: "corporate",   label: "Corporate",   blurb: "Incorporation, compliance, M&A",         icon: "🏢", bg: "#D1FAE5", fg: "#065F46", col: "1 / 5",  row: "3 / 4" },
   { id: "criminal",    label: "Criminal",    blurb: "Defense, bail, appeals",                 icon: "⚖️", bg: "#EDE9FE", fg: "#5B21B6", col: "5 / 9",  row: "3 / 4" },
   { id: "insurance",   label: "Insurance",   blurb: "Claims, denials, disputes",              icon: "🛡️", bg: "#CFFAFE", fg: "#155E75", col: "9 / 12", row: "3 / 4" },
@@ -218,20 +219,23 @@ function DocCard({ d, hovered, onHover, onLeave }: {
 /* Note: sized generously with room to grow — these tiles are built to
    later host a looping Jitter product-demo animation without changing
    the grid composition. */
-function SpecCard({ s }: { s: typeof specializations[0] }) {
+function SpecCard({ s }: { s: typeof specializations[0] & { video?: string } }) {
   const [hov, setHov] = useState(false);
   const isTall = parseInt(s.row.split(" / ")[1]) - parseInt(s.row.split(" / ")[0]) >= 2;
+  const hasVideo = Boolean(s.video);
 
   return (
     <div
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
       style={{
+        position: "relative",
         gridColumn: s.col,
         gridRow: s.row,
         background: s.bg,
         borderRadius: R.card,
-        padding: isTall ? "32px 28px" : "26px 24px",
+        overflow: "hidden",
+        padding: hasVideo ? 0 : (isTall ? "32px 28px" : "26px 24px"),
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
@@ -243,12 +247,46 @@ function SpecCard({ s }: { s: typeof specializations[0] }) {
           : "0 2px 8px -2px rgba(0,0,0,0.06)",
       }}
     >
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+      {hasVideo && (
+        <>
+          <video
+            src={s.video}
+            autoPlay
+            muted
+            loop
+            playsInline
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              transform: hov ? "scale(1.04)" : "scale(1)",
+              transition: "transform 0.5s cubic-bezier(.2,.8,.2,1)",
+            }}
+          />
+          <div style={{
+            position: "absolute",
+            inset: 0,
+            background: "linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,0.55) 100%)",
+          }} />
+        </>
+      )}
+
+      <div style={{
+        position: "relative",
+        zIndex: 1,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        padding: hasVideo ? (isTall ? "24px 24px 0" : "20px 20px 0") : 0,
+      }}>
         <div style={{
           width: isTall ? 52 : 42,
           height: isTall ? 52 : 42,
           borderRadius: 12,
           background: "rgba(255,255,255,0.55)",
+          backdropFilter: hasVideo ? "blur(6px)" : undefined,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -258,8 +296,9 @@ function SpecCard({ s }: { s: typeof specializations[0] }) {
         <div style={{
           width: 32, height: 32,
           borderRadius: 9,
-          background: `${s.fg}18`,
-          color: s.fg,
+          background: hasVideo ? "rgba(255,255,255,0.28)" : `${s.fg}18`,
+          color: hasVideo ? "#fff" : s.fg,
+          backdropFilter: hasVideo ? "blur(6px)" : undefined,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -269,15 +308,19 @@ function SpecCard({ s }: { s: typeof specializations[0] }) {
         }}>→</div>
       </div>
 
-      <div>
+      <div style={{
+        position: "relative",
+        zIndex: 1,
+        padding: hasVideo ? (isTall ? "0 28px 26px" : "0 22px 20px") : 0,
+      }}>
         <div style={{
           fontFamily: "'Switzer', sans-serif",
           fontWeight: 700,
           fontSize: isTall ? "1.3rem" : "1.05rem",
-          color: C.charcoal,
+          color: hasVideo ? "#fff" : C.charcoal,
           marginBottom: 6,
         }}>{s.label}</div>
-        <div style={{ fontSize: "0.86rem", color: s.fg, opacity: 0.85, lineHeight: 1.4 }}>
+        <div style={{ fontSize: "0.86rem", color: hasVideo ? "rgba(255,255,255,0.82)" : s.fg, opacity: hasVideo ? 1 : 0.85, lineHeight: 1.4 }}>
           {s.blurb}
         </div>
       </div>
@@ -784,47 +827,30 @@ export default function App() {
           </svg>
         </div>
         <Section bg="transparent">
-          <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "0.85fr 1.15fr", gap: 72, alignItems: "center" }}>
-            <div>
-              <div style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                fontSize: "0.78rem",
-                fontWeight: 600,
-                letterSpacing: "0.06em",
-                textTransform: "uppercase",
-                color: C.burgundy,
-                background: `${C.burgundy}12`,
-                padding: "5px 14px",
-                borderRadius: 999,
-                marginBottom: 22,
-              }}>✦ Meet the right lawyer</div>
+          <div style={{ maxWidth: 1100, margin: "0 auto", textAlign: "center" }}>
+            <div style={{ margin: "0 0 48px" }}>
               <h2 style={{
                 fontFamily: "'Switzer', sans-serif",
                 fontWeight: 600,
-                fontSize: "clamp(2rem, 3vw, 2.8rem)",
-                letterSpacing: "-0.02em",
+                fontSize: "clamp(1.35rem, 2vw, 1.75rem)",
+                letterSpacing: "-0.015em",
+                lineHeight: 1.2,
+                margin: 0,
                 color: C.charcoal,
-                lineHeight: 1.15,
-                margin: "0 0 20px",
               }}>
-                Once we understand<br />your document, we find<br />who can act on it.
+                Once we understand your document,
               </h2>
-              <p style={{ color: C.charcoalSoft, lineHeight: 1.7, fontSize: "1.02rem", margin: "0 0 36px", maxWidth: 420 }}>
-                Every specialization, every city, matched to exactly what your document needs — not a directory to scroll through.
+              <p style={{
+                fontFamily: "'Switzer', sans-serif",
+                fontWeight: 400,
+                fontSize: "clamp(1.35rem, 2vw, 1.75rem)",
+                letterSpacing: "-0.015em",
+                lineHeight: 1.2,
+                margin: "2px 0 0",
+                color: C.charcoalFaint,
+              }}>
+                we find who can act on it.
               </p>
-              <button style={{
-                background: C.burgundy,
-                color: "#fbf3ee",
-                border: "none",
-                borderRadius: R.btn,
-                padding: "14px 30px",
-                fontSize: "0.98rem",
-                fontWeight: 600,
-                fontFamily: "inherit",
-                cursor: "pointer",
-              }}>Browse Marketplace →</button>
             </div>
 
             <div style={{
@@ -832,9 +858,25 @@ export default function App() {
               gridTemplateColumns: "repeat(11, 1fr)",
               gridTemplateRows: "150px 130px 130px",
               gap: 14,
+              textAlign: "left",
             }}>
               {specializations.map(s => <SpecCard key={s.id} s={s} />)}
             </div>
+
+            <p style={{ color: C.charcoalSoft, lineHeight: 1.7, fontSize: "1.02rem", margin: "48px auto 32px", maxWidth: 480 }}>
+              Every specialization, every city, matched to exactly what your document needs. Not a directory to scroll through.
+            </p>
+            <button style={{
+              background: C.burgundy,
+              color: "#fbf3ee",
+              border: "none",
+              borderRadius: R.btn,
+              padding: "14px 30px",
+              fontSize: "0.98rem",
+              fontWeight: 600,
+              fontFamily: "inherit",
+              cursor: "pointer",
+            }}>Browse Marketplace →</button>
           </div>
         </Section>
       </div>
