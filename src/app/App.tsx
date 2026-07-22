@@ -1,26 +1,27 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import tableUploadImg from "../assets/table-upload.png";
+import howItWorksVideo from "../assets/hero-bg.mp4";
 
 /* ─── palette ─────────────────────────────────────── */
 const C = {
-  cream:        "#F8F3EA",
-  creamGlass:   "rgba(250,246,238,0.55)",
-  creamGlassHv: "rgba(250,246,238,0.68)",
+  cream:        "#FFFFFF",
+  creamGlass:   "rgba(255,255,255,0.55)",
+  creamGlassHv: "rgba(255,255,255,0.68)",
   charcoal:     "#2B2620",
   charcoalSoft: "#5A5348",
   charcoalFaint:"#A8A092",
   burgundy:     "#8C3D46",
   burgundyDeep: "#75323A",
-  beige:        "#EDE3D2",
+  beige:        "#F0EFEA",
   beigeAlpha:   "rgba(43,38,32,0.12)",
   shadow:       "rgba(43,38,32,0.16)",
-  off1:         "#FCFCFA",
-  off2:         "#F8F7F3",
-  off3:         "#F3F2EC",
+  off1:         "#FFFFFF",
+  off2:         "#FFFFFF",
+  off3:         "#FFFFFF",
   /* layered diagonal transition */
-  heroOverlay:    "#F8F5EE",
-  diagonalPlane:  "#F2ECE1",
-  sectionBg:      "#FCFBF8",
+  heroOverlay:    "#FFFFFF",
+  diagonalPlane:  "#FFFFFF",
+  sectionBg:      "#FFFFFF",
 };
 
 /* ─── shared corner radii ─────────────────────────── */
@@ -877,56 +878,128 @@ export default function App() {
         </Section>
       </div>
 
-      {/* ── AI PIPELINE ─── */}
+      {/* ── HOW IT WORKS ─── */}
       <div style={{ background: C.off2 }}>
         <Section bg="transparent">
           <div style={{ maxWidth: 1200, margin: "0 auto", padding: "100px 64px" }}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
+
+            {/* Heading block */}
+            <div style={{ maxWidth: 720, margin: "0 0 48px" }}>
+              <h2 style={{
+                fontFamily: "'Switzer', sans-serif",
+                fontWeight: 600,
+                fontSize: "clamp(1.6rem, 2.4vw, 2.1rem)",
+                letterSpacing: "-0.01em",
+                lineHeight: 1.35,
+                margin: 0,
+                color: C.charcoal,
+              }}>
+                One place to understand any legal document.
+              </h2>
+              <p style={{
+                fontFamily: "'Switzer', sans-serif",
+                fontWeight: 400,
+                fontSize: "clamp(1.6rem, 2.4vw, 2.1rem)",
+                letterSpacing: "-0.01em",
+                lineHeight: 1.35,
+                margin: "4px 0 0",
+                color: C.charcoalFaint,
+              }}>
+                From upload to expert advice, all the way through.
+              </p>
+            </div>
+
+            {/* Large video showcase */}
+            <div style={{
+              position: "relative",
+              overflow: "hidden",
+              background: C.charcoal,
+            }}>
+              <video
+                src={howItWorksVideo}
+                autoPlay
+                muted
+                loop
+                playsInline
+                style={{ width: "100%", height: "auto", display: "block" }}
+              />
+            </div>
+
+            {/* Detail copy — sits below the video now */}
+            <div style={{ maxWidth: 640, marginTop: 32 }}>
+              <p style={{ color: C.charcoalSoft, lineHeight: 1.6, fontSize: "1.05rem", margin: 0 }}>
+                NyaySetu reads your document, flags what matters, and connects you with the right lawyer, all in one flow.
+              </p>
+            </div>
+
+            {/* Explore links */}
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(2, 1fr)",
+              gap: "40px 64px",
+              marginTop: 48,
+              paddingTop: 40,
+              borderTop: `1px solid ${C.beigeAlpha}`,
+            }}>
               <div>
-                <div style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 8,
-                  fontSize: "0.78rem",
-                  fontWeight: 600,
-                  letterSpacing: "0.06em",
-                  textTransform: "uppercase",
-                  color: C.burgundy,
-                  background: `${C.burgundy}12`,
-                  padding: "5px 14px",
-                  borderRadius: 999,
-                  marginBottom: 20,
-                }}>✦ How it works</div>
-                <h2 style={{
+                <span style={{
+                  display: "inline-block",
+                  width: 8, height: 8,
+                  borderRadius: "50%",
+                  background: C.charcoal,
+                  marginBottom: 16,
+                }} />
+                <h3 style={{
                   fontFamily: "'Switzer', sans-serif",
                   fontWeight: 600,
-                  fontSize: "clamp(1.8rem, 2.6vw, 2.6rem)",
-                  letterSpacing: "-0.02em",
+                  fontSize: "1.15rem",
                   color: C.charcoal,
-                  lineHeight: 1.15,
-                  margin: "0 0 20px",
-                }}>
-                  From document<br />to decision — in seconds.
-                </h2>
-                <p style={{ color: C.charcoalSoft, lineHeight: 1.7, fontSize: "1.02rem", margin: "0 0 32px" }}>
-                  NyaySetu reads your document, identifies the legal category, flags unusual clauses, and connects you with the right lawyer. All in one flow.
+                  margin: "0 0 6px",
+                }}>Understand your document</h3>
+                <p style={{ color: C.charcoalSoft, fontSize: "0.95rem", lineHeight: 1.5, margin: "0 0 14px" }}>
+                  Get instant classification, plain-language summaries, and clause-level risk flags.
                 </p>
-                <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-                  {[
-                    ["📄", "Upload any legal document"],
-                    ["🤖", "AI reads every clause"],
-                    ["🏷️", "Classifies with 98% accuracy"],
-                    ["👩‍⚖️", "Matches you to a specialist"],
-                  ].map(([icon, text]) => (
-                    <div key={text as string} style={{ display: "flex", alignItems: "center", gap: 14, fontSize: "0.95rem", color: C.charcoal }}>
-                      <span style={{ fontSize: "1.2rem" }}>{icon}</span>
-                      <span>{text}</span>
-                    </div>
-                  ))}
-                </div>
+                <a href="#" style={{
+                  color: C.charcoal,
+                  fontSize: "0.95rem",
+                  fontWeight: 500,
+                  textDecoration: "underline",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 6,
+                }}>Explore document analysis →</a>
               </div>
-              <PipelineDemo />
+
+              <div>
+                <span style={{
+                  display: "inline-block",
+                  width: 8, height: 8,
+                  background: C.charcoal,
+                  transform: "rotate(45deg)",
+                  marginBottom: 16,
+                }} />
+                <h3 style={{
+                  fontFamily: "'Switzer', sans-serif",
+                  fontWeight: 600,
+                  fontSize: "1.15rem",
+                  color: C.charcoal,
+                  margin: "0 0 6px",
+                }}>Talk to a specialist</h3>
+                <p style={{ color: C.charcoalSoft, fontSize: "0.95rem", lineHeight: 1.5, margin: "0 0 14px" }}>
+                  Get matched with a vetted lawyer based on your document's category and case type.
+                </p>
+                <a href="#" style={{
+                  color: C.charcoal,
+                  fontSize: "0.95rem",
+                  fontWeight: 500,
+                  textDecoration: "underline",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 6,
+                }}>Explore the lawyer network →</a>
+              </div>
             </div>
+
           </div>
         </Section>
       </div>
