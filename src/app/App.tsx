@@ -827,12 +827,8 @@ export default function App() {
           </svg>
         </div>
         <Section bg="transparent">
-          <div style={{ maxWidth: 1100, margin: "0 auto", textAlign: "center" }}>
-            <div style={{
-              display: "inline-block",
-              textAlign: "left",
-              margin: "0 auto 48px",
-            }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto", textAlign: "left" }}>
+            <div style={{ margin: "0 0 48px" }}>
               <h2 style={{
                 fontFamily: "'Switzer', sans-serif",
                 fontWeight: 600,
@@ -869,11 +865,14 @@ export default function App() {
 
             <div style={{ textAlign: "left", marginTop: 48 }}>
               <p style={{
+                fontFamily: "'Switzer', sans-serif",
+                fontWeight: 400,
+                fontSize: "clamp(1.35rem, 2vw, 1.75rem)",
+                letterSpacing: "-0.015em",
+                lineHeight: 1.2,
                 color: C.charcoalSoft,
-                lineHeight: 1.7,
-                fontSize: "1.02rem",
                 margin: "0 0 24px",
-                maxWidth: 540,
+                maxWidth: 800,
               }}>
                 Every specialization, every city, matched to exactly what your document needs. Not a directory to scroll through.
               </p>
