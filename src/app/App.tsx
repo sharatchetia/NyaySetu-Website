@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import heroBgVideo from "../assets/hero-bg.mp4";
 import tableUploadImg from "../assets/table-upload.png";
 
 /* ─── palette ─────────────────────────────────────── */
@@ -9,6 +8,7 @@ const C = {
   creamGlassHv: "rgba(250,246,238,0.68)",
   charcoal:     "#2B2620",
   charcoalSoft: "#5A5348",
+  charcoalFaint:"#A8A092",
   burgundy:     "#8C3D46",
   burgundyDeep: "#75323A",
   beige:        "#EDE3D2",
@@ -201,7 +201,7 @@ function DocCard({ d, hovered, onHover, onLeave }: {
         width: "fit-content",
       }}>{d.tag}</span>
       <p style={{
-        fontFamily: "'Instrument Sans', sans-serif",
+        fontFamily: "'Switzer', sans-serif",
         fontWeight: 600,
         fontSize: "clamp(1rem, 1.4vw, 1.25rem)",
         color: C.charcoal,
@@ -270,7 +270,7 @@ function SpecCard({ s }: { s: typeof specializations[0] }) {
 
       <div>
         <div style={{
-          fontFamily: "'Instrument Sans', sans-serif",
+          fontFamily: "'Switzer', sans-serif",
           fontWeight: 700,
           fontSize: isTall ? "1.3rem" : "1.05rem",
           color: C.charcoal,
@@ -549,7 +549,7 @@ function TestimonialCard({ t }: { t: typeof testimonials[0] }) {
           alignItems: "center",
           justifyContent: "center",
           fontWeight: 700,
-          fontFamily: "'Instrument Sans', sans-serif",
+          fontFamily: "'Switzer', sans-serif",
         }}>{t.avatar}</div>
         <div>
           <div style={{ fontWeight: 600, fontSize: "0.92rem", color: C.charcoal }}>{t.user}</div>
@@ -617,66 +617,59 @@ export default function App() {
   
 
   return (
-    <div style={{ fontFamily: "'Inter', sans-serif", color: C.charcoal, WebkitFontSmoothing: "antialiased", overflowX: "hidden" }}>
+    <div style={{ fontFamily: "'Switzer', sans-serif", color: C.charcoal, WebkitFontSmoothing: "antialiased", overflowX: "hidden" }}>
 
       {/* ── TOP NAVBAR (post-hero) ───
-          Flush/transparent style (like jasoncameron.dev): no glass card, no
-          border, no blur, no shadow — the nav just floats directly on the
-          page background instead of reading as a distinct bar. */}
-      <nav style={{
+          Icy frosted look: a blurred backdrop layer sits behind the nav
+          content and fades out smoothly via a gradient mask, so scrolled
+          content blurs as it passes underneath without a hard cutoff line. */}
+      <div style={{
         position: "fixed",
         top: 0, left: 0, right: 0,
         zIndex: 9999,
-        height: 60,
-        background: "transparent",
-        border: "none",
-        display: "block",
-        padding: "0",
-        opacity: 1,
-        transform: "translateY(0)",
-        transition: "opacity 0.48s ease 0.08s, transform 0.52s cubic-bezier(.2,.8,.2,1) 0.08s",
+        height: 108,
         pointerEvents: "none",
       }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto", width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 24px", height: "100%", pointerEvents: "auto" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 10, fontFamily: "'Instrument Sans', sans-serif", fontWeight: 700, fontSize: "1.05rem", color: C.charcoal }}>
-            <div style={{ width: 26, height: 26, borderRadius: 9, background: C.burgundy, color: "#fbf3ee", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.85rem", fontWeight: 700, transform: "rotate(-6deg)" }}>N</div>
-            NyaySetu
+        {/* Fading frosted-glass layer */}
+        <div style={{
+          position: "absolute",
+          inset: 0,
+          background: "linear-gradient(to bottom, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.34) 55%, rgba(255,255,255,0) 100%)",
+          backdropFilter: "blur(18px) saturate(1.15)",
+          WebkitBackdropFilter: "blur(18px) saturate(1.15)",
+          maskImage: "linear-gradient(to bottom, black 0%, black 45%, transparent 96%)",
+          WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 45%, transparent 96%)",
+        }} />
+
+        <nav style={{
+          position: "relative",
+          height: 60,
+          opacity: 1,
+          transform: "translateY(0)",
+          transition: "opacity 0.48s ease 0.08s, transform 0.52s cubic-bezier(.2,.8,.2,1) 0.08s",
+        }}>
+          <div style={{ maxWidth: 1200, margin: "0 auto", width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 24px", height: "100%", pointerEvents: "auto" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, fontFamily: "'Switzer', sans-serif", fontWeight: 700, fontSize: "1.05rem", color: C.charcoal }}>
+              <div style={{ width: 26, height: 26, borderRadius: 9, background: C.burgundy, color: "#fbf3ee", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.85rem", fontWeight: 700, transform: "rotate(-6deg)" }}>N</div>
+              NyaySetu
+            </div>
+            <div style={{ display: "flex", gap: 36, fontSize: "0.9rem", color: C.charcoalSoft, alignItems: "center" }}>
+              {["Analyze", "Lawyers", "Resources", "About"].map(l => (
+                <a key={l} href="#" style={{ textDecoration: "none", color: "inherit", fontWeight: 500 }}>{l}</a>
+              ))}
+            </div>
+            <button style={{ display: "flex", alignItems: "center", justifyContent: "center", background: C.burgundy, color: "#fbf3ee", border: "none", borderRadius: R.btn, height: 40, padding: "0 20px", fontSize: "0.88rem", fontWeight: 600, cursor: "pointer", fontFamily: "inherit" }}>
+              Get Started
+            </button>
           </div>
-          <div style={{ display: "flex", gap: 36, fontSize: "0.9rem", color: C.charcoalSoft, alignItems: "center" }}>
-            {["Analyze", "Lawyers", "Resources", "About"].map(l => (
-              <a key={l} href="#" style={{ textDecoration: "none", color: "inherit", fontWeight: 500 }}>{l}</a>
-            ))}
-          </div>
-          <button style={{ display: "flex", alignItems: "center", justifyContent: "center", background: C.burgundy, color: "#fbf3ee", border: "none", borderRadius: R.btn, height: 40, padding: "0 20px", fontSize: "0.88rem", fontWeight: 600, cursor: "pointer", fontFamily: "inherit" }}>
-            Get Started
-          </button>
-        </div>
-      </nav>
+        </nav>
+      </div>
 
       {/* ── HERO ─── */}
-      <section style={{ position: "relative", height: "100vh", minHeight: "100vh", maxHeight: "100vh", display: "flex", flexDirection: "column", overflow: "hidden", background: C.cream }}>
+      <section style={{ position: "relative", height: "100vh", minHeight: "100vh", maxHeight: "100vh", display: "flex", flexDirection: "column", overflow: "hidden", background: "#FFFFFF" }}>
 
-        {/* Hero-only video stage */}
+        {/* Hero background (static, no video) */}
         <div style={{ position: "absolute", inset: 0, zIndex: 0, overflow: "hidden" }}>
-          <video
-            autoPlay
-            muted
-            playsInline
-            loop
-            aria-hidden="true"
-            style={{
-              position: "absolute",
-              inset: 0,
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              transform: "scale(1.06)",
-              filter: "grayscale(1) blur(8px) brightness(1.14) contrast(0.86)",
-            }}
-          >
-            <source src={heroBgVideo} type="video/mp4" />
-          </video>
-          <div style={{ position: "absolute", inset: 0, background: "rgba(248,245,238,0.68)" }} />
           <div className="nyay-sheen" style={{ position: "absolute", inset: 0 }} />
         </div>
 
@@ -688,39 +681,56 @@ export default function App() {
           zIndex: 2,
           flex: 1,
           display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          textAlign: "center",
-          padding: "96px 24px 32px",
-          paddingLeft: "24px",
+          alignItems: "stretch",
+          padding: "96px 64px 48px",
           transition: "padding-left 0.32s cubic-bezier(.2,.8,.2,1)",
           minHeight: 0,
         }}>
-          <h1 className="nyay-headline" style={{
-            flex: "0 0 auto",
-            fontFamily: "'Instrument Sans', sans-serif",
-            fontWeight: 600,
-            fontSize: "clamp(2.4rem, 5.4vw, 4.6rem)",
-            lineHeight: 1.08,
-            letterSpacing: "-0.02em",
-            color: C.charcoal,
-            margin: "0 0 16px",
-            maxWidth: "15ch",
+          <div style={{
+            maxWidth: 1200,
+            margin: "0 auto",
+            width: "100%",
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "stretch",
+            gap: 72,
+            minHeight: 0,
           }}>
-            Understand your law.<br />Make the right move.
-          </h1>
+          <div style={{
+            flex: "0 0 42%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            textAlign: "left",
+          }}>
+            <h1 className="nyay-headline" style={{
+              fontFamily: "'Switzer', sans-serif",
+              fontWeight: 600,
+              letterSpacing: "-0.02em",
+              color: C.charcoal,
+              margin: 0,
+              display: "flex",
+              flexDirection: "column",
+            }}>
+              <span style={{ display: "block", fontSize: "clamp(2.6rem, 5vw, 4.6rem)", lineHeight: 1.02, color: C.charcoal }}>Understand</span>
+              <span style={{ display: "block", fontSize: "clamp(2rem, 3.8vw, 3.4rem)", lineHeight: 1.05, color: C.charcoalFaint }}>your</span>
+              <span style={{ display: "block", fontSize: "clamp(1.4rem, 2.6vw, 2.1rem)", lineHeight: 1.1, color: C.charcoal }}>law.</span>
+              <span style={{ display: "block", fontSize: "clamp(2.6rem, 5vw, 4.6rem)", lineHeight: 1.02, marginTop: "0.12em", color: C.charcoal }}>Make</span>
+              <span style={{ display: "block", fontSize: "clamp(2rem, 3.8vw, 3.4rem)", lineHeight: 1.05, color: C.charcoalFaint }}>the</span>
+              <span style={{ display: "block", fontSize: "clamp(1.5rem, 2.8vw, 2.3rem)", lineHeight: 1.08, color: C.charcoalFaint }}>right</span>
+              <span style={{ display: "block", fontSize: "clamp(1.4rem, 2.6vw, 2.1rem)", lineHeight: 1.1, color: C.charcoal }}>move.</span>
+            </h1>
+          </div>
 
           <div className="nyay-card" style={{
             position: "relative",
-            flex: "1 1 auto",
+            flex: "1 1 56%",
             minHeight: 0,
-            width: "100%",
-            maxWidth: 1100,
-            cursor: "pointer",
-            transition: "transform 0.35s cubic-bezier(.2,.8,.2,1)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            cursor: "pointer",
+            transition: "transform 0.35s cubic-bezier(.2,.8,.2,1)",
           }}
           onMouseEnter={e => {
             (e.currentTarget as HTMLElement).style.transform = "translateY(-6px)";
@@ -746,7 +756,7 @@ export default function App() {
               pointerEvents: "none",
             }}>
               <div style={{
-                fontFamily: "'Instrument Sans', sans-serif",
+                fontFamily: "'Switzer', sans-serif",
                 fontWeight: 600,
                 fontSize: "clamp(1rem, 1.6vw, 1.3rem)",
                 color: C.charcoal,
@@ -758,6 +768,7 @@ export default function App() {
                 or <span style={{ color: C.burgundy, fontWeight: 600 }}>browse your files</span>
               </div>
             </div>
+          </div>
           </div>
         </div>
 
@@ -789,7 +800,7 @@ export default function App() {
                 marginBottom: 22,
               }}>✦ Meet the right lawyer</div>
               <h2 style={{
-                fontFamily: "'Instrument Sans', sans-serif",
+                fontFamily: "'Switzer', sans-serif",
                 fontWeight: 600,
                 fontSize: "clamp(2rem, 3vw, 2.8rem)",
                 letterSpacing: "-0.02em",
@@ -833,7 +844,7 @@ export default function App() {
           <div style={{ maxWidth: 1200, margin: "0 auto" }}>
             <p style={{
               textAlign: "center",
-              fontFamily: "'Instrument Sans', sans-serif",
+              fontFamily: "'Switzer', sans-serif",
               fontSize: "clamp(1.6rem, 2.8vw, 2.4rem)",
               fontWeight: 600,
               color: C.charcoal,
@@ -887,7 +898,7 @@ export default function App() {
                   marginBottom: 20,
                 }}>✦ How it works</div>
                 <h2 style={{
-                  fontFamily: "'Instrument Sans', sans-serif",
+                  fontFamily: "'Switzer', sans-serif",
                   fontWeight: 600,
                   fontSize: "clamp(1.8rem, 2.6vw, 2.6rem)",
                   letterSpacing: "-0.02em",
@@ -925,7 +936,7 @@ export default function App() {
         <Section bg="transparent">
           <div style={{ maxWidth: 1200, margin: "0 auto" }}>
             <p style={{
-              fontFamily: "'Instrument Sans', sans-serif",
+              fontFamily: "'Switzer', sans-serif",
               fontSize: "clamp(1.6rem, 2.8vw, 2.4rem)",
               fontWeight: 600,
               color: C.charcoal,
@@ -957,7 +968,7 @@ export default function App() {
           }}>
             <div style={{ fontSize: "2.4rem", marginBottom: 16 }}>⚖️</div>
             <h2 style={{
-              fontFamily: "'Instrument Sans', sans-serif",
+              fontFamily: "'Switzer', sans-serif",
               fontWeight: 600,
               fontSize: "clamp(1.8rem, 2.8vw, 2.6rem)",
               letterSpacing: "-0.02em",
@@ -1000,7 +1011,7 @@ export default function App() {
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 48, paddingBottom: 48, borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
             <div>
-              <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16, fontFamily: "'Instrument Sans', sans-serif", fontWeight: 700, fontSize: "1.1rem", color: "#fbf3ee" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16, fontFamily: "'Switzer', sans-serif", fontWeight: 700, fontSize: "1.1rem", color: "#fbf3ee" }}>
                 <div style={{ width: 26, height: 26, borderRadius: 8, background: C.burgundy, color: "#fbf3ee", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.85rem", fontWeight: 700, transform: "rotate(-6deg)" }}>N</div>
                 NyaySetu
               </div>
