@@ -488,11 +488,10 @@ function PipelineDemo() {
                 <div style={{ color: "#1E40AF", fontSize: "0.76rem", marginBottom: 6 }}>
                   Employment Law · 4.9 Rating
                 </div>
-                <div style={{
+                <div className="nyay-btn" style={{
                   background: "#000000",
                   color: "#ffffff",
-                  borderRadius: 8,
-                  padding: "6px 12px",
+                  padding: "8px 12px",
                   fontSize: "0.76rem",
                   fontWeight: 600,
                   textAlign: "center",
@@ -506,13 +505,13 @@ function PipelineDemo() {
 
       <div style={{ textAlign: "center", marginTop: 32 }}>
         <button
+          className="nyay-btn"
           onClick={run}
           disabled={running}
           style={{
             background: running ? C.beige : "#000000",
             color: running ? C.charcoalSoft : "#ffffff",
             border: "none",
-            borderRadius: R.btn,
             padding: "12px 32px",
             fontSize: "0.95rem",
             fontWeight: 600,
@@ -706,7 +705,7 @@ export default function App() {
                 <a key={l} href="#" style={{ textDecoration: "none", color: "inherit", fontWeight: 500 }}>{l}</a>
               ))}
             </div>
-            <button style={{ display: "flex", alignItems: "center", justifyContent: "center", background: "#000000", color: "#ffffff", border: "none", borderRadius: R.btn, height: 40, padding: "0 20px", fontSize: "0.88rem", fontWeight: 600, cursor: "pointer", fontFamily: "inherit" }}>
+            <button className="nyay-btn" style={{ display: "flex", alignItems: "center", justifyContent: "center", background: "#000000", color: "#ffffff", border: "none", height: 40, padding: "0 20px", fontSize: "0.88rem", fontWeight: 600, cursor: "pointer", fontFamily: "inherit" }}>
               Get Started
             </button>
           </div>
@@ -863,7 +862,7 @@ export default function App() {
                   we find who can act on it.
                 </p>
               </div>
-              <button style={{
+              <button className="nyay-btn" style={{
                 display: "inline-flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -871,7 +870,6 @@ export default function App() {
                 background: "#000000",
                 color: "#ffffff",
                 border: "none",
-                borderRadius: R.btn,
                 padding: "0 34px",
                 fontSize: "0.98rem",
                 fontWeight: 600,
@@ -1131,11 +1129,10 @@ export default function App() {
               Upload any legal document and understand exactly what you're signing.
             </p>
             <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
-              <button style={{
+              <button className="nyay-btn" style={{
                 background: "#000000",
                 color: "#ffffff",
                 border: "none",
-                borderRadius: R.btn,
                 height: 48,
                 padding: "0 36px",
                 fontSize: "1rem",
@@ -1146,11 +1143,10 @@ export default function App() {
                 alignItems: "center",
                 justifyContent: "center",
               }}>Analyze Your Document →</button>
-              <button style={{
+              <button className="nyay-btn" style={{
                 background: "transparent",
                 color: "#000000",
                 border: "1px solid #000000",
-                borderRadius: R.btn,
                 height: 48,
                 padding: "0 28px",
                 fontSize: "1rem",
