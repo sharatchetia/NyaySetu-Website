@@ -905,7 +905,7 @@ export default function App() {
                 margin: "2px 0 0",
                 color: C.charcoalFaint,
               }}>
-                From upload to expert advice, all the way through.
+                The process from upload to expert advice, all the way through.
               </p>
             </div>
 
