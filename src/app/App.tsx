@@ -965,7 +965,7 @@ export default function App() {
                   margin: "0 0 6px",
                 }}>Understand your document</h3>
                 <p style={{ color: C.charcoalSoft, fontSize: "0.95rem", lineHeight: 1.5, margin: "0 0 14px" }}>
-                  Get instant classification, plain-language summaries, and clause-level risk flags.
+                  Get instant classification, plain-language summaries,<br />and clause-level risk flags.
                 </p>
                 <a href="#" style={{
                   color: C.charcoal,
@@ -994,7 +994,7 @@ export default function App() {
                   margin: "0 0 6px",
                 }}>Talk to a specialist</h3>
                 <p style={{ color: C.charcoalSoft, fontSize: "0.95rem", lineHeight: 1.5, margin: "0 0 14px" }}>
-                  Get matched with a vetted lawyer based on your document's category and case type.
+                  Get matched with a vetted lawyer based on your<br />document's category and case type.
                 </p>
                 <a href="#" style={{
                   color: C.charcoal,
