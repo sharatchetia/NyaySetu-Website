@@ -926,8 +926,16 @@ export default function App() {
             </div>
 
             {/* Detail copy — sits below the video now */}
-            <div style={{ maxWidth: 640, marginTop: 32 }}>
-              <p style={{ color: C.charcoalSoft, lineHeight: 1.6, fontSize: "1.05rem", margin: 0 }}>
+            <div style={{ maxWidth: 900, marginTop: 24 }}>
+              <p style={{
+                fontFamily: "'Switzer', sans-serif",
+                fontWeight: 400,
+                fontSize: "clamp(1.35rem, 2vw, 1.75rem)",
+                letterSpacing: "-0.015em",
+                lineHeight: 1.2,
+                color: C.charcoalSoft,
+                margin: 0,
+              }}>
                 NyaySetu reads your document, flags what matters, and connects you with the right lawyer, all in one flow.
               </p>
             </div>
