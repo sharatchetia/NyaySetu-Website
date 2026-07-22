@@ -828,7 +828,11 @@ export default function App() {
         </div>
         <Section bg="transparent">
           <div style={{ maxWidth: 1100, margin: "0 auto", textAlign: "center" }}>
-            <div style={{ margin: "0 0 48px" }}>
+            <div style={{
+              display: "inline-block",
+              textAlign: "left",
+              margin: "0 auto 48px",
+            }}>
               <h2 style={{
                 fontFamily: "'Switzer', sans-serif",
                 fontWeight: 600,
@@ -863,20 +867,28 @@ export default function App() {
               {specializations.map(s => <SpecCard key={s.id} s={s} />)}
             </div>
 
-            <p style={{ color: C.charcoalSoft, lineHeight: 1.7, fontSize: "1.02rem", margin: "48px auto 32px", maxWidth: 480 }}>
-              Every specialization, every city, matched to exactly what your document needs. Not a directory to scroll through.
-            </p>
-            <button style={{
-              background: C.burgundy,
-              color: "#fbf3ee",
-              border: "none",
-              borderRadius: R.btn,
-              padding: "14px 30px",
-              fontSize: "0.98rem",
-              fontWeight: 600,
-              fontFamily: "inherit",
-              cursor: "pointer",
-            }}>Browse Marketplace →</button>
+            <div style={{ textAlign: "left", marginTop: 48 }}>
+              <p style={{
+                color: C.charcoalSoft,
+                lineHeight: 1.7,
+                fontSize: "1.02rem",
+                margin: "0 0 24px",
+                maxWidth: 540,
+              }}>
+                Every specialization, every city, matched to exactly what your document needs. Not a directory to scroll through.
+              </p>
+              <button style={{
+                background: C.burgundy,
+                color: "#fbf3ee",
+                border: "none",
+                borderRadius: R.btn,
+                padding: "14px 30px",
+                fontSize: "0.98rem",
+                fontWeight: 600,
+                fontFamily: "inherit",
+                cursor: "pointer",
+              }}>Browse Marketplace →</button>
+            </div>
           </div>
         </Section>
       </div>
