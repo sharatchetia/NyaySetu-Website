@@ -640,10 +640,10 @@ function SettlementTile() {
         background: "radial-gradient(circle at 85% 8%, rgba(255,255,255,0.5) 0%, transparent 42%), radial-gradient(circle at 10% 100%, rgba(0,0,0,0.16) 0%, transparent 55%)"
       }} />
 
-      <div style={{ ...badgeDark, background: "#E040B0", color: "#fff" }}>SETTLEMENT</div>
+      <div style={{ ...badgeDark, background: "#C23D68", color: "#fff" }}>SETTLEMENT</div>
 
       <div style={{ position: "relative", padding: 14, paddingTop: 32 }}>
-        <div style={{ fontSize: 15, fontWeight: 700, color: "#E040B0" }}>Settlement deed</div>
+        <div style={{ fontSize: 15, fontWeight: 700, color: "#C23D68" }}>Settlement deed</div>
       </div>
 
       {/* Floating Card */}
@@ -653,10 +653,10 @@ function SettlementTile() {
         boxShadow: "0 6px 16px rgba(0,0,0,0.18)"
       }}>
         <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 12 }}>
-          <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.05em", color: isSettled ? "#E040B0" : "#00F5C4", transition: "color 0.25s ease" }}>
+          <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.05em", color: isSettled ? "#C23D68" : "#00F5C4", transition: "color 0.25s ease" }}>
             {isSettled ? "SETTLED AMOUNT" : "OFFERED AMOUNT"}
           </div>
-          <div style={{ fontSize: 22, fontWeight: 700, color: isSettled ? "#E040B0" : "#241A08", letterSpacing: "-0.01em", transition: "color 0.25s ease" }}>
+          <div style={{ fontSize: 22, fontWeight: 700, color: isSettled ? "#C23D68" : "#241A08", letterSpacing: "-0.01em", transition: "color 0.25s ease" }}>
             ₹{amtVal}L
           </div>
         </div>
@@ -666,13 +666,13 @@ function SettlementTile() {
           <div ref={trackRef} style={{ position: "relative", height: 8, borderRadius: 999, background: "#E7E3D8" }}>
             <div style={{
               position: "absolute", top: 0, left: 0, height: "100%", borderRadius: 999,
-              background: isSettled ? "#E040B0" : "#00F5C4",
+              background: isSettled ? "#C23D68" : "#00F5C4",
               width: `${dragProgress * 100}%`,
               transition: "background 0.25s ease"
             }} />
             <div style={{
               position: "absolute", top: "50%", width: 22, height: 22, borderRadius: "50%",
-              background: isSettled ? "#E040B0" : "#00F5C4",
+              background: isSettled ? "#C23D68" : "#00F5C4",
               transform: "translate(-50%, -50%)",
               left: `${dragProgress * 100}%`,
               boxShadow: isGrabbed
@@ -690,7 +690,7 @@ function SettlementTile() {
           <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.05em", color: dragProgress < 0.5 ? "#00F5C4" : "#B9B2A0", transition: "color 0.3s ease" }}>
             OFFERED
           </span>
-          <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.05em", color: dragProgress >= 0.5 ? "#E040B0" : "#B9B2A0", transition: "color 0.3s ease" }}>
+          <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.05em", color: dragProgress >= 0.5 ? "#C23D68" : "#B9B2A0", transition: "color 0.3s ease" }}>
             SETTLED
           </span>
         </div>
