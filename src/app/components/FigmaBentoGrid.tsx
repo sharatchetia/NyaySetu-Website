@@ -64,6 +64,64 @@ const keyframeCss = `
 @keyframes fbg-dotLight2 { 0%,40%,100% { opacity:0.3; } 50%,90% { opacity:1; } }
 @keyframes fbg-dotLight3 { 0%,65%,100% { opacity:0.3; } 75%,95% { opacity:1; } }
 @keyframes fbg-arrowNudge { 0%,100% { transform:translateX(0); } 50% { transform:translateX(6px); } }
+
+@keyframes ssCameraMove {
+  0%   { transform:scale(1);    }
+  18%  { transform:scale(1.03); }
+  32%  { transform:scale(1.10); }
+  70%  { transform:scale(1.10); }
+  92%  { transform:scale(1.02); }
+  100% { transform:scale(1);    }
+}
+@keyframes ssCursor {
+  0%   { transform: translate(-95px,-15px); }
+  9%   { transform: translate(24px,104px); }
+  18%  { transform: translate(24px,104px); }
+  26%  { transform: translate(24px,138px); }
+  34%  { transform: translate(24px,138px); }
+  42%  { transform: translate(24px,172px); }
+  50%  { transform: translate(24px,172px); }
+  58%  { transform: translate(24px,172px); }
+  90%  { transform: translate(-105px,-10px); }
+  100% { transform: translate(-105px,-10px); }
+}
+@keyframes ssRipple1 { 0%,10% {opacity:0; transform:scale(0.15);} 13% {opacity:0.6; transform:scale(2);} 20% {opacity:0; transform:scale(2.6);} 100%{opacity:0;} }
+@keyframes ssRipple2 { 0%,27% {opacity:0; transform:scale(0.15);} 30% {opacity:0.6; transform:scale(2);} 37% {opacity:0; transform:scale(2.6);} 100%{opacity:0;} }
+@keyframes ssRipple3 { 0%,43% {opacity:0; transform:scale(0.15);} 46% {opacity:0.6; transform:scale(2);} 53% {opacity:0; transform:scale(2.6);} 100%{opacity:0;} }
+
+@keyframes ssBoxFill1 {
+  0%,11%  { background:rgba(255,255,255,0.12); transform:scale(1) rotate(0deg); }
+  13%     { transform:scale(1.3) rotate(-12deg); }
+  16%     { background:#F5D100; transform:scale(0.95) rotate(4deg); }
+  19%,92% { background:#F5D100; transform:scale(1) rotate(0deg); }
+  96%,100%{ background:rgba(255,255,255,0.12); transform:scale(1) rotate(0deg); }
+}
+@keyframes ssBoxFill2 {
+  0%,28%  { background:rgba(255,255,255,0.12); transform:scale(1) rotate(0deg); }
+  30%     { transform:scale(1.3) rotate(-12deg); }
+  33%     { background:#F5D100; transform:scale(0.95) rotate(4deg); }
+  36%,92% { background:#F5D100; transform:scale(1) rotate(0deg); }
+  96%,100%{ background:rgba(255,255,255,0.12); transform:scale(1) rotate(0deg); }
+}
+@keyframes ssBoxFill3 {
+  0%,44%  { background:rgba(255,255,255,0.12); transform:scale(1) rotate(0deg); }
+  46%     { transform:scale(1.3) rotate(-12deg); }
+  49%     { background:#F5D100; transform:scale(0.95) rotate(4deg); }
+  52%,92% { background:#F5D100; transform:scale(1) rotate(0deg); }
+  96%,100%{ background:rgba(255,255,255,0.12); transform:scale(1) rotate(0deg); }
+}
+
+@keyframes ssCheckDraw1 { 0%,13% { stroke-dashoffset:20; } 19%,92% { stroke-dashoffset:0; } 96%,100% { stroke-dashoffset:20; } }
+@keyframes ssCheckDraw2 { 0%,30% { stroke-dashoffset:20; } 36%,92% { stroke-dashoffset:0; } 96%,100% { stroke-dashoffset:20; } }
+@keyframes ssCheckDraw3 { 0%,46% { stroke-dashoffset:20; } 52%,92% { stroke-dashoffset:0; } 96%,100% { stroke-dashoffset:20; } }
+
+@keyframes ssLabelDim1 { 0%,13% { opacity:1; } 19%,92% { opacity:0.6; } 96%,100% { opacity:1; } }
+@keyframes ssLabelDim2 { 0%,30% { opacity:1; } 36%,92% { opacity:0.6; } 96%,100% { opacity:1; } }
+@keyframes ssLabelDim3 { 0%,46% { opacity:1; } 52%,92% { opacity:0.6; } 96%,100% { opacity:1; } }
+
+@keyframes ssStrike1 { 0%,13% { transform:translateY(-50%) scaleX(0); } 19%,92% { transform:translateY(-50%) scaleX(1); } 96%,100% { transform:translateY(-50%) scaleX(0); } }
+@keyframes ssStrike2 { 0%,30% { transform:translateY(-50%) scaleX(0); } 36%,92% { transform:translateY(-50%) scaleX(1); } 96%,100% { transform:translateY(-50%) scaleX(0); } }
+@keyframes ssStrike3 { 0%,46% { transform:translateY(-50%) scaleX(0); } 52%,92% { transform:translateY(-50%) scaleX(1); } 96%,100% { transform:translateY(-50%) scaleX(0); } }
 `;
 
 const tileBase: React.CSSProperties = {
@@ -785,17 +843,114 @@ function SettlementTile() {
 
 function ServiceSupplyTile() {
   return (
-    <div style={{ ...tileBase, background: "#E2664B" }}>
+    <div style={{ ...tileBase, background: "#111111" }}>
       <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(0deg, rgba(255,255,255,0.16) 0 1px, transparent 1px 13px)" }} />
-      <div style={{ ...badgeLight, color: "#8A2E1B" }}>SERVICE &amp; SUPPLY</div>
-      <div style={{ position: "relative", padding: 14, paddingTop: 38 }}>
-        <div style={{ fontSize: 14, fontWeight: 700, color: "#fff" }}>Service &amp; supply</div>
-      </div>
-      <div style={{ position: "absolute", left: 14, right: 14, bottom: 14 }}>
-        <div style={{ fontSize: 9, color: "rgba(255,255,255,0.85)", marginBottom: 5, letterSpacing: "0.03em" }}>SLA DELIVERY</div>
-        <div style={{ height: 5, background: "rgba(0,0,0,0.2)", borderRadius: 3 }}>
-          <div style={{ height: "100%", background: "#0A0A0A", borderRadius: 3, animation: "fbg-fillBar 4s ease infinite" }} />
+      <div style={{ ...badgeDark, background: "#F5D100", color: "#0A0A0A", zIndex: 10 }}>SERVICE &amp; SUPPLY</div>
+
+      <div style={{ position: "relative", width: "100%", height: "100%", transformOrigin: "34% 66%", animation: "ssCameraMove 6s ease infinite" }}>
+        <div style={{ position: "relative", padding: 14, paddingTop: 38 }}>
+          <div style={{ fontSize: 16, fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.03em", color: "#F5EFDD" }}>Service &amp; supply</div>
         </div>
+
+        {/* Row 1 */}
+        <div style={{ position: "absolute", top: 96, left: 14, display: "flex", alignItems: "center", gap: 10 }}>
+          <div style={{ position: "relative", width: 18, height: 18, flexShrink: 0, border: "1.8px solid #F5D100", animation: "ssBoxFill1 6s ease infinite" }}>
+            <svg width="18" height="18" viewBox="0 0 16 16" style={{ position: "absolute", top: 0, left: 0 }}>
+              <path d="M3.5 8.2l2.6 2.6 6-6.4" fill="none" stroke="#0A0A0A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="20" style={{ animation: "ssCheckDraw1 6s ease infinite" }} />
+            </svg>
+          </div>
+          <div style={{ position: "relative", display: "inline-block", fontSize: 14, fontWeight: 700, letterSpacing: "0.02em", textTransform: "uppercase", color: "#F5EFDD", animation: "ssLabelDim1 6s ease infinite" }}>
+            Delivery confirmed
+            <div style={{ position: "absolute", left: 0, right: 0, top: "50%", height: 0, borderTop: "2.5px solid #F5D100", transformOrigin: "left", animation: "ssStrike1 6s ease infinite" }} />
+          </div>
+        </div>
+
+        {/* Row 2 */}
+        <div style={{ position: "absolute", top: 130, left: 14, display: "flex", alignItems: "center", gap: 10 }}>
+          <div style={{ position: "relative", width: 18, height: 18, flexShrink: 0, border: "1.8px solid #F5D100", animation: "ssBoxFill2 6s ease infinite" }}>
+            <svg width="18" height="18" viewBox="0 0 16 16" style={{ position: "absolute", top: 0, left: 0 }}>
+              <path d="M3.5 8.2l2.6 2.6 6-6.4" fill="none" stroke="#0A0A0A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="20" style={{ animation: "ssCheckDraw2 6s ease infinite" }} />
+            </svg>
+          </div>
+          <div style={{ position: "relative", display: "inline-block", fontSize: 14, fontWeight: 700, letterSpacing: "0.02em", textTransform: "uppercase", color: "#F5EFDD", animation: "ssLabelDim2 6s ease infinite" }}>
+            QA sign-off
+            <div style={{ position: "absolute", left: 0, right: 0, top: "50%", height: 0, borderTop: "2.5px solid #F5D100", transformOrigin: "left", animation: "ssStrike2 6s ease infinite" }} />
+          </div>
+        </div>
+
+        {/* Row 3 */}
+        <div style={{ position: "absolute", top: 164, left: 14, display: "flex", alignItems: "center", gap: 10 }}>
+          <div style={{ position: "relative", width: 18, height: 18, flexShrink: 0, border: "1.8px solid #F5D100", animation: "ssBoxFill3 6s ease infinite" }}>
+            <svg width="18" height="18" viewBox="0 0 16 16" style={{ position: "absolute", top: 0, left: 0 }}>
+              <path d="M3.5 8.2l2.6 2.6 6-6.4" fill="none" stroke="#0A0A0A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="20" style={{ animation: "ssCheckDraw3 6s ease infinite" }} />
+            </svg>
+          </div>
+          <div style={{ position: "relative", display: "inline-block", fontSize: 14, fontWeight: 700, letterSpacing: "0.02em", textTransform: "uppercase", color: "#F5EFDD", animation: "ssLabelDim3 6s ease infinite" }}>
+            Invoice cleared
+            <div style={{ position: "absolute", left: 0, right: 0, top: "50%", height: 0, borderTop: "2.5px solid #F5D100", transformOrigin: "left", animation: "ssStrike3 6s ease infinite" }} />
+          </div>
+        </div>
+
+        {/* Ripples */}
+        <div style={{ position: "absolute", top: 92, left: 10, width: 26, height: 26, borderRadius: "50%", background: "#F5D100", animation: "ssRipple1 6s ease infinite" }} />
+        <div style={{ position: "absolute", top: 126, left: 10, width: 26, height: 26, borderRadius: "50%", background: "#F5D100", animation: "ssRipple2 6s ease infinite" }} />
+        <div style={{ position: "absolute", top: 160, left: 10, width: 26, height: 26, borderRadius: "50%", background: "#F5D100", animation: "ssRipple3 6s ease infinite" }} />
+
+        {/* Cursor */}
+        <div style={{ position: "absolute", top: 0, left: 0, animation: "ssCursor 6s ease infinite", width: 42, height: 52, transformOrigin: "top left" }}>
+          <svg width="42" height="52" viewBox="0 0 394 420" fill="none" style={{ filter: "drop-shadow(2px 2px 1px rgba(0,0,0,0.6))" }}>
+            <rect x="131.25" width="52.5" height="393.75" fill="#fff"/>
+            <rect x="78.75" y="183.75" width="26.25" height="131.25" fill="#fff"/>
+            <rect x="262.5" y="367.5" width="26.25" height="26.25" fill="#fff"/>
+            <rect x="105" y="236.25" width="236.25" height="105" fill="#fff"/>
+            <rect x="341.25" y="288.75" width="26.25" height="52.5" fill="#fff"/>
+            <rect x="367.5" y="157.5" width="26.25" height="131.25" fill="#fff"/>
+            <rect x="315" y="131.25" width="52.5" height="157.5" fill="#fff"/>
+            <rect x="315" y="157.5" width="26.25" height="26.25" fill="#fff"/>
+            <rect x="262.5" y="105" width="26.25" height="78.75" fill="#fff"/>
+            <rect x="236.25" y="236.25" width="26.25" height="105" fill="#fff"/>
+            <rect x="288.75" y="236.25" width="26.25" height="105" fill="#fff"/>
+            <rect x="315" y="341.25" width="26.25" height="78.75" fill="#fff"/>
+            <rect x="288.75" y="393.75" width="26.25" height="26.25" fill="#fff"/>
+            <rect x="131.25" y="393.75" width="131.25" height="26.25" fill="#fff"/>
+            <rect x="131.25" y="367.5" width="26.25" height="26.25" fill="#fff"/>
+            <rect x="105" y="341.25" width="26.25" height="26.25" fill="#fff"/>
+            <rect x="78.75" y="315" width="26.25" height="26.25" fill="#fff"/>
+            <rect x="52.5" y="262.5" width="26.25" height="52.5" fill="#fff"/>
+            <rect x="26.25" y="236.25" width="26.25" height="26.25" fill="#fff"/>
+            <rect y="183.75" width="26.25" height="52.5" fill="#fff"/>
+            <rect x="26.25" y="157.5" width="52.5" height="105" fill="#fff"/>
+            <rect x="183.75" y="105" width="131.25" height="288.75" fill="#fff"/>
+            <rect x="183.75" y="26.25" width="26.25" height="157.5" fill="#fff"/>
+            <rect x="105" y="26.25" width="26.25" height="236.25" fill="#fff"/>
+            {/* Black outlines */}
+            <rect x="131.25" width="52.5" height="26.25" fill="#0A0A0A"/>
+            <rect x="78.75" y="183.75" width="26.25" height="26.25" fill="#0A0A0A"/>
+            <rect x="262.5" y="367.5" width="26.25" height="26.25" fill="#0A0A0A"/>
+            <rect x="183.75" y="236.25" width="26.25" height="105" fill="#0A0A0A"/>
+            <rect x="341.25" y="288.75" width="26.25" height="52.5" fill="#0A0A0A"/>
+            <rect x="367.5" y="157.5" width="26.25" height="131.25" fill="#0A0A0A"/>
+            <rect x="315" y="131.25" width="52.5" height="26.25" fill="#0A0A0A"/>
+            <rect x="315" y="157.5" width="26.25" height="26.25" fill="#0A0A0A"/>
+            <rect x="262.5" y="105" width="26.25" height="78.75" fill="#0A0A0A"/>
+            <rect x="236.25" y="236.25" width="26.25" height="105" fill="#0A0A0A"/>
+            <rect x="288.75" y="236.25" width="26.25" height="105" fill="#0A0A0A"/>
+            <rect x="315" y="341.25" width="26.25" height="78.75" fill="#0A0A0A"/>
+            <rect x="288.75" y="393.75" width="26.25" height="26.25" fill="#0A0A0A"/>
+            <rect x="131.25" y="393.75" width="131.25" height="26.25" fill="#0A0A0A"/>
+            <rect x="131.25" y="367.5" width="26.25" height="26.25" fill="#0A0A0A"/>
+            <rect x="105" y="341.25" width="26.25" height="26.25" fill="#0A0A0A"/>
+            <rect x="78.75" y="315" width="26.25" height="26.25" fill="#0A0A0A"/>
+            <rect x="52.5" y="262.5" width="26.25" height="52.5" fill="#0A0A0A"/>
+            <rect x="26.25" y="236.25" width="26.25" height="26.25" fill="#0A0A0A"/>
+            <rect y="183.75" width="26.25" height="52.5" fill="#0A0A0A"/>
+            <rect x="26.25" y="157.5" width="52.5" height="26.25" fill="#0A0A0A"/>
+            <rect x="183.75" y="105" width="131.25" height="26.25" fill="#0A0A0A"/>
+            <rect x="183.75" y="26.25" width="26.25" height="157.5" fill="#0A0A0A"/>
+            <rect x="105" y="26.25" width="26.25" height="236.25" fill="#0A0A0A"/>
+          </svg>
+        </div>
+
       </div>
     </div>
   );
