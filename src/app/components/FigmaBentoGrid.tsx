@@ -1297,10 +1297,13 @@ function MoreTile({ onClick }: { onClick?: () => void }) {
   return (
     <div style={{ ...tileBase, background: "#F3EFE3", cursor: onClick ? "pointer" : "default" }} onClick={onClick}>
       <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(rgba(10,10,10,0.05) 1px, transparent 1px)", backgroundSize: "16px 16px" }} />
-      <div style={{ position: "absolute", left: -6, bottom: -24, fontSize: 96, fontWeight: 700, color: "#0A0A0A", lineHeight: 0.85, letterSpacing: "-0.03em" }}>MORE</div>
-      <div style={{ position: "absolute", top: 14, left: 14, fontSize: 10, fontWeight: 600, color: "#5A5348", letterSpacing: "0.03em" }}>9 CLASSES</div>
-      <div style={{ position: "absolute", top: 14, right: 14, animation: "fbg-arrowNudge 1.6s ease infinite" }}>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" strokeWidth={2.4}><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+      <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", gap: 16, transform: "translateY(-6px)" }}>
+        <span style={{ fontSize: 76, fontWeight: 800, color: "#0A0A0A", lineHeight: 1, letterSpacing: "-0.03em" }}>MORE</span>
+        <div style={{ animation: "fbg-arrowNudge 1.6s ease infinite", display: "flex", alignItems: "center" }}>
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </div>
       </div>
     </div>
   );
