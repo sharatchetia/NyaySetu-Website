@@ -990,10 +990,6 @@ function ShareholderTile() {
       <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-radial-gradient(circle at 78% 22%, rgba(255,255,255,0.12) 0 1px, transparent 1px 13px)" }} />
       <div style={{ ...badgeDark, background: "#D9F99D", color: "#0A0A0A", zIndex: 10 }}>SHAREHOLDER</div>
 
-      <div style={{ position: "relative", padding: 14, paddingTop: 32 }}>
-        <div style={{ fontSize: 14, fontWeight: 700, color: "#fff" }}>Shareholder rights</div>
-      </div>
-
       {/* Baseline axis */}
       <div style={{ position: "absolute", left: 40, right: 40, bottom: 30, height: 2, background: "rgba(255,255,255,0.3)", zIndex: 1 }} />
 
