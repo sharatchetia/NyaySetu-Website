@@ -173,16 +173,71 @@ function EmploymentTile() {
 }
 
 function LeaseTile() {
+  const [days, setDays] = useState(47);
+  const [offset, setOffset] = useState(0);
+  const [isUrgent, setIsUrgent] = useState(false);
+
+  useEffect(() => {
+    const CIRC = 94.2;
+    const LOOP = 10;
+    let animId: number;
+    const startTime = Date.now();
+
+    const frame = () => {
+      const elapsed = (Date.now() - startTime) / 1000;
+      const t = elapsed % LOOP;
+      const frac = Math.min(t / (LOOP * 0.9), 1);
+      const currentDays = Math.round(47 - frac * 44);
+      setDays(currentDays);
+      setOffset(parseFloat((CIRC * frac).toFixed(1)));
+      setIsUrgent(currentDays <= 10);
+      animId = requestAnimationFrame(frame);
+    };
+
+    animId = requestAnimationFrame(frame);
+    return () => cancelAnimationFrame(animId);
+  }, []);
+
   return (
     <div style={{ ...tileBase, background: "#7CAEE0" }}>
       <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(rgba(255,255,255,0.35) 1px, transparent 1px)", backgroundSize: "8px 8px" }} />
-      <div style={{ ...badgeLight, color: "#1D4488" }}>RENTAL &amp; LEASE</div>
-      <div style={{ position: "relative", padding: 14, paddingTop: 38 }}>
-        <div style={{ fontSize: 14, fontWeight: 700, color: "#0A2A5C" }}>Rental agreement</div>
-      </div>
-      <div style={{ position: "absolute", left: 14, bottom: 14, background: "#0A0A0A", color: "#fff", borderRadius: 6, padding: "8px 10px" }}>
-        <div style={{ fontSize: 9, color: "#D6E4F7", letterSpacing: "0.03em" }}>RENEWAL IN</div>
-        <div style={{ fontSize: 16, fontWeight: 700 }}>47 days</div>
+      <div style={{ ...badgeLight, color: "#1D4488", zIndex: 2 }}>RENTAL AND LEASE</div>
+      <div style={{
+        position: "absolute",
+        left: "50%",
+        top: "calc(28px + (210px - 28px - 14px) / 2)",
+        transform: "translate(-50%, -50%)",
+        width: "88%",
+        height: "calc(210px - 28px - 14px)",
+        background: isUrgent ? "linear-gradient(135deg, #B84C71, #7A2846)" : "linear-gradient(135deg, #E993B4, #C23D68)",
+        color: "#fff",
+        borderRadius: 999,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 8,
+        transition: "box-shadow 0.3s ease, background 0.3s ease",
+        boxShadow: isUrgent ? "0 0 0 3px rgba(153,53,86,0.4)" : "0 0 0 0 rgba(153,53,86,0)",
+      }}>
+        <svg width="56" height="56" viewBox="0 0 34 34">
+          <circle cx="17" cy="17" r="15" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="3" />
+          <circle
+            cx="17" cy="17" r="15"
+            fill="none"
+            stroke="#fff"
+            strokeWidth="3"
+            strokeDasharray="94.2"
+            strokeDashoffset={offset}
+            strokeLinecap="round"
+            transform="rotate(-90 17 17)"
+            style={{ transition: "stroke 0.3s" }}
+          />
+        </svg>
+        <div style={{ textAlign: "center" }}>
+          <div style={{ fontSize: 10, color: "#FBEAF0", letterSpacing: "0.03em" }}>RENEWAL IN</div>
+          <div style={{ fontSize: 20, fontWeight: 500, color: "#fff", transition: "color 0.3s" }}>{days} days</div>
+        </div>
       </div>
     </div>
   );
