@@ -188,6 +188,55 @@ const keyframeCss = `
   64%,82% { opacity:1; transform:translateY(0); }
   94%,100%{ opacity:0; transform:translateY(3px); }
 }
+
+@keyframes handlePos {
+  0%,8%    { transform:translateX(-8px); }
+  24%,42%  { transform:translateX(122px); }
+  58%,76%  { transform:translateX(252px); }
+  92%,100% { transform:translateX(-8px); }
+}
+@keyframes handleBounce {
+  0%,6%    { transform:scale(1); }
+  8%       { transform:scale(0.82); }
+  10%,22%  { transform:scale(1); }
+  24%      { transform:scale(1.3); }
+  26%,40%  { transform:scale(1); }
+  42%      { transform:scale(0.82); }
+  44%,56%  { transform:scale(1); }
+  58%      { transform:scale(1.3); }
+  60%,74%  { transform:scale(1); }
+  76%      { transform:scale(0.82); }
+  78%,90%  { transform:scale(1); }
+  92%      { transform:scale(1.3); }
+  94%,100% { transform:scale(1); }
+}
+@keyframes cur5 {
+  0%,4%    { transform: translate(-60px, -40px); }
+  8%       { transform: translate(17px, 128px); }
+  24%,42%  { transform: translate(147px, 128px); }
+  58%,76%  { transform: translate(277px, 128px); }
+  92%,94%  { transform: translate(17px, 128px); }
+  98%,100% { transform: translate(-60px, -40px); }
+}
+@keyframes clickRipple5 {
+  0%,6%   { opacity:0; transform:scale(0.15); }
+  10%     { opacity:0.5; transform:scale(2.1); }
+  16%,100%{ opacity:0; }
+}
+@keyframes labelActive1 {
+  0%,10%   { background:#0A0A0A; color:#fff; }
+  20%,100% { background:transparent; color:rgba(255,255,255,0.75); }
+}
+@keyframes labelActive2 {
+  0%,20%   { background:transparent; color:rgba(255,255,255,0.75); }
+  26%,40%  { background:#0A0A0A; color:#fff; }
+  46%,100% { background:transparent; color:rgba(255,255,255,0.75); }
+}
+@keyframes labelActive3 {
+  0%,54%   { background:transparent; color:rgba(255,255,255,0.75); }
+  60%,74%  { background:#0A0A0A; color:#fff; }
+  80%,100% { background:transparent; color:rgba(255,255,255,0.75); }
+}
 `;
 
 const tileBase: React.CSSProperties = {
@@ -1159,16 +1208,78 @@ function LitigationTile() {
   return (
     <div style={{ ...tileBase, background: "#B5482E" }}>
       <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(70deg, rgba(255,255,255,0.14) 0 3px, transparent 3px 12px)" }} />
-      <div style={{ ...badgeLight, color: "#7A2E1B" }}>DISPUTE</div>
+      <div style={{ ...badgeLight, color: "#7A2E1B", zIndex: 10 }}>DISPUTE</div>
+
       <div style={{ position: "relative", padding: 14, paddingTop: 38 }}>
         <div style={{ fontSize: 14, fontWeight: 700, color: "#fff" }}>Litigation notice</div>
       </div>
-      <div style={{ position: "absolute", left: 14, right: 14, bottom: 18, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <div style={{ width: 9, height: 9, borderRadius: "50%", background: "#fff", animation: "fbg-dotLight1 4s ease infinite" }} />
-        <div style={{ flex: 1, height: 1, background: "rgba(255,255,255,0.4)", margin: "0 4px" }} />
-        <div style={{ width: 9, height: 9, borderRadius: "50%", background: "#fff", animation: "fbg-dotLight2 4s ease infinite" }} />
-        <div style={{ flex: 1, height: 1, background: "rgba(255,255,255,0.4)", margin: "0 4px" }} />
-        <div style={{ width: 9, height: 9, borderRadius: "50%", background: "#fff", animation: "fbg-dotLight3 4s ease infinite" }} />
+
+      {/* Track */}
+      <div style={{ position: "absolute", left: 30, top: 130, width: 260, height: 4, background: "rgba(255,255,255,0.4)" }}>
+        {/* Ticks */}
+        <div style={{ position: "absolute", left: 0, top: -4, width: 2, height: 12, background: "#fff" }} />
+        <div style={{ position: "absolute", left: 129, top: -4, width: 2, height: 12, background: "#fff" }} />
+        <div style={{ position: "absolute", left: 258, top: -4, width: 2, height: 12, background: "#fff" }} />
+
+        {/* Labels */}
+        <div style={{ position: "absolute", left: 0, top: 16, fontSize: 9, fontWeight: 700, letterSpacing: "0.04em", padding: "3px 6px", marginLeft: -6, animation: "labelActive1 12s ease-in-out infinite" }}>LEGAL</div>
+        <div style={{ position: "absolute", left: 130, top: 16, transform: "translateX(-50%)", fontSize: 9, fontWeight: 700, letterSpacing: "0.04em", padding: "3px 6px", whiteSpace: "nowrap", animation: "labelActive2 12s ease-in-out infinite" }}>STANDARD</div>
+        <div style={{ position: "absolute", left: 260, top: 16, transform: "translateX(-100%)", fontSize: 9, fontWeight: 700, letterSpacing: "0.04em", padding: "3px 6px", marginLeft: 6, animation: "labelActive3 12s ease-in-out infinite" }}>PLAIN</div>
+
+        {/* Handle */}
+        <div style={{ position: "absolute", top: -7, left: 0, width: 18, height: 18, animation: "handlePos 12s ease-in-out infinite" }}>
+          <div style={{ width: "100%", height: "100%", borderRadius: "50%", background: "#fff", border: "2px solid #0A0A0A", boxShadow: "0 2px 4px rgba(0,0,0,0.35)", animation: "handleBounce 12s ease-in-out infinite" }} />
+        </div>
+      </div>
+
+      {/* Ripple */}
+      <div style={{ position: "absolute", top: 0, left: 0, width: 40, height: 40, borderRadius: "50%", background: "#fff", marginLeft: 11, marginTop: 111, animation: "clickRipple5 12s ease infinite" }} />
+
+      {/* Cursor */}
+      <div style={{ position: "absolute", top: 0, left: 0, animation: "cur5 12s ease-in-out infinite", width: 36, height: 44, transformOrigin: "top left", zIndex: 5 }}>
+        <svg width="36" height="44" viewBox="0 0 394 420" fill="none" style={{ filter: "drop-shadow(2px 2px 1px rgba(0,0,0,0.6))" }}>
+          <rect x="131.25" width="52.5" height="393.75" fill="#fff"/>
+          <rect x="78.75" y="183.75" width="26.25" height="131.25" fill="#fff"/>
+          <rect x="262.5" y="367.5" width="26.25" height="26.25" fill="#fff"/>
+          <rect x="105" y="236.25" width="236.25" height="105" fill="#fff"/>
+          <rect x="341.25" y="288.75" width="26.25" height="52.5" fill="#fff"/>
+          <rect x="367.5" y="157.5" width="26.25" height="131.25" fill="#fff"/>
+          <rect x="315" y="131.25" width="52.5" height="157.5" fill="#fff"/>
+          <rect x="315" y="157.5" width="26.25" height="26.25" fill="#fff"/>
+          <rect x="262.5" y="105" width="26.25" height="78.75" fill="#fff"/>
+          <rect x="236.25" y="236.25" width="26.25" height="105" fill="#fff"/>
+          <rect x="288.75" y="236.25" width="26.25" height="105" fill="#fff"/>
+          <rect x="315" y="341.25" width="26.25" height="78.75" fill="#fff"/>
+          <rect x="288.75" y="393.75" width="26.25" height="26.25" fill="#fff"/>
+          <rect x="131.25" y="393.75" width="131.25" height="26.25" fill="#fff"/>
+          <rect x="131.25" y="367.5" width="26.25" height="26.25" fill="#fff"/>
+          <rect x="105" y="341.25" width="26.25" height="26.25" fill="#fff"/>
+          {/* Black outlines */}
+          <rect x="131.25" width="52.5" height="26.25" fill="#0A0A0A"/>
+          <rect x="78.75" y="183.75" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="262.5" y="367.5" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="183.75" y="236.25" width="26.25" height="105" fill="#0A0A0A"/>
+          <rect x="341.25" y="288.75" width="26.25" height="52.5" fill="#0A0A0A"/>
+          <rect x="367.5" y="157.5" width="26.25" height="131.25" fill="#0A0A0A"/>
+          <rect x="315" y="131.25" width="52.5" height="26.25" fill="#0A0A0A"/>
+          <rect x="315" y="157.5" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="262.5" y="105" width="26.25" height="78.75" fill="#0A0A0A"/>
+          <rect x="236.25" y="236.25" width="26.25" height="105" fill="#0A0A0A"/>
+          <rect x="288.75" y="236.25" width="26.25" height="105" fill="#0A0A0A"/>
+          <rect x="315" y="341.25" width="26.25" height="78.75" fill="#0A0A0A"/>
+          <rect x="288.75" y="393.75" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="131.25" y="393.75" width="131.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="131.25" y="367.5" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="105" y="341.25" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="78.75" y="315" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="52.5" y="262.5" width="26.25" height="52.5" fill="#0A0A0A"/>
+          <rect x="26.25" y="236.25" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect y="183.75" width="26.25" height="52.5" fill="#0A0A0A"/>
+          <rect x="26.25" y="157.5" width="52.5" height="26.25" fill="#0A0A0A"/>
+          <rect x="183.75" y="105" width="131.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="183.75" y="26.25" width="26.25" height="157.5" fill="#0A0A0A"/>
+          <rect x="105" y="26.25" width="26.25" height="236.25" fill="#0A0A0A"/>
+        </svg>
       </div>
     </div>
   );
