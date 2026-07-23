@@ -1295,7 +1295,7 @@ function LitigationTile() {
 
 function MoreTile({ onClick }: { onClick?: () => void }) {
   return (
-    <div style={{ ...tileBase, background: "#F3EFE3", cursor: onClick ? "pointer" : "default" }} onClick={onClick}>
+    <div style={{ ...tileBase, background: "linear-gradient(135deg, #FFFDF6 0%, #F3EFE3 55%, #E6DFCD 100%)", cursor: onClick ? "pointer" : "default" }} onClick={onClick}>
       <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(rgba(10,10,10,0.05) 1px, transparent 1px)", backgroundSize: "16px 16px" }} />
       <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", gap: 16, transform: "translateY(-6px)" }}>
         <span style={{ fontSize: 76, fontWeight: 800, color: "#0A0A0A", lineHeight: 1, letterSpacing: "-0.03em" }}>MORE</span>
