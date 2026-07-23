@@ -212,10 +212,10 @@ const keyframeCss = `
 }
 @keyframes cur5 {
   0%,4%    { transform: translate(-120px, -170px); }
-  8%       { transform: translate(-13px, -2px); }
-  24%,42%  { transform: translate(117px, -2px); }
-  58%,76%  { transform: translate(247px, -2px); }
-  92%,94%  { transform: translate(-13px, -2px); }
+  8%       { transform: translate(-13px, 38px); }
+  24%,42%  { transform: translate(117px, 38px); }
+  58%,76%  { transform: translate(247px, 38px); }
+  92%,94%  { transform: translate(-13px, 38px); }
   98%,100% { transform: translate(-120px, -170px); }
 }
 @keyframes clickRipple5 {
