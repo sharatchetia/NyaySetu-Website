@@ -8,6 +8,41 @@ import React, { useEffect, useRef, useState } from "react";
 ──────────────────────────────────────────────────────────── */
 
 const keyframeCss = `
+@keyframes fbg-cameraMove {
+  0%   { transform:scale(1)    translate(0px,0px); }
+  16%  { transform:scale(1.04) translate(15px,-9px); }
+  30%  { transform:scale(1.3)  translate(116px,-65px); }
+  78%  { transform:scale(1.3)  translate(116px,-65px); }
+  92%  { transform:scale(1.02) translate(8px,-4px); }
+  100% { transform:scale(1)    translate(0px,0px); }
+}
+@keyframes fbg-cur1-test1 {
+  0%    { transform: translate(-95px, -15px); }
+  13%   { transform: translate(34px, 159px); }
+  22%   { transform: translate(34px, 159px); }
+  40%   { transform: translate(-105px, -10px); }
+  100%  { transform: translate(-105px, -10px); }
+}
+@keyframes fbg-clickRipple {
+  0%,15% { transform:scale(0.15); opacity:0; }
+  19% { transform:scale(2.2); opacity:0.65; }
+  29% { transform:scale(3.1); opacity:0; }
+  100% { opacity:0; }
+}
+@keyframes fbg-strikeDraw {
+  0%,20% { stroke-dashoffset:140; }
+  38% { stroke-dashoffset:0; }
+  78% { stroke-dashoffset:0; }
+  96%,100% { stroke-dashoffset:140; }
+}
+@keyframes fbg-tagPop {
+  0%,32%  { opacity:0; transform:translateY(4px) scale(0.9); box-shadow:0 0 0 0 rgba(220,38,38,0); }
+  40%     { opacity:1; transform:translateY(0) scale(1.06); box-shadow:0 0 0 7px rgba(220,38,38,0.38); }
+  50%     { transform:translateY(0) scale(1); box-shadow:0 0 0 0 rgba(220,38,38,0); }
+  62%     { box-shadow:0 0 0 7px rgba(220,38,38,0.38); }
+  74%     { opacity:1; transform:translateY(0) scale(1); box-shadow:0 0 0 0 rgba(220,38,38,0); }
+  86%,100%{ opacity:0; transform:translateY(4px) scale(0.9); box-shadow:0 0 0 0 rgba(220,38,38,0); }
+}
 @keyframes fbg-strike { to { stroke-dashoffset: 0; } }
 @keyframes fbg-tagIn { 0%,20% { opacity:0;} 40%,90% { opacity:1;} 100% {opacity:0;} }
 @keyframes fbg-cur1 { 0%,10% { transform:translate(90px,120px);} 35%,80% { transform:translate(190px,150px);} 100% {transform:translate(90px,120px);} }
@@ -59,24 +94,81 @@ function EmploymentTile() {
   return (
     <div style={{ ...tileBase, background: "#2451D6" }}>
       <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(45deg, rgba(255,255,255,0.07) 0 2px, transparent 2px 9px)" }} />
-      <div style={{ ...badgeDark }}>EMPLOYMENT</div>
-      <div style={{ position: "relative", padding: 14 }}>
-        <div style={{ fontSize: 14, fontWeight: 700, color: "#fff", maxWidth: 150, lineHeight: 1.25 }}>Employment agreement</div>
-      </div>
-      <div style={{ position: "absolute", left: 14, right: 14, bottom: 14, background: "#fff", border: "1px solid #0A0A0A", borderRadius: 8, padding: "9px 10px", fontSize: 11, color: "#0A0A0A" }}>
-        <div style={{ position: "relative", display: "inline-block" }}>
-          Non-compete, 24 months
-          <svg width="140" height="4" style={{ position: "absolute", left: 0, top: 8 }}>
-            <line x1="0" y1="2" x2="140" y2="2" stroke="#0A0A0A" strokeWidth={2} strokeDasharray={140} strokeDashoffset={140}
-              style={{ animation: "fbg-strike 0.6s ease 1.1s forwards, fbg-strike 0.6s ease 4.6s forwards reverse" }} />
+      <div style={{ ...badgeDark, zIndex: 10 }}>EMPLOYMENT</div>
+
+      <div style={{ position: "relative", width: "100%", height: "100%", transformOrigin: "50% 50%", animation: "fbg-cameraMove 6s ease infinite" }}>
+        <div style={{ position: "relative", padding: 14 }}>
+          <div style={{ fontSize: 14, fontWeight: 700, color: "#fff", maxWidth: 150, lineHeight: 1.25 }}>Employment agreement</div>
+        </div>
+
+        <div style={{ position: "absolute", left: 14, right: 14, bottom: 14, background: "#fff", border: "1px solid #0A0A0A", padding: "9px 10px", fontSize: 11, color: "#0A0A0A" }}>
+          <div style={{ position: "relative", display: "inline-block", padding: "2px 0" }}>
+            Non-compete, 24 months
+            <svg width="140" height="18" style={{ position: "absolute", left: 0, top: "50%", transform: "translateY(-50%)" }}>
+              <line x1="0" y1="9" x2="140" y2="9" stroke="#DC2626" strokeWidth={2} strokeDasharray={140} style={{ animation: "fbg-strikeDraw 6s ease infinite" }} />
+            </svg>
+          </div>
+          <div style={{ position: "absolute", background: "#DC2626", color: "#fff", fontSize: 9, fontWeight: 700, letterSpacing: "0.03em", padding: "3px 7px", top: -28, left: 0, animation: "fbg-tagPop 6s ease infinite" }}>
+            ⚠ RISKY CLAUSE
+          </div>
+        </div>
+
+        <div style={{ position: "absolute", top: 0, left: 0, width: 48, height: 48, borderRadius: "50%", background: "#fff", animation: "fbg-clickRipple 6s ease infinite", marginLeft: 26, marginTop: 147 }} />
+
+        {/* Small Retro Cursor */}
+        <div style={{ position: "absolute", top: 0, left: 0, animation: "fbg-cur1-test1 6s ease infinite", width: 42, height: 52, transformOrigin: "top left" }}>
+          <svg width="42" height="52" viewBox="0 0 394 420" fill="none" style={{ filter: "drop-shadow(2px 2px 1px rgba(0,0,0,0.6))" }}>
+            <rect x="131.25" width="52.5" height="393.75" fill="#fff"/>
+            <rect x="78.75" y="183.75" width="26.25" height="131.25" fill="#fff"/>
+            <rect x="262.5" y="367.5" width="26.25" height="26.25" fill="#fff"/>
+            <rect x="105" y="236.25" width="236.25" height="105" fill="#fff"/>
+            <rect x="341.25" y="288.75" width="26.25" height="52.5" fill="#fff"/>
+            <rect x="367.5" y="157.5" width="26.25" height="131.25" fill="#fff"/>
+            <rect x="315" y="131.25" width="52.5" height="157.5" fill="#fff"/>
+            <rect x="315" y="157.5" width="26.25" height="26.25" fill="#fff"/>
+            <rect x="262.5" y="105" width="26.25" height="78.75" fill="#fff"/>
+            <rect x="236.25" y="236.25" width="26.25" height="105" fill="#fff"/>
+            <rect x="288.75" y="236.25" width="26.25" height="105" fill="#fff"/>
+            <rect x="315" y="341.25" width="26.25" height="78.75" fill="#fff"/>
+            <rect x="288.75" y="393.75" width="26.25" height="26.25" fill="#fff"/>
+            <rect x="131.25" y="393.75" width="131.25" height="26.25" fill="#fff"/>
+            <rect x="131.25" y="367.5" width="26.25" height="26.25" fill="#fff"/>
+            <rect x="105" y="341.25" width="26.25" height="26.25" fill="#fff"/>
+            <rect x="78.75" y="315" width="26.25" height="26.25" fill="#fff"/>
+            <rect x="52.5" y="262.5" width="26.25" height="52.5" fill="#fff"/>
+            <rect x="26.25" y="236.25" width="26.25" height="26.25" fill="#fff"/>
+            <rect y="183.75" width="26.25" height="52.5" fill="#fff"/>
+            <rect x="26.25" y="157.5" width="52.5" height="105" fill="#fff"/>
+            <rect x="183.75" y="105" width="131.25" height="288.75" fill="#fff"/>
+            <rect x="183.75" y="26.25" width="26.25" height="157.5" fill="#fff"/>
+            <rect x="105" y="26.25" width="26.25" height="236.25" fill="#fff"/>
+            {/* Black outlines */}
+            <rect x="131.25" width="52.5" height="26.25" fill="#0A0A0A"/>
+            <rect x="78.75" y="183.75" width="26.25" height="26.25" fill="#0A0A0A"/>
+            <rect x="262.5" y="367.5" width="26.25" height="26.25" fill="#0A0A0A"/>
+            <rect x="183.75" y="236.25" width="26.25" height="105" fill="#0A0A0A"/>
+            <rect x="341.25" y="288.75" width="26.25" height="52.5" fill="#0A0A0A"/>
+            <rect x="367.5" y="157.5" width="26.25" height="131.25" fill="#0A0A0A"/>
+            <rect x="315" y="131.25" width="52.5" height="26.25" fill="#0A0A0A"/>
+            <rect x="315" y="157.5" width="26.25" height="26.25" fill="#0A0A0A"/>
+            <rect x="262.5" y="105" width="26.25" height="78.75" fill="#0A0A0A"/>
+            <rect x="236.25" y="236.25" width="26.25" height="105" fill="#0A0A0A"/>
+            <rect x="288.75" y="236.25" width="26.25" height="105" fill="#0A0A0A"/>
+            <rect x="315" y="341.25" width="26.25" height="78.75" fill="#0A0A0A"/>
+            <rect x="288.75" y="393.75" width="26.25" height="26.25" fill="#0A0A0A"/>
+            <rect x="131.25" y="393.75" width="131.25" height="26.25" fill="#0A0A0A"/>
+            <rect x="131.25" y="367.5" width="26.25" height="26.25" fill="#0A0A0A"/>
+            <rect x="105" y="341.25" width="26.25" height="26.25" fill="#0A0A0A"/>
+            <rect x="78.75" y="315" width="26.25" height="26.25" fill="#0A0A0A"/>
+            <rect x="52.5" y="262.5" width="26.25" height="52.5" fill="#0A0A0A"/>
+            <rect x="26.25" y="236.25" width="26.25" height="26.25" fill="#0A0A0A"/>
+            <rect y="183.75" width="26.25" height="52.5" fill="#0A0A0A"/>
+            <rect x="26.25" y="157.5" width="52.5" height="26.25" fill="#0A0A0A"/>
+            <rect x="183.75" y="105" width="131.25" height="26.25" fill="#0A0A0A"/>
+            <rect x="183.75" y="26.25" width="26.25" height="157.5" fill="#0A0A0A"/>
+            <rect x="105" y="26.25" width="26.25" height="236.25" fill="#0A0A0A"/>
           </svg>
         </div>
-        <div style={{ position: "absolute", background: "#0A0A0A", color: "#fff", fontSize: 9, fontWeight: 600, padding: "3px 6px", borderRadius: 4, top: -28, left: 0, animation: "fbg-tagIn 4s ease infinite" }}>
-          RISKY CLAUSE
-        </div>
-      </div>
-      <div style={{ position: "absolute", top: 0, left: 0, animation: "fbg-cur1 4s ease infinite" }}>
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="#fff"><path d="M4 2l14 8-6 2 4 6-3 2-4-6-4 4z" /></svg>
       </div>
     </div>
   );
