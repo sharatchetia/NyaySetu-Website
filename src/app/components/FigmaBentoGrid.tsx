@@ -211,12 +211,12 @@ const keyframeCss = `
   94%,100% { transform:scale(1); }
 }
 @keyframes cur5 {
-  0%,4%    { transform: translate(-60px, -40px); }
-  8%       { transform: translate(17px, 128px); }
-  24%,42%  { transform: translate(147px, 128px); }
-  58%,76%  { transform: translate(277px, 128px); }
-  92%,94%  { transform: translate(17px, 128px); }
-  98%,100% { transform: translate(-60px, -40px); }
+  0%,4%    { transform: translate(-120px, -60px); }
+  8%       { transform: translate(calc(50% - 138px), 123px); }
+  24%,42%  { transform: translate(calc(50% - 10px), 123px); }
+  58%,76%  { transform: translate(calc(50% + 119px), 123px); }
+  92%,94%  { transform: translate(calc(50% - 138px), 123px); }
+  98%,100% { transform: translate(-120px, -60px); }
 }
 @keyframes clickRipple5 {
   0%,6%   { opacity:0; transform:scale(0.15); }
@@ -1214,8 +1214,8 @@ function LitigationTile() {
         <div style={{ fontSize: 14, fontWeight: 700, color: "#fff" }}>Litigation notice</div>
       </div>
 
-      {/* Track */}
-      <div style={{ position: "absolute", left: 30, top: 130, width: 260, height: 4, background: "rgba(255,255,255,0.4)" }}>
+      {/* Track (260px wide, centered horizontally) */}
+      <div style={{ position: "absolute", left: "calc(50% - 130px)", top: 130, width: 260, height: 4, background: "rgba(255,255,255,0.4)" }}>
         {/* Ticks */}
         <div style={{ position: "absolute", left: 0, top: -4, width: 2, height: 12, background: "#fff" }} />
         <div style={{ position: "absolute", left: 129, top: -4, width: 2, height: 12, background: "#fff" }} />
@@ -1226,18 +1226,18 @@ function LitigationTile() {
         <div style={{ position: "absolute", left: 130, top: 16, transform: "translateX(-50%)", fontSize: 9, fontWeight: 700, letterSpacing: "0.04em", padding: "3px 6px", whiteSpace: "nowrap", animation: "labelActive2 12s ease-in-out infinite" }}>STANDARD</div>
         <div style={{ position: "absolute", left: 260, top: 16, transform: "translateX(-100%)", fontSize: 9, fontWeight: 700, letterSpacing: "0.04em", padding: "3px 6px", marginLeft: 6, animation: "labelActive3 12s ease-in-out infinite" }}>PLAIN</div>
 
+        {/* Ripple */}
+        <div style={{ position: "absolute", left: -11, top: -18, width: 40, height: 40, borderRadius: "50%", background: "#fff", animation: "clickRipple5 12s ease infinite" }} />
+
         {/* Handle */}
         <div style={{ position: "absolute", top: -7, left: 0, width: 18, height: 18, animation: "handlePos 12s ease-in-out infinite" }}>
           <div style={{ width: "100%", height: "100%", borderRadius: "50%", background: "#fff", border: "2px solid #0A0A0A", boxShadow: "0 2px 4px rgba(0,0,0,0.35)", animation: "handleBounce 12s ease-in-out infinite" }} />
         </div>
       </div>
 
-      {/* Ripple */}
-      <div style={{ position: "absolute", top: 0, left: 0, width: 40, height: 40, borderRadius: "50%", background: "#fff", marginLeft: 11, marginTop: 111, animation: "clickRipple5 12s ease infinite" }} />
-
       {/* Cursor */}
-      <div style={{ position: "absolute", top: 0, left: 0, animation: "cur5 12s ease-in-out infinite", width: 36, height: 44, transformOrigin: "top left", zIndex: 5 }}>
-        <svg width="36" height="44" viewBox="0 0 394 420" fill="none" style={{ filter: "drop-shadow(2px 2px 1px rgba(0,0,0,0.6))" }}>
+      <div style={{ position: "absolute", top: 0, left: 0, animation: "cur5 12s ease-in-out infinite", width: 42, height: 52, transformOrigin: "top left", zIndex: 15 }}>
+        <svg width="42" height="52" viewBox="0 0 394 420" fill="none" style={{ filter: "drop-shadow(2px 2px 1px rgba(0,0,0,0.6))" }}>
           <rect x="131.25" width="52.5" height="393.75" fill="#fff"/>
           <rect x="78.75" y="183.75" width="26.25" height="131.25" fill="#fff"/>
           <rect x="262.5" y="367.5" width="26.25" height="26.25" fill="#fff"/>
@@ -1254,6 +1254,14 @@ function LitigationTile() {
           <rect x="131.25" y="393.75" width="131.25" height="26.25" fill="#fff"/>
           <rect x="131.25" y="367.5" width="26.25" height="26.25" fill="#fff"/>
           <rect x="105" y="341.25" width="26.25" height="26.25" fill="#fff"/>
+          <rect x="78.75" y="315" width="26.25" height="26.25" fill="#fff"/>
+          <rect x="52.5" y="262.5" width="26.25" height="52.5" fill="#fff"/>
+          <rect x="26.25" y="236.25" width="26.25" height="26.25" fill="#fff"/>
+          <rect y="183.75" width="26.25" height="52.5" fill="#fff"/>
+          <rect x="26.25" y="157.5" width="52.5" height="105" fill="#fff"/>
+          <rect x="183.75" y="105" width="131.25" height="288.75" fill="#fff"/>
+          <rect x="183.75" y="26.25" width="26.25" height="157.5" fill="#fff"/>
+          <rect x="105" y="26.25" width="26.25" height="236.25" fill="#fff"/>
           {/* Black outlines */}
           <rect x="131.25" width="52.5" height="26.25" fill="#0A0A0A"/>
           <rect x="78.75" y="183.75" width="26.25" height="26.25" fill="#0A0A0A"/>
