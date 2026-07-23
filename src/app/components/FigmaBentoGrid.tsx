@@ -643,13 +643,15 @@ function SettlementTile() {
       <div style={{ ...badgeDark, background: "#C23D68", color: "#fff" }}>SETTLEMENT</div>
 
       <div style={{ position: "relative", padding: 14, paddingTop: 32 }}>
-        <div style={{ fontSize: 15, fontWeight: 700, color: "#C23D68" }}>Settlement deed</div>
+        <div style={{ fontSize: 15, fontWeight: 700, color: "#241A08" }}>Settlement deed</div>
       </div>
 
       {/* Floating Card */}
       <div style={{
         position: "absolute", left: 10, right: 10, bottom: 10,
-        background: "#fff", borderRadius: 14, padding: "12px 12px 14px",
+        background: "linear-gradient(135deg, #FFFFFF 0%, #F6F5F0 100%)",
+        border: "1px solid rgba(255, 255, 255, 0.6)",
+        borderRadius: 14, padding: "12px 12px 14px",
         boxShadow: "0 6px 16px rgba(0,0,0,0.18)"
       }}>
         <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 12 }}>
