@@ -640,10 +640,10 @@ function SettlementTile() {
         background: "radial-gradient(circle at 85% 8%, rgba(255,255,255,0.5) 0%, transparent 42%), radial-gradient(circle at 10% 100%, rgba(0,0,0,0.16) 0%, transparent 55%)"
       }} />
 
-      <div style={{ ...badgeDark }}>SETTLEMENT</div>
+      <div style={{ ...badgeDark, background: "#E040B0", color: "#fff" }}>SETTLEMENT</div>
 
       <div style={{ position: "relative", padding: 14, paddingTop: 32 }}>
-        <div style={{ fontSize: 15, fontWeight: 700, color: "#241A08" }}>Settlement deed</div>
+        <div style={{ fontSize: 15, fontWeight: 700, color: "#E040B0" }}>Settlement deed</div>
       </div>
 
       {/* Floating Card */}
