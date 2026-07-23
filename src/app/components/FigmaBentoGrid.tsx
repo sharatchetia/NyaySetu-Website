@@ -150,6 +150,44 @@ const keyframeCss = `
   58%    { opacity:0; transform:scale(2.4); }
   100%   { opacity:0; }
 }
+
+@keyframes maCamera {
+  0%    { transform:scale(1); }
+  18%   { transform:scale(1.02); }
+  40%   { transform:scale(1.1); }
+  62%   { transform:scale(1.16); }
+  84%   { transform:scale(1.16); }
+  96%   { transform:scale(1.03); }
+  100%  { transform:scale(1); }
+}
+
+@keyframes maLineA { 0%,15% { stroke-dashoffset:1; } 34%,58% { stroke-dashoffset:0; } 100% { stroke-dashoffset:1; } }
+@keyframes maLineB { 0%,20% { stroke-dashoffset:1; } 38%,58% { stroke-dashoffset:0; } 100% { stroke-dashoffset:1; } }
+
+@keyframes maNodeFade {
+  0%,42%  { opacity:1; transform:scale(1); }
+  58%,82% { opacity:0.35; transform:scale(0.88); }
+  96%,100%{ opacity:1; transform:scale(1); }
+}
+
+@keyframes maCenterScale {
+  0%,40%  { transform:scale(0); opacity:0; }
+  56%     { transform:scale(1.08); opacity:1; }
+  62%,84% { transform:scale(1); opacity:1; }
+  94%,100%{ transform:scale(0); opacity:0; }
+}
+
+@keyframes maCheckDraw {
+  0%,54%  { stroke-dashoffset:1; }
+  64%,84% { stroke-dashoffset:0; }
+  94%,100%{ stroke-dashoffset:1; }
+}
+
+@keyframes maCaption {
+  0%,56%  { opacity:0; transform:translateY(3px); }
+  64%,82% { opacity:1; transform:translateY(0); }
+  94%,100%{ opacity:0; transform:translateY(3px); }
+}
 `;
 
 const tileBase: React.CSSProperties = {
@@ -1082,13 +1120,36 @@ function MergerTile() {
   return (
     <div style={{ ...tileBase, background: "#5B4FE0" }}>
       <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)", backgroundSize: "15px 15px" }} />
-      <div style={{ ...badgeDark }}>CORPORATE</div>
-      <div style={{ position: "relative", padding: 14 }}>
-        <div style={{ fontSize: 14, fontWeight: 700, color: "#fff", maxWidth: 150 }}>Merger &amp; acquisition</div>
-      </div>
-      <div style={{ position: "absolute", left: 0, right: 0, bottom: 40, display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <div style={{ width: 36, height: 36, background: "#fff", borderRadius: 6, animation: "fbg-mergeL 4s ease infinite" }} />
-        <div style={{ width: 36, height: 36, background: "#0A0A0A", borderRadius: 6, animation: "fbg-mergeR 4s ease infinite", marginLeft: -4 }} />
+      <div style={{ ...badgeDark, zIndex: 10 }}>CORPORATE</div>
+
+      <div style={{ position: "relative", width: "100%", height: "100%", transformOrigin: "50% 78%", animation: "maCamera 5s ease infinite" }}>
+        <div style={{ position: "relative", padding: 14 }}>
+          <div style={{ fontSize: 14, fontWeight: 700, color: "#fff", maxWidth: 150 }}>Merger &amp; acquisition</div>
+        </div>
+
+        <svg width="200" height="130" viewBox="0 0 200 130" style={{ position: "absolute", left: "50%", top: 56, transform: "translateX(-100px)", overflow: "visible" }}>
+          <line x1="55" y1="34" x2="97" y2="88" stroke="rgba(255,255,255,0.55)" strokeWidth="2" pathLength="1" strokeDasharray="1" strokeDashoffset="1" style={{ animation: "maLineA 5s ease infinite" }} />
+          <line x1="145" y1="34" x2="103" y2="88" stroke="rgba(255,255,255,0.55)" strokeWidth="2" pathLength="1" strokeDasharray="1" strokeDashoffset="1" style={{ animation: "maLineB 5s ease infinite" }} />
+
+          <g style={{ transformBox: "fill-box", transformOrigin: "center", animation: "maNodeFade 5s ease infinite" }}>
+            <circle cx="55" cy="26" r="16" fill="#fff" />
+            <text x="55" y="31" textAnchor="middle" fontSize="12" fontWeight="700" fill="#0A0A0A">A</text>
+          </g>
+
+          <g style={{ transformBox: "fill-box", transformOrigin: "center", animation: "maNodeFade 5s ease infinite" }}>
+            <circle cx="145" cy="26" r="16" fill="#0A0A0A" />
+            <text x="145" y="31" textAnchor="middle" fontSize="12" fontWeight="700" fill="#fff">B</text>
+          </g>
+
+          <g style={{ transformBox: "fill-box", transformOrigin: "center", animation: "maCenterScale 5s ease infinite" }}>
+            <circle cx="100" cy="96" r="22" fill="#D9F99D" />
+            <path d="M90 96 l7 7 l14 -14" fill="none" stroke="#0A0A0A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" pathLength="1" strokeDasharray="1" strokeDashoffset="1" style={{ animation: "maCheckDraw 5s ease infinite" }} />
+          </g>
+        </svg>
+
+        <div style={{ position: "absolute", left: 0, right: 0, top: 184, textAlign: "center", fontSize: 10, fontWeight: 600, color: "rgba(255,255,255,0.85)", letterSpacing: "0.03em", animation: "maCaption 5s ease infinite" }}>
+          SINGLE ENTITY
+        </div>
       </div>
     </div>
   );
