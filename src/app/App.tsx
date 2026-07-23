@@ -377,50 +377,20 @@ function TestimonialCard({ t }: { t: typeof testimonials[0] }) {
   );
 }
 
-function Logo({ variant = "dark", size = 44 }: { variant?: "dark" | "light"; size?: number }) {
-  const [hov, setHov] = useState(false);
-  const badgeBg = variant === "dark" ? C.charcoalSoft : "#fbf3ee";
-  const iconStroke = variant === "dark" ? "#FFFFFF" : C.charcoalSoft;
-  const text = variant === "dark" ? C.charcoalSoft : "#fbf3ee";
+function Logo({ variant = "dark", size = 26 }: { variant?: "dark" | "light"; size?: number }) {
+  const strokeColor = variant === "dark" ? "#0A0A0A" : "#fbf3ee";
+  const textColor = variant === "dark" ? "#0A0A0A" : "#fbf3ee";
   const red = "#EF4136";
-  const iconSize = size * 0.62;
+
   return (
-    <div
-      onMouseEnter={() => setHov(true)}
-      onMouseLeave={() => setHov(false)}
-      style={{
-        position: "relative",
-        display: "inline-flex",
-        alignItems: "center",
-        height: size,
-        cursor: "pointer",
-      }}
-    >
-      <div style={{
-        width: size, height: size,
-        borderRadius: size * 0.24,
-        background: badgeBg,
-        display: "flex", alignItems: "center", justifyContent: "center",
-        flexShrink: 0,
-      }}>
-        <svg width={iconSize} height={iconSize} viewBox="0 0 64 64" fill="none">
-          <path d="M32 6C32 6 14 12 14 12V30C14 44 22 54 32 58C42 54 50 44 50 30V12C50 12 32 6 32 6Z" stroke={iconStroke} strokeWidth={4.5} fill="none" strokeLinejoin="round" />
-          <path d="M32 14V50M22 32H42" stroke={iconStroke} strokeWidth={4.5} strokeLinecap="round" />
-        </svg>
-      </div>
-      <div style={{
-        position: "absolute",
-        left: size + 10,
-        opacity: hov ? 1 : 0,
-        transform: hov ? "translateX(0)" : "translateX(-6px)",
-        pointerEvents: hov ? "auto" : "none",
-        whiteSpace: "nowrap",
-        transition: "opacity 0.3s ease, transform 0.3s ease",
-      }}>
-        <span style={{ fontFamily: "'Switzer', sans-serif", fontWeight: 700, fontSize: "1.05rem", letterSpacing: "-0.02em" }}>
-          <span style={{ color: text }}>Nyay</span><span style={{ color: red }}>Setu</span>
-        </span>
-      </div>
+    <div style={{ display: "inline-flex", alignItems: "center", gap: 10, cursor: "pointer" }}>
+      <svg width={size} height={size} viewBox="0 0 64 64" fill="none" style={{ flexShrink: 0 }}>
+        <path d="M32 6C32 6 14 12 14 12V30C14 44 22 54 32 58C42 54 50 44 50 30V12C50 12 32 6 32 6Z" stroke={strokeColor} strokeWidth={4.5} fill="none" strokeLinejoin="round" />
+        <path d="M32 14V50M22 32H42" stroke={strokeColor} strokeWidth={4.5} strokeLinecap="round" />
+      </svg>
+      <span style={{ fontFamily: "'Switzer', sans-serif", fontWeight: 700, fontSize: "1.1rem", letterSpacing: "-0.02em" }}>
+        <span style={{ color: textColor }}>Nyay</span><span style={{ color: red }}>Setu</span>
+      </span>
     </div>
   );
 }
@@ -945,7 +915,7 @@ export default function App() {
           <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 48, paddingBottom: 48, borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
             <div>
               <div style={{ marginBottom: 16 }}>
-                <Logo variant="light" size={40} />
+                <Logo variant="light" size={26} />
               </div>
               <p style={{ color: "rgba(255,255,255,0.45)", fontSize: "0.92rem", lineHeight: 1.7, maxWidth: 280, margin: 0 }}>
                 Making the Indian legal system accessible to everyone — one document at a time.
