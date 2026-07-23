@@ -481,9 +481,9 @@ export default function App() {
             <div style={{ display: "flex", alignItems: "center" }}>
               <Logo />
             </div>
-            <div style={{ display: "flex", gap: 36, fontSize: "0.9rem", color: C.charcoalSoft, alignItems: "center" }}>
+            <div style={{ display: "flex", gap: 36, fontSize: "0.9rem", color: "#000000", alignItems: "center" }}>
               {["Analyze", "Lawyers", "Resources", "About"].map(l => (
-                <a key={l} href="#" style={{ textDecoration: "none", color: "inherit", fontWeight: 500 }}>{l}</a>
+                <a key={l} href="#" style={{ textDecoration: "none", color: "#000000", fontWeight: 600 }}>{l}</a>
               ))}
             </div>
             <button className="nyay-btn" style={{ display: "flex", alignItems: "center", justifyContent: "center", background: "#000000", color: "#ffffff", border: "none", height: 40, padding: "0 20px", fontSize: "0.88rem", fontWeight: 600, cursor: "pointer", fontFamily: "inherit" }}>
