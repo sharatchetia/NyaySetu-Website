@@ -366,7 +366,7 @@ function EmploymentTile({ onClick }: { onClick?: () => void }) {
   );
 }
 
-function LeaseTile() {
+function LeaseTile({ onClick }: { onClick?: () => void }) {
   const [days, setDays] = useState(47);
   const [offset, setOffset] = useState(0);
   const [isUrgent, setIsUrgent] = useState(false);
