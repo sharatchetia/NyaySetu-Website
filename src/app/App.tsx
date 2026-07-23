@@ -690,20 +690,32 @@ export default function App() {
       <div style={{ background: C.off1, padding: "100px 64px 80px" }}>
         <Section bg="transparent">
           <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-            <p style={{
-              textAlign: "center",
-              fontFamily: "'Switzer', sans-serif",
-              fontSize: "clamp(1.6rem, 2.8vw, 2.4rem)",
-              fontWeight: 600,
-              color: C.charcoal,
-              letterSpacing: "-0.02em",
-              margin: "0 0 16px",
-            }}>
-              We understand more than contracts.
-            </p>
-            <p style={{ textAlign: "center", color: C.charcoalSoft, fontSize: "1.05rem", margin: "0 0 56px", maxWidth: 480, marginLeft: "auto", marginRight: "auto" }}>
-              From employment disputes to property agreements — every kind of legal document, explained.
-            </p>
+            {/* Heading block */}
+            <div style={{ maxWidth: 900, margin: "0 0 48px" }}>
+              <h2 style={{
+                fontFamily: "'Switzer', sans-serif",
+                fontWeight: 600,
+                fontSize: "clamp(1.35rem, 2vw, 1.75rem)",
+                letterSpacing: "-0.015em",
+                lineHeight: 1.2,
+                margin: 0,
+                color: C.charcoal,
+              }}>
+                We understand more than contracts.
+              </h2>
+              <p style={{
+                fontFamily: "'Switzer', sans-serif",
+                fontWeight: 400,
+                fontSize: "clamp(1.35rem, 2vw, 1.75rem)",
+                letterSpacing: "-0.015em",
+                lineHeight: 1.2,
+                margin: "2px 0 0",
+                color: C.charcoalFaint,
+              }}>
+                From employment disputes to property agreements<br />
+                every kind of legal document, explained.
+              </p>
+            </div>
 
             <FigmaBentoGrid />
           </div>
