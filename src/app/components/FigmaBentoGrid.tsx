@@ -856,7 +856,7 @@ function ServiceSupplyTile() {
         <div style={{ position: "absolute", top: 96, left: 14, display: "flex", alignItems: "center", gap: 10 }}>
           <div style={{ position: "relative", width: 18, height: 18, flexShrink: 0, border: "1.8px solid #355216", animation: "ssBoxFill1 6s ease infinite" }}>
             <svg width="18" height="18" viewBox="0 0 16 16" style={{ position: "absolute", top: 0, left: 0 }}>
-              <path d="M3.5 8.2l2.6 2.6 6-6.4" fill="none" stroke="#F5EFDD" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="20" style={{ animation: "ssCheckDraw1 6s ease infinite" }} />
+              <path d="M3.5 8.2l2.6 2.6 6-6.4" fill="none" stroke="#F5EFDD" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="20" style={{ strokeDashoffset: 20, animation: "ssCheckDraw1 6s ease infinite" }} />
             </svg>
           </div>
           <div style={{ position: "relative", display: "inline-block", fontSize: 14, fontWeight: 700, letterSpacing: "0.02em", textTransform: "uppercase", color: "#355216", animation: "ssLabelDim1 6s ease infinite" }}>
@@ -869,7 +869,7 @@ function ServiceSupplyTile() {
         <div style={{ position: "absolute", top: 130, left: 14, display: "flex", alignItems: "center", gap: 10 }}>
           <div style={{ position: "relative", width: 18, height: 18, flexShrink: 0, border: "1.8px solid #355216", animation: "ssBoxFill2 6s ease infinite" }}>
             <svg width="18" height="18" viewBox="0 0 16 16" style={{ position: "absolute", top: 0, left: 0 }}>
-              <path d="M3.5 8.2l2.6 2.6 6-6.4" fill="none" stroke="#F5EFDD" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="20" style={{ animation: "ssCheckDraw2 6s ease infinite" }} />
+              <path d="M3.5 8.2l2.6 2.6 6-6.4" fill="none" stroke="#F5EFDD" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="20" style={{ strokeDashoffset: 20, animation: "ssCheckDraw2 6s ease infinite" }} />
             </svg>
           </div>
           <div style={{ position: "relative", display: "inline-block", fontSize: 14, fontWeight: 700, letterSpacing: "0.02em", textTransform: "uppercase", color: "#355216", animation: "ssLabelDim2 6s ease infinite" }}>
@@ -882,7 +882,7 @@ function ServiceSupplyTile() {
         <div style={{ position: "absolute", top: 164, left: 14, display: "flex", alignItems: "center", gap: 10 }}>
           <div style={{ position: "relative", width: 18, height: 18, flexShrink: 0, border: "1.8px solid #355216", animation: "ssBoxFill3 6s ease infinite" }}>
             <svg width="18" height="18" viewBox="0 0 16 16" style={{ position: "absolute", top: 0, left: 0 }}>
-              <path d="M3.5 8.2l2.6 2.6 6-6.4" fill="none" stroke="#F5EFDD" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="20" style={{ animation: "ssCheckDraw3 6s ease infinite" }} />
+              <path d="M3.5 8.2l2.6 2.6 6-6.4" fill="none" stroke="#F5EFDD" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="20" style={{ strokeDashoffset: 20, animation: "ssCheckDraw3 6s ease infinite" }} />
             </svg>
           </div>
           <div style={{ position: "relative", display: "inline-block", fontSize: 14, fontWeight: 700, letterSpacing: "0.02em", textTransform: "uppercase", color: "#355216", animation: "ssLabelDim3 6s ease infinite" }}>
