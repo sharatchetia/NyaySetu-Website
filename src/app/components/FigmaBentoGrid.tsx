@@ -241,14 +241,16 @@ const keyframeCss = `
 .fbg-tile {
   cursor: pointer;
   user-select: none;
-  transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.22s ease;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease, filter 0.3s ease;
 }
 .fbg-tile:hover {
-  transform: translateY(-2px);
-  filter: brightness(1.04);
+  transform: translateY(-4px) scale(1.018);
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.22);
+  filter: brightness(1.03);
 }
 .fbg-tile:active {
-  transform: translateY(1px) scale(0.99);
+  transform: translateY(-1px) scale(0.995);
+  box-shadow: 0 6px 16px -4px rgba(0, 0, 0, 0.16);
 }
 `;
 
@@ -820,7 +822,7 @@ function SettlementTile({ onClick }: { onClick?: () => void }) {
   const amtVal = (4.2 + (7.8 - 4.2) * dragProgress).toFixed(1);
 
   return (
-    <div ref={tileRef} style={{ ...tileBase, background: "#00F5C4" }}>
+    <div ref={tileRef} className="fbg-tile" onClick={onClick} style={{ ...tileBase, background: "#00F5C4" }}>
       {/* Grain & Glow Background */}
       <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(rgba(36,26,8,0.16) 1px, transparent 1px)", backgroundSize: "8px 8px" }} />
       <div style={{

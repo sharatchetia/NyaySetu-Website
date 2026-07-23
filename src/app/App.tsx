@@ -689,9 +689,7 @@ export default function App() {
               </div>
             </div>
 
-            <FigmaBentoGrid onTileClick={() => {
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }} />
+            <FigmaBentoGrid />
           </div>
         </Section>
       </div>
