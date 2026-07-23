@@ -690,31 +690,33 @@ export default function App() {
       <div style={{ background: C.off1, padding: "100px 64px 80px" }}>
         <Section bg="transparent">
           <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-            {/* Heading block */}
-            <div style={{ maxWidth: 900, margin: "0 0 48px" }}>
-              <h2 style={{
-                fontFamily: "'Switzer', sans-serif",
-                fontWeight: 600,
-                fontSize: "clamp(1.35rem, 2vw, 1.75rem)",
-                letterSpacing: "-0.015em",
-                lineHeight: 1.2,
-                margin: 0,
-                color: C.charcoal,
-              }}>
-                We understand more than contracts.
-              </h2>
-              <p style={{
-                fontFamily: "'Switzer', sans-serif",
-                fontWeight: 400,
-                fontSize: "clamp(1.35rem, 2vw, 1.75rem)",
-                letterSpacing: "-0.015em",
-                lineHeight: 1.2,
-                margin: "2px 0 0",
-                color: C.charcoalFaint,
-              }}>
-                From employment disputes to property agreements<br />
-                every kind of legal document, explained.
-              </p>
+            {/* Heading block centered as a block, left-aligned lines */}
+            <div style={{ display: "flex", justifyContent: "center", width: "100%", margin: "0 0 48px" }}>
+              <div style={{ textAlign: "left" }}>
+                <h2 style={{
+                  fontFamily: "'Switzer', sans-serif",
+                  fontWeight: 600,
+                  fontSize: "clamp(1.35rem, 2vw, 1.75rem)",
+                  letterSpacing: "-0.015em",
+                  lineHeight: 1.2,
+                  margin: 0,
+                  color: C.charcoal,
+                }}>
+                  We understand more than contracts.
+                </h2>
+                <p style={{
+                  fontFamily: "'Switzer', sans-serif",
+                  fontWeight: 400,
+                  fontSize: "clamp(1.35rem, 2vw, 1.75rem)",
+                  letterSpacing: "-0.015em",
+                  lineHeight: 1.2,
+                  margin: "2px 0 0",
+                  color: C.charcoalFaint,
+                }}>
+                  From employment disputes to property agreements.<br />
+                  Every kind of legal document, explained.
+                </p>
+              </div>
             </div>
 
             <FigmaBentoGrid />
