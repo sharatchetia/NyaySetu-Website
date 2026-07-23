@@ -378,8 +378,8 @@ function TestimonialCard({ t }: { t: typeof testimonials[0] }) {
 
 function Logo({ variant = "dark", size = 44 }: { variant?: "dark" | "light"; size?: number }) {
   const [hov, setHov] = useState(false);
-  const badgeBg = variant === "dark" ? "#0A0A0A" : "#fbf3ee";
-  const iconStroke = variant === "dark" ? "#FFFFFF" : "#0A0A0A";
+  const badgeBg = variant === "dark" ? C.charcoalSoft : "#fbf3ee";
+  const iconStroke = variant === "dark" ? "#FFFFFF" : C.charcoalSoft;
   const text = variant === "dark" ? C.charcoalSoft : "#fbf3ee";
   const red = "#EF4136";
   const iconSize = size * 0.62;
