@@ -122,6 +122,34 @@ const keyframeCss = `
 @keyframes ssStrike1 { 0%,13% { transform:translateY(-50%) scaleX(0); } 19%,92% { transform:translateY(-50%) scaleX(1); } 96%,100% { transform:translateY(-50%) scaleX(0); } }
 @keyframes ssStrike2 { 0%,30% { transform:translateY(-50%) scaleX(0); } 36%,92% { transform:translateY(-50%) scaleX(1); } 96%,100% { transform:translateY(-50%) scaleX(0); } }
 @keyframes ssStrike3 { 0%,46% { transform:translateY(-50%) scaleX(0); } 52%,92% { transform:translateY(-50%) scaleX(1); } 96%,100% { transform:translateY(-50%) scaleX(0); } }
+
+@keyframes barGrow1 { 0%,9%  { transform:scaleY(0); } 20%,88% { transform:scaleY(1); } 96%,100% { transform:scaleY(0); } }
+@keyframes barGrow2 { 0%,19% { transform:scaleY(0); } 28%,88% { transform:scaleY(1); } 96%,100% { transform:scaleY(0); } }
+@keyframes barGrow3 { 0%,27% { transform:scaleY(0); } 35%,88% { transform:scaleY(1); } 96%,100% { transform:scaleY(0); } }
+@keyframes barGrow4 { 0%,34% { transform:scaleY(0); } 41%,88% { transform:scaleY(1); } 96%,100% { transform:scaleY(0); } }
+
+@keyframes shLabelPop {
+  0%,47%  { opacity:0; transform:translateY(4px) scale(0.4); }
+  51%     { opacity:1; transform:translateY(0) scale(1.2); }
+  55%,86% { opacity:1; transform:translateY(0) scale(1); }
+  94%,100%{ opacity:0; transform:translateY(4px) scale(0.4); }
+}
+
+@keyframes shCursor {
+  0%  { transform: translate(-95px,-15px); }
+  40% { transform: translate(-95px,-15px); }
+  50% { transform: translate(178px,118px); }
+  58% { transform: translate(178px,118px); }
+  90% { transform: translate(-105px,-10px); }
+  100%{ transform: translate(-105px,-10px); }
+}
+
+@keyframes shRipple {
+  0%,48% { opacity:0; transform:scale(0.15); }
+  51%    { opacity:0.6; transform:scale(1.8); }
+  58%    { opacity:0; transform:scale(2.4); }
+  100%   { opacity:0; }
+}
 `;
 
 const tileBase: React.CSSProperties = {
@@ -960,16 +988,96 @@ function ShareholderTile() {
   return (
     <div style={{ ...tileBase, background: "#3F6B4E" }}>
       <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-radial-gradient(circle at 78% 22%, rgba(255,255,255,0.12) 0 1px, transparent 1px 13px)" }} />
-      <div style={{ ...badgeLight, background: "#D9F99D", color: "#0A0A0A" }}>SHAREHOLDER</div>
-      <div style={{ position: "relative", padding: 14, paddingTop: 38 }}>
+      <div style={{ ...badgeDark, background: "#D9F99D", color: "#0A0A0A", zIndex: 10 }}>SHAREHOLDER</div>
+
+      <div style={{ position: "relative", padding: 14, paddingTop: 32 }}>
         <div style={{ fontSize: 14, fontWeight: 700, color: "#fff" }}>Shareholder rights</div>
       </div>
-      <svg width="88" height="88" viewBox="0 0 96 96" style={{ position: "absolute", right: 12, bottom: 12 }}>
-        <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(255,255,255,0.18)" strokeWidth={11} />
-        <circle cx="48" cy="48" r="38" fill="none" stroke="#D9F99D" strokeWidth={11} strokeDasharray={238.7} strokeDashoffset={238.7}
-          transform="rotate(-90 48 48)" style={{ animation: "fbg-wedge1 1.6s ease 0.4s forwards" }} />
-        <text x="48" y="53" textAnchor="middle" fontSize="14" fontWeight={700} fill="#fff">42%</text>
-      </svg>
+
+      {/* Baseline axis */}
+      <div style={{ position: "absolute", left: 40, right: 40, bottom: 30, height: 2, background: "rgba(255,255,255,0.3)", zIndex: 1 }} />
+
+      {/* Founder 42% */}
+      <div style={{ position: "absolute", left: 50, bottom: 30, width: 40, height: 140, transformOrigin: "bottom center", animation: "barGrow1 6s ease infinite", background: "#D9F99D", borderRadius: "3px 3px 0 0", zIndex: 1 }} />
+      <div style={{ position: "absolute", left: 35, bottom: 178, width: 70, textAlign: "center", zIndex: 2, animation: "shLabelPop 6s ease infinite" }}>
+        <div style={{ fontSize: 20, fontWeight: 700, color: "#D9F99D" }}>42%</div>
+      </div>
+
+      {/* Investor A 26% */}
+      <div style={{ position: "absolute", left: 110, bottom: 30, width: 40, height: 86.67, transformOrigin: "bottom center", animation: "barGrow2 6s ease infinite", background: "#F5D100", borderRadius: "3px 3px 0 0", zIndex: 1 }} />
+      <div style={{ position: "absolute", left: 95, bottom: 124.67, width: 70, textAlign: "center", zIndex: 2, animation: "shLabelPop 6s ease infinite" }}>
+        <div style={{ fontSize: 20, fontWeight: 700, color: "#F5D100" }}>26%</div>
+      </div>
+
+      {/* Investor B 20% */}
+      <div style={{ position: "absolute", left: 170, bottom: 30, width: 40, height: 66.67, transformOrigin: "bottom center", animation: "barGrow3 6s ease infinite", background: "#7CAEE0", borderRadius: "3px 3px 0 0", zIndex: 1 }} />
+      <div style={{ position: "absolute", left: 155, bottom: 104.67, width: 70, textAlign: "center", zIndex: 2, animation: "shLabelPop 6s ease infinite" }}>
+        <div style={{ fontSize: 20, fontWeight: 700, color: "#7CAEE0" }}>20%</div>
+      </div>
+
+      {/* ESOP pool 12% */}
+      <div style={{ position: "absolute", left: 230, bottom: 30, width: 40, height: 40, transformOrigin: "bottom center", animation: "barGrow4 6s ease infinite", background: "#E2664B", borderRadius: "3px 3px 0 0", zIndex: 1 }} />
+      <div style={{ position: "absolute", left: 215, bottom: 78, width: 70, textAlign: "center", zIndex: 2, animation: "shLabelPop 6s ease infinite" }}>
+        <div style={{ fontSize: 20, fontWeight: 700, color: "#E2664B" }}>12%</div>
+      </div>
+
+      {/* Ripple at center of chart */}
+      <div style={{ position: "absolute", top: 104, left: 174, width: 28, height: 28, borderRadius: "50%", background: "#D9F99D", animation: "shRipple 6s ease infinite", zIndex: 1 }} />
+
+      {/* Retro Cursor */}
+      <div style={{ position: "absolute", top: 0, left: 0, animation: "shCursor 6s ease infinite", width: 42, height: 52, transformOrigin: "top left", zIndex: 3 }}>
+        <svg width="42" height="52" viewBox="0 0 394 420" fill="none" style={{ filter: "drop-shadow(2px 2px 1px rgba(0,0,0,0.6))" }}>
+          <rect x="131.25" width="52.5" height="393.75" fill="#fff"/>
+          <rect x="78.75" y="183.75" width="26.25" height="131.25" fill="#fff"/>
+          <rect x="262.5" y="367.5" width="26.25" height="26.25" fill="#fff"/>
+          <rect x="105" y="236.25" width="236.25" height="105" fill="#fff"/>
+          <rect x="341.25" y="288.75" width="26.25" height="52.5" fill="#fff"/>
+          <rect x="367.5" y="157.5" width="26.25" height="131.25" fill="#fff"/>
+          <rect x="315" y="131.25" width="52.5" height="157.5" fill="#fff"/>
+          <rect x="315" y="157.5" width="26.25" height="26.25" fill="#fff"/>
+          <rect x="262.5" y="105" width="26.25" height="78.75" fill="#fff"/>
+          <rect x="236.25" y="236.25" width="26.25" height="105" fill="#fff"/>
+          <rect x="288.75" y="236.25" width="26.25" height="105" fill="#fff"/>
+          <rect x="315" y="341.25" width="26.25" height="78.75" fill="#fff"/>
+          <rect x="288.75" y="393.75" width="26.25" height="26.25" fill="#fff"/>
+          <rect x="131.25" y="393.75" width="131.25" height="26.25" fill="#fff"/>
+          <rect x="131.25" y="367.5" width="26.25" height="26.25" fill="#fff"/>
+          <rect x="105" y="341.25" width="26.25" height="26.25" fill="#fff"/>
+          <rect x="78.75" y="315" width="26.25" height="26.25" fill="#fff"/>
+          <rect x="52.5" y="262.5" width="26.25" height="52.5" fill="#fff"/>
+          <rect x="26.25" y="236.25" width="26.25" height="26.25" fill="#fff"/>
+          <rect y="183.75" width="26.25" height="52.5" fill="#fff"/>
+          <rect x="26.25" y="157.5" width="52.5" height="105" fill="#fff"/>
+          <rect x="183.75" y="105" width="131.25" height="288.75" fill="#fff"/>
+          <rect x="183.75" y="26.25" width="26.25" height="157.5" fill="#fff"/>
+          <rect x="105" y="26.25" width="26.25" height="236.25" fill="#fff"/>
+          {/* Black outlines */}
+          <rect x="131.25" width="52.5" height="26.25" fill="#0A0A0A"/>
+          <rect x="78.75" y="183.75" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="262.5" y="367.5" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="183.75" y="236.25" width="26.25" height="105" fill="#0A0A0A"/>
+          <rect x="341.25" y="288.75" width="26.25" height="52.5" fill="#0A0A0A"/>
+          <rect x="367.5" y="157.5" width="26.25" height="131.25" fill="#0A0A0A"/>
+          <rect x="315" y="131.25" width="52.5" height="26.25" fill="#0A0A0A"/>
+          <rect x="315" y="157.5" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="262.5" y="105" width="26.25" height="78.75" fill="#0A0A0A"/>
+          <rect x="236.25" y="236.25" width="26.25" height="105" fill="#0A0A0A"/>
+          <rect x="288.75" y="236.25" width="26.25" height="105" fill="#0A0A0A"/>
+          <rect x="315" y="341.25" width="26.25" height="78.75" fill="#0A0A0A"/>
+          <rect x="288.75" y="393.75" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="131.25" y="393.75" width="131.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="131.25" y="367.5" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="105" y="341.25" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="78.75" y="315" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="52.5" y="262.5" width="26.25" height="52.5" fill="#0A0A0A"/>
+          <rect x="26.25" y="236.25" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect y="183.75" width="26.25" height="52.5" fill="#0A0A0A"/>
+          <rect x="26.25" y="157.5" width="52.5" height="26.25" fill="#0A0A0A"/>
+          <rect x="183.75" y="105" width="131.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="183.75" y="26.25" width="26.25" height="157.5" fill="#0A0A0A"/>
+          <rect x="105" y="26.25" width="26.25" height="236.25" fill="#0A0A0A"/>
+        </svg>
+      </div>
     </div>
   );
 }
