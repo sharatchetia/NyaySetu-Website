@@ -9,6 +9,7 @@ import {
   getClassMetadata,
   ModelClassId,
 } from "./constants/classes";
+import FigmaBentoGrid from "./components/FigmaBentoGrid";
 
 /* ─── palette ─────────────────────────────────────── */
 const C = {
@@ -704,22 +705,7 @@ export default function App() {
               From employment disputes to property agreements — every kind of legal document, explained.
             </p>
 
-            <div style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(11, 1fr)",
-              gridTemplateRows: "160px 140px 120px",
-              gap: 12,
-            }}>
-              {docTypes.map(d => (
-                <DocCard
-                  key={d.id}
-                  d={d}
-                  hovered={docHovered}
-                  onHover={setDocHovered}
-                  onLeave={() => setDocHovered(null)}
-                />
-              ))}
-            </div>
+            <FigmaBentoGrid />
           </div>
         </Section>
       </div>
