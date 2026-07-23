@@ -376,25 +376,34 @@ function TestimonialCard({ t }: { t: typeof testimonials[0] }) {
   );
 }
 
-function Logo({ variant = "dark" }: { variant?: "dark" | "light" }) {
+function Logo({ variant = "dark", size = 44 }: { variant?: "dark" | "light"; size?: number }) {
   const [hov, setHov] = useState(false);
-  const mark = variant === "dark" ? "#0A0A0A" : "#fbf3ee";
+  const badgeBg = variant === "dark" ? "#0A0A0A" : "#fbf3ee";
+  const iconStroke = variant === "dark" ? "#FFFFFF" : "#0A0A0A";
   const text = variant === "dark" ? "#0A0A0A" : "#fbf3ee";
+  const iconSize = size * 0.62;
   return (
     <div
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
       style={{ display: "inline-flex", alignItems: "center", cursor: "pointer" }}
     >
-      <svg width={28} height={28} viewBox="0 0 64 64" fill="none" style={{ flexShrink: 0 }}>
-        <path d="M32 8V56" stroke={mark} strokeWidth={3.2} />
-        <path d="M32 16L16 22L20 34C20 40 26 44 32 44" stroke={mark} strokeWidth={3.2} fill="none" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M32 16L48 22L44 34C44 40 38 44 32 44" stroke={mark} strokeWidth={3.2} fill="none" strokeLinecap="round" strokeLinejoin="round" opacity={0.4} />
-      </svg>
+      <div style={{
+        width: size, height: size,
+        borderRadius: size * 0.24,
+        background: badgeBg,
+        display: "flex", alignItems: "center", justifyContent: "center",
+        flexShrink: 0,
+      }}>
+        <svg width={iconSize} height={iconSize} viewBox="0 0 64 64" fill="none">
+          <path d="M32 6C32 6 14 12 14 12V30C14 44 22 54 32 58C42 54 50 44 50 30V12C50 12 32 6 32 6Z" stroke={iconStroke} strokeWidth={4.5} fill="none" strokeLinejoin="round" />
+          <path d="M32 14V50M22 32H42" stroke={iconStroke} strokeWidth={4.5} strokeLinecap="round" />
+        </svg>
+      </div>
       <div style={{
         maxWidth: hov ? 140 : 0,
         opacity: hov ? 1 : 0,
-        marginLeft: hov ? 10 : 0,
+        marginLeft: hov ? 12 : 0,
         overflow: "hidden",
         whiteSpace: "nowrap",
         transition: "max-width 0.35s ease, opacity 0.3s ease, margin-left 0.35s ease",
@@ -926,7 +935,7 @@ export default function App() {
           <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 48, paddingBottom: 48, borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
             <div>
               <div style={{ marginBottom: 16 }}>
-                <Logo variant="light" />
+                <Logo variant="light" size={40} />
               </div>
               <p style={{ color: "rgba(255,255,255,0.45)", fontSize: "0.92rem", lineHeight: 1.7, maxWidth: 280, margin: 0 }}>
                 Making the Indian legal system accessible to everyone — one document at a time.
