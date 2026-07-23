@@ -237,6 +237,19 @@ const keyframeCss = `
   60%,74%  { background:#0A0A0A; color:#fff; }
   80%,100% { background:transparent; color:rgba(255,255,255,0.75); }
 }
+
+.fbg-tile {
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.22s ease;
+}
+.fbg-tile:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.04);
+}
+.fbg-tile:active {
+  transform: translateY(1px) scale(0.99);
+}
 `;
 
 const tileBase: React.CSSProperties = {
@@ -269,9 +282,9 @@ const badgeLight: React.CSSProperties = {
   borderRadius: 0,
 };
 
-function EmploymentTile() {
+function EmploymentTile({ onClick }: { onClick?: () => void }) {
   return (
-    <div style={{ ...tileBase, background: "#2451D6" }}>
+    <div className="fbg-tile" style={{ ...tileBase, background: "#2451D6" }} onClick={onClick}>
       <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(45deg, rgba(255,255,255,0.07) 0 2px, transparent 2px 9px)" }} />
       <div style={{ ...badgeDark, zIndex: 10 }}>EMPLOYMENT</div>
 
@@ -380,7 +393,7 @@ function LeaseTile() {
   }, []);
 
   return (
-    <div style={{ ...tileBase, background: "#7CAEE0" }}>
+    <div className="fbg-tile" style={{ ...tileBase, background: "#7CAEE0" }} onClick={onClick}>
       <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(rgba(255,255,255,0.35) 1px, transparent 1px)", backgroundSize: "8px 8px" }} />
       <div style={{ ...badgeLight, color: "#1D4488", zIndex: 2 }}>RENTAL AND LEASE</div>
       <div style={{
@@ -479,7 +492,7 @@ function LeaseTile() {
   );
 }
 
-function LicenseIpTile() {
+function LicenseIpTile({ onClick }: { onClick?: () => void }) {
   const [isNonExclusive, setIsNonExclusive] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
   const [rippleActive, setRippleActive] = useState(false);
@@ -505,6 +518,8 @@ function LicenseIpTile() {
 
   return (
     <div
+      className="fbg-tile"
+      onClick={onClick}
       style={{
         ...tileBase,
         background: isNonExclusive ? "#F4D03F" : "#34C77B",
@@ -688,7 +703,7 @@ function LicenseIpTile() {
   );
 }
 
-function SettlementTile() {
+function SettlementTile({ onClick }: { onClick?: () => void }) {
   const [dragProgress, setDragProgress] = useState(0);
   const [cursorPos, setCursorPos] = useState({ x: 14, y: 260 });
   const [isGrabbed, setIsGrabbed] = useState(false);
@@ -956,9 +971,9 @@ function SettlementTile() {
   );
 }
 
-function ServiceSupplyTile() {
+function ServiceSupplyTile({ onClick }: { onClick?: () => void }) {
   return (
-    <div style={{ ...tileBase, background: "linear-gradient(135deg, #FFE066 0%, #F5D100 55%, #E8C400 100%)" }}>
+    <div className="fbg-tile" style={{ ...tileBase, background: "linear-gradient(135deg, #FFE066 0%, #F5D100 55%, #E8C400 100%)" }} onClick={onClick}>
       <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(0deg, rgba(255,255,255,0.16) 0 1px, transparent 1px 13px)" }} />
       <div style={{ ...badgeDark, background: "#355216", color: "#F5EFDD", zIndex: 10 }}>SERVICE &amp; SUPPLY</div>
 
@@ -1071,9 +1086,9 @@ function ServiceSupplyTile() {
   );
 }
 
-function ShareholderTile() {
+function ShareholderTile({ onClick }: { onClick?: () => void }) {
   return (
-    <div style={{ ...tileBase, background: "#3F6B4E" }}>
+    <div className="fbg-tile" style={{ ...tileBase, background: "#3F6B4E" }} onClick={onClick}>
       <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-radial-gradient(circle at 78% 22%, rgba(255,255,255,0.12) 0 1px, transparent 1px 13px)" }} />
       <div style={{ ...badgeDark, background: "#D9F99D", color: "#0A0A0A", zIndex: 10 }}>SHAREHOLDER</div>
 
@@ -1165,9 +1180,9 @@ function ShareholderTile() {
   );
 }
 
-function MergerTile() {
+function MergerTile({ onClick }: { onClick?: () => void }) {
   return (
-    <div style={{ ...tileBase, background: "linear-gradient(135deg, #6E5FF0 0%, #5B4FE0 60%, #493CD0 100%)" }}>
+    <div className="fbg-tile" style={{ ...tileBase, background: "linear-gradient(135deg, #6E5FF0 0%, #5B4FE0 60%, #493CD0 100%)" }} onClick={onClick}>
       <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)", backgroundSize: "15px 15px" }} />
       <div style={{ ...badgeDark, background: "#C4B5FD", color: "#fff", zIndex: 10 }}>CORPORATE</div>
 
@@ -1204,9 +1219,9 @@ function MergerTile() {
   );
 }
 
-function LitigationTile() {
+function LitigationTile({ onClick }: { onClick?: () => void }) {
   return (
-    <div style={{ ...tileBase, background: "#B5482E" }}>
+    <div className="fbg-tile" style={{ ...tileBase, background: "#B5482E" }} onClick={onClick}>
       <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(70deg, rgba(255,255,255,0.14) 0 3px, transparent 3px 12px)" }} />
       <div style={{ ...badgeLight, color: "#7A2E1B", zIndex: 10 }}>DISPUTE</div>
 
@@ -1295,7 +1310,7 @@ function LitigationTile() {
 
 function MoreTile({ onClick }: { onClick?: () => void }) {
   return (
-    <div style={{ ...tileBase, background: "linear-gradient(135deg, #FFFDF5 0%, #F1EAD7 50%, #D7CBAB 100%)", cursor: onClick ? "pointer" : "default" }} onClick={onClick}>
+    <div className="fbg-tile" style={{ ...tileBase, background: "linear-gradient(135deg, #FFFDF5 0%, #F1EAD7 50%, #D7CBAB 100%)" }} onClick={onClick}>
       <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(rgba(10,10,10,0.05) 1px, transparent 1px)", backgroundSize: "16px 16px" }} />
       <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", gap: 16, transform: "translateY(-6px)" }}>
         <span style={{ fontSize: 76, fontWeight: 800, color: "#0A0A0A", lineHeight: 1, letterSpacing: "-0.03em" }}>MORE</span>
@@ -1309,7 +1324,13 @@ function MoreTile({ onClick }: { onClick?: () => void }) {
   );
 }
 
-export default function FigmaBentoGrid({ onMoreClick }: { onMoreClick?: () => void }) {
+export default function FigmaBentoGrid({
+  onTileClick,
+  onMoreClick,
+}: {
+  onTileClick?: (tileName: string) => void;
+  onMoreClick?: () => void;
+}) {
   const styleInjected = useRef(false);
   useEffect(() => {
     if (styleInjected.current) return;
@@ -1324,15 +1345,15 @@ export default function FigmaBentoGrid({ onMoreClick }: { onMoreClick?: () => vo
 
   return (
     <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 14 }}>
-      <EmploymentTile />
-      <LeaseTile />
-      <LicenseIpTile />
-      <SettlementTile />
-      <ServiceSupplyTile />
-      <ShareholderTile />
-      <MergerTile />
-      <LitigationTile />
-      <MoreTile onClick={onMoreClick} />
+      <EmploymentTile onClick={() => onTileClick?.("Employment")} />
+      <LeaseTile onClick={() => onTileClick?.("Rental & Lease")} />
+      <LicenseIpTile onClick={() => onTileClick?.("License & IP")} />
+      <SettlementTile onClick={() => onTileClick?.("Settlement Deed")} />
+      <ServiceSupplyTile onClick={() => onTileClick?.("Service & Supply")} />
+      <ShareholderTile onClick={() => onTileClick?.("Shareholder Rights")} />
+      <MergerTile onClick={() => onTileClick?.("Merger & Acquisition")} />
+      <LitigationTile onClick={() => onTileClick?.("Litigation Notice")} />
+      <MoreTile onClick={() => { onMoreClick?.(); onTileClick?.("More"); }} />
     </div>
   );
 }
