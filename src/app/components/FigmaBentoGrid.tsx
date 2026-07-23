@@ -1120,7 +1120,7 @@ function MergerTile() {
   return (
     <div style={{ ...tileBase, background: "#5B4FE0" }}>
       <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)", backgroundSize: "15px 15px" }} />
-      <div style={{ ...badgeDark, background: "#C4B5FD", color: "#0A0A0A", zIndex: 10 }}>CORPORATE</div>
+      <div style={{ ...badgeDark, background: "#C4B5FD", color: "#fff", zIndex: 10 }}>CORPORATE</div>
 
       <div style={{ position: "relative", width: "100%", height: "100%", transformOrigin: "50% 78%", animation: "maCamera 5s ease infinite" }}>
         <div style={{ position: "relative", padding: 14 }}>
