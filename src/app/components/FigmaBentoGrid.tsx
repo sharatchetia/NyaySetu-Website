@@ -516,27 +516,266 @@ function LicenseIpTile() {
 }
 
 function SettlementTile() {
-  const [big, setBig] = useState(false);
+  const [dragProgress, setDragProgress] = useState(0);
+  const [cursorPos, setCursorPos] = useState({ x: 14, y: 260 });
+  const [isGrabbed, setIsGrabbed] = useState(false);
+  const [rippleState, setRippleState] = useState<{ x: number; y: number; active: boolean }>({ x: 0, y: 0, active: false });
+
+  const tileRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    const id = setInterval(() => {
-      const t = (Date.now() / 1000) % 4;
-      setBig(t > 1.8 && t < 3.4);
-    }, 150);
-    return () => clearInterval(id);
+    const OFFER_VAL = 4.2;
+    const SETTLE_VAL = 7.8;
+    const LOOP = 7.0;
+    const P_ENTER_END = 0.08;
+    const P_GRAB_END = 0.15;
+    const P_DRAG_END = 0.60;
+    const P_SETTLE_END = 0.74;
+    const P_RELEASE_END = 0.80;
+    const P_EXIT_END = 0.94;
+
+    const clamp01 = (x: number) => Math.max(0, Math.min(1, x));
+    const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+    const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+
+    let animId: number;
+    let lastRippleTag = "";
+
+    const frame = () => {
+      if (!tileRef.current || !trackRef.current) {
+        animId = requestAnimationFrame(frame);
+        return;
+      }
+
+      const tileRect = tileRef.current.getBoundingClientRect();
+      const trackRect = trackRef.current.getBoundingClientRect();
+      const trackXInTile = trackRect.left - tileRect.left;
+      const trackYInTile = trackRect.top - tileRect.top + trackRect.height / 2;
+      const trackW = trackRect.width;
+
+      const t = (Date.now() / 1000) % LOOP;
+      const f = t / LOOP;
+
+      let progress = 0;
+      let cx = 0;
+      let cy = 0;
+      let grabbed = false;
+      let rippleTag = "";
+
+      const enterFrom = { x: trackXInTile - 6, y: tileRect.height + 50 };
+      const exitTo = { x: trackXInTile + trackW + 6, y: tileRect.height + 50 };
+      const handleYAbs = trackYInTile;
+
+      if (f < P_ENTER_END) {
+        const p = clamp01(f / P_ENTER_END);
+        const e = easeInOutCubic(p);
+        progress = 0;
+        cx = lerp(enterFrom.x, trackXInTile, e);
+        cy = lerp(enterFrom.y, handleYAbs, e);
+      } else if (f < P_GRAB_END) {
+        progress = 0;
+        cx = trackXInTile;
+        cy = handleYAbs;
+        grabbed = true;
+        rippleTag = "grab";
+      } else if (f < P_DRAG_END) {
+        const p = clamp01((f - P_GRAB_END) / (P_DRAG_END - P_GRAB_END));
+        const e = easeInOutCubic(p);
+        progress = e;
+        cx = lerp(trackXInTile, trackXInTile + trackW, e);
+        cy = handleYAbs;
+        grabbed = true;
+      } else if (f < P_SETTLE_END) {
+        progress = 1;
+        cx = trackXInTile + trackW;
+        cy = handleYAbs;
+        grabbed = true;
+      } else if (f < P_RELEASE_END) {
+        progress = 1;
+        cx = trackXInTile + trackW;
+        cy = handleYAbs;
+        grabbed = false;
+        rippleTag = "release";
+      } else if (f < P_EXIT_END) {
+        const p = clamp01((f - P_RELEASE_END) / (P_EXIT_END - P_RELEASE_END));
+        const e = easeInOutCubic(p);
+        progress = 1;
+        cx = lerp(trackXInTile + trackW, exitTo.x, e);
+        cy = lerp(handleYAbs, exitTo.y, e);
+      } else {
+        progress = 0;
+        cx = enterFrom.x;
+        cy = enterFrom.y;
+      }
+
+      setDragProgress(progress);
+      setCursorPos({ x: cx - 6, y: cy - 4 });
+      setIsGrabbed(grabbed);
+
+      if (rippleTag && rippleTag !== lastRippleTag) {
+        setRippleState({ x: cx, y: handleYAbs, active: true });
+        setTimeout(() => {
+          setRippleState((prev) => ({ ...prev, active: false }));
+        }, 500);
+      }
+      lastRippleTag = rippleTag;
+
+      animId = requestAnimationFrame(frame);
+    };
+
+    animId = requestAnimationFrame(frame);
+    return () => cancelAnimationFrame(animId);
   }, []);
+
+  const isSettled = dragProgress > 0.985;
+  const amtVal = (4.2 + (7.8 - 4.2) * dragProgress).toFixed(1);
+
   return (
-    <div style={{ ...tileBase, background: "#DDD3B8" }}>
-      <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 82% 15%, rgba(255,255,255,0.55) 0%, transparent 45%)" }} />
-      <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(rgba(120,105,70,0.28) 1px, transparent 1px)", backgroundSize: "9px 9px" }} />
-      <div style={{ position: "relative", padding: 14 }}>
-        <div style={{ background: "#0A0A0A", color: "#fff", fontSize: 10, fontWeight: 600, padding: "5px 9px", borderRadius: 6, width: "fit-content" }}>SETTLEMENT</div>
-        <div style={{ marginTop: 14, fontSize: 14, fontWeight: 700, color: "#2B2620" }}>Settlement deed</div>
+    <div ref={tileRef} style={{ ...tileBase, background: "#00F5C4" }}>
+      {/* Grain & Glow Background */}
+      <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(rgba(36,26,8,0.16) 1px, transparent 1px)", backgroundSize: "8px 8px" }} />
+      <div style={{
+        position: "absolute", inset: 0,
+        background: "radial-gradient(circle at 85% 8%, rgba(255,255,255,0.5) 0%, transparent 42%), radial-gradient(circle at 10% 100%, rgba(0,0,0,0.16) 0%, transparent 55%)"
+      }} />
+
+      <div style={{ ...badgeDark }}>SETTLEMENT</div>
+
+      <div style={{ position: "relative", padding: 14, paddingTop: 32 }}>
+        <div style={{ fontSize: 15, fontWeight: 700, color: "#241A08" }}>Settlement deed</div>
       </div>
-      <div style={{ position: "absolute", left: 14, right: 14, bottom: 18 }}>
-        <div style={{ fontSize: 22, fontWeight: 700, color: "#2B2620" }}>{big ? "₹7.8L" : "₹4.2L"}</div>
-        <div style={{ position: "relative", marginTop: 9, height: 3, background: "rgba(43,38,32,0.25)", borderRadius: 2 }}>
-          <div style={{ position: "absolute", top: -6, width: 14, height: 14, background: "#fff", border: "2px solid #0A0A0A", borderRadius: "50%", animation: "fbg-dragHandle 4s ease infinite" }} />
+
+      {/* Floating Card */}
+      <div style={{
+        position: "absolute", left: 10, right: 10, bottom: 10,
+        background: "#fff", borderRadius: 14, padding: "12px 12px 14px",
+        boxShadow: "0 6px 16px rgba(0,0,0,0.18)"
+      }}>
+        <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 12 }}>
+          <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.05em", color: isSettled ? "#E040B0" : "#00F5C4", transition: "color 0.25s ease" }}>
+            {isSettled ? "SETTLED AMOUNT" : "OFFERED AMOUNT"}
+          </div>
+          <div style={{ fontSize: 22, fontWeight: 700, color: isSettled ? "#E040B0" : "#241A08", letterSpacing: "-0.01em", transition: "color 0.25s ease" }}>
+            ₹{amtVal}L
+          </div>
         </div>
+
+        {/* Track Row */}
+        <div style={{ position: "relative", padding: "8px 0" }}>
+          <div ref={trackRef} style={{ position: "relative", height: 8, borderRadius: 999, background: "#E7E3D8" }}>
+            <div style={{
+              position: "absolute", top: 0, left: 0, height: "100%", borderRadius: 999,
+              background: isSettled ? "#E040B0" : "#00F5C4",
+              width: `${dragProgress * 100}%`,
+              transition: "background 0.25s ease"
+            }} />
+            <div style={{
+              position: "absolute", top: "50%", width: 22, height: 22, borderRadius: "50%",
+              background: isSettled ? "#E040B0" : "#00F5C4",
+              transform: "translate(-50%, -50%)",
+              left: `${dragProgress * 100}%`,
+              boxShadow: isGrabbed
+                ? (isSettled
+                    ? "0 0 0 3px #fff, 0 0 0 8px rgba(22,163,74,0.22), 0 3px 8px rgba(0,0,0,0.25)"
+                    : "0 0 0 3px #fff, 0 0 0 8px rgba(47,111,237,0.22), 0 3px 8px rgba(0,0,0,0.25)")
+                : "0 0 0 3px #fff, 0 3px 8px rgba(0,0,0,0.25)",
+              transition: "background 0.25s ease, box-shadow 0.25s ease"
+            }} />
+          </div>
+        </div>
+
+        {/* Labels */}
+        <div style={{ display: "flex", justifyContent: "space-between", marginTop: 8 }}>
+          <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.05em", color: dragProgress < 0.5 ? "#00F5C4" : "#B9B2A0", transition: "color 0.3s ease" }}>
+            OFFERED
+          </span>
+          <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.05em", color: dragProgress >= 0.5 ? "#E040B0" : "#B9B2A0", transition: "color 0.3s ease" }}>
+            SETTLED
+          </span>
+        </div>
+      </div>
+
+      {/* Ripple Element */}
+      <div style={{
+        position: "absolute",
+        left: rippleState.x,
+        top: rippleState.y,
+        width: 30,
+        height: 30,
+        marginLeft: -15,
+        marginTop: -15,
+        borderRadius: "50%",
+        background: "#fff",
+        pointerEvents: "none",
+        zIndex: 4,
+        transform: rippleState.active ? "scale(2.6)" : "scale(0.3)",
+        opacity: rippleState.active ? 0 : 0.55,
+        transition: rippleState.active ? "transform 0.5s ease, opacity 0.5s ease" : "none"
+      }} />
+
+      {/* Retro Cursor */}
+      <div style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        transform: `translate(${cursorPos.x}px, ${cursorPos.y}px)`,
+        width: 42,
+        height: 52,
+        zIndex: 6,
+        filter: "drop-shadow(2px 2px 1px rgba(0,0,0,0.5))"
+      }}>
+        <svg width="42" height="52" viewBox="0 0 394 420" fill="none">
+          <rect x="131.25" width="52.5" height="393.75" fill="#fff"/>
+          <rect x="78.75" y="183.75" width="26.25" height="131.25" fill="#fff"/>
+          <rect x="262.5" y="367.5" width="26.25" height="26.25" fill="#fff"/>
+          <rect x="105" y="236.25" width="236.25" height="105" fill="#fff"/>
+          <rect x="341.25" y="288.75" width="26.25" height="52.5" fill="#fff"/>
+          <rect x="367.5" y="157.5" width="26.25" height="131.25" fill="#fff"/>
+          <rect x="315" y="131.25" width="52.5" height="157.5" fill="#fff"/>
+          <rect x="315" y="157.5" width="26.25" height="26.25" fill="#fff"/>
+          <rect x="262.5" y="105" width="26.25" height="78.75" fill="#fff"/>
+          <rect x="236.25" y="236.25" width="26.25" height="105" fill="#fff"/>
+          <rect x="288.75" y="236.25" width="26.25" height="105" fill="#fff"/>
+          <rect x="315" y="341.25" width="26.25" height="78.75" fill="#fff"/>
+          <rect x="288.75" y="393.75" width="26.25" height="26.25" fill="#fff"/>
+          <rect x="131.25" y="393.75" width="131.25" height="26.25" fill="#fff"/>
+          <rect x="131.25" y="367.5" width="26.25" height="26.25" fill="#fff"/>
+          <rect x="105" y="341.25" width="26.25" height="26.25" fill="#fff"/>
+          <rect x="78.75" y="315" width="26.25" height="26.25" fill="#fff"/>
+          <rect x="52.5" y="262.5" width="26.25" height="52.5" fill="#fff"/>
+          <rect x="26.25" y="236.25" width="26.25" height="26.25" fill="#fff"/>
+          <rect y="183.75" width="26.25" height="52.5" fill="#fff"/>
+          <rect x="26.25" y="157.5" width="52.5" height="105" fill="#fff"/>
+          <rect x="183.75" y="105" width="131.25" height="288.75" fill="#fff"/>
+          <rect x="183.75" y="26.25" width="26.25" height="157.5" fill="#fff"/>
+          <rect x="105" y="26.25" width="26.25" height="236.25" fill="#fff"/>
+          {/* Black outlines */}
+          <rect x="131.25" width="52.5" height="26.25" fill="#0A0A0A"/>
+          <rect x="78.75" y="183.75" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="262.5" y="367.5" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="183.75" y="236.25" width="26.25" height="105" fill="#0A0A0A"/>
+          <rect x="341.25" y="288.75" width="26.25" height="52.5" fill="#0A0A0A"/>
+          <rect x="367.5" y="157.5" width="26.25" height="131.25" fill="#0A0A0A"/>
+          <rect x="315" y="131.25" width="52.5" height="26.25" fill="#0A0A0A"/>
+          <rect x="315" y="157.5" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="262.5" y="105" width="26.25" height="78.75" fill="#0A0A0A"/>
+          <rect x="236.25" y="236.25" width="26.25" height="105" fill="#0A0A0A"/>
+          <rect x="288.75" y="236.25" width="26.25" height="105" fill="#0A0A0A"/>
+          <rect x="315" y="341.25" width="26.25" height="78.75" fill="#0A0A0A"/>
+          <rect x="288.75" y="393.75" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="131.25" y="393.75" width="131.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="131.25" y="367.5" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="105" y="341.25" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="78.75" y="315" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="52.5" y="262.5" width="26.25" height="52.5" fill="#0A0A0A"/>
+          <rect x="26.25" y="236.25" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect y="183.75" width="26.25" height="52.5" fill="#0A0A0A"/>
+          <rect x="26.25" y="157.5" width="52.5" height="26.25" fill="#0A0A0A"/>
+          <rect x="183.75" y="105" width="131.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="183.75" y="26.25" width="26.25" height="157.5" fill="#0A0A0A"/>
+          <rect x="105" y="26.25" width="26.25" height="236.25" fill="#0A0A0A"/>
+        </svg>
       </div>
     </div>
   );
