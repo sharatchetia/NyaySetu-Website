@@ -152,13 +152,13 @@ const keyframeCss = `
 }
 
 @keyframes maCamera {
-  0%    { transform:scale(1); }
-  18%   { transform:scale(1.02); }
-  40%   { transform:scale(1.1); }
-  62%   { transform:scale(1.16); }
-  84%   { transform:scale(1.16); }
-  96%   { transform:scale(1.03); }
-  100%  { transform:scale(1); }
+  0%    { transform: scale(1) translateY(0px); }
+  18%   { transform: scale(1.02) translateY(-4px); }
+  40%   { transform: scale(1.1) translateY(-14px); }
+  56%   { transform: scale(1.2) translateY(-28px); }
+  84%   { transform: scale(1.2) translateY(-28px); }
+  96%   { transform: scale(1.03) translateY(-6px); }
+  100%  { transform: scale(1) translateY(0px); }
 }
 
 @keyframes maLineA { 0%,15% { stroke-dashoffset:1; } 34%,58% { stroke-dashoffset:0; } 100% { stroke-dashoffset:1; } }
