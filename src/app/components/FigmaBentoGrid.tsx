@@ -92,22 +92,22 @@ const keyframeCss = `
 @keyframes ssBoxFill1 {
   0%,11%  { background:rgba(255,255,255,0.12); transform:scale(1) rotate(0deg); }
   13%     { transform:scale(1.3) rotate(-12deg); }
-  16%     { background:#F5D100; transform:scale(0.95) rotate(4deg); }
-  19%,92% { background:#F5D100; transform:scale(1) rotate(0deg); }
+  16%     { background:#355216; transform:scale(0.95) rotate(4deg); }
+  19%,92% { background:#355216; transform:scale(1) rotate(0deg); }
   96%,100%{ background:rgba(255,255,255,0.12); transform:scale(1) rotate(0deg); }
 }
 @keyframes ssBoxFill2 {
   0%,28%  { background:rgba(255,255,255,0.12); transform:scale(1) rotate(0deg); }
   30%     { transform:scale(1.3) rotate(-12deg); }
-  33%     { background:#F5D100; transform:scale(0.95) rotate(4deg); }
-  36%,92% { background:#F5D100; transform:scale(1) rotate(0deg); }
+  33%     { background:#355216; transform:scale(0.95) rotate(4deg); }
+  36%,92% { background:#355216; transform:scale(1) rotate(0deg); }
   96%,100%{ background:rgba(255,255,255,0.12); transform:scale(1) rotate(0deg); }
 }
 @keyframes ssBoxFill3 {
   0%,44%  { background:rgba(255,255,255,0.12); transform:scale(1) rotate(0deg); }
   46%     { transform:scale(1.3) rotate(-12deg); }
-  49%     { background:#F5D100; transform:scale(0.95) rotate(4deg); }
-  52%,92% { background:#F5D100; transform:scale(1) rotate(0deg); }
+  49%     { background:#355216; transform:scale(0.95) rotate(4deg); }
+  52%,92% { background:#355216; transform:scale(1) rotate(0deg); }
   96%,100%{ background:rgba(255,255,255,0.12); transform:scale(1) rotate(0deg); }
 }
 
@@ -843,58 +843,58 @@ function SettlementTile() {
 
 function ServiceSupplyTile() {
   return (
-    <div style={{ ...tileBase, background: "#111111" }}>
+    <div style={{ ...tileBase, background: "linear-gradient(135deg, #FFE066 0%, #F5D100 55%, #E8C400 100%)" }}>
       <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(0deg, rgba(255,255,255,0.16) 0 1px, transparent 1px 13px)" }} />
-      <div style={{ ...badgeDark, background: "#F5D100", color: "#0A0A0A", zIndex: 10 }}>SERVICE &amp; SUPPLY</div>
+      <div style={{ ...badgeDark, background: "#355216", color: "#F5EFDD", zIndex: 10 }}>SERVICE &amp; SUPPLY</div>
 
       <div style={{ position: "relative", width: "100%", height: "100%", transformOrigin: "34% 66%", animation: "ssCameraMove 6s ease infinite" }}>
         <div style={{ position: "relative", padding: 14, paddingTop: 38 }}>
-          <div style={{ fontSize: 16, fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.03em", color: "#F5EFDD" }}>Service &amp; supply</div>
+          <div style={{ fontSize: 16, fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.03em", color: "#355216" }}>Service &amp; supply</div>
         </div>
 
         {/* Row 1 */}
         <div style={{ position: "absolute", top: 96, left: 14, display: "flex", alignItems: "center", gap: 10 }}>
-          <div style={{ position: "relative", width: 18, height: 18, flexShrink: 0, border: "1.8px solid #F5D100", animation: "ssBoxFill1 6s ease infinite" }}>
+          <div style={{ position: "relative", width: 18, height: 18, flexShrink: 0, border: "1.8px solid #355216", animation: "ssBoxFill1 6s ease infinite" }}>
             <svg width="18" height="18" viewBox="0 0 16 16" style={{ position: "absolute", top: 0, left: 0 }}>
-              <path d="M3.5 8.2l2.6 2.6 6-6.4" fill="none" stroke="#0A0A0A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="20" style={{ animation: "ssCheckDraw1 6s ease infinite" }} />
+              <path d="M3.5 8.2l2.6 2.6 6-6.4" fill="none" stroke="#F5EFDD" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="20" style={{ animation: "ssCheckDraw1 6s ease infinite" }} />
             </svg>
           </div>
-          <div style={{ position: "relative", display: "inline-block", fontSize: 14, fontWeight: 700, letterSpacing: "0.02em", textTransform: "uppercase", color: "#F5EFDD", animation: "ssLabelDim1 6s ease infinite" }}>
+          <div style={{ position: "relative", display: "inline-block", fontSize: 14, fontWeight: 700, letterSpacing: "0.02em", textTransform: "uppercase", color: "#355216", animation: "ssLabelDim1 6s ease infinite" }}>
             Delivery confirmed
-            <div style={{ position: "absolute", left: 0, right: 0, top: "50%", height: 0, borderTop: "2.5px solid #F5D100", transformOrigin: "left", animation: "ssStrike1 6s ease infinite" }} />
+            <div style={{ position: "absolute", left: 0, right: 0, top: "50%", height: 0, borderTop: "2.5px solid #355216", transformOrigin: "left", animation: "ssStrike1 6s ease infinite" }} />
           </div>
         </div>
 
         {/* Row 2 */}
         <div style={{ position: "absolute", top: 130, left: 14, display: "flex", alignItems: "center", gap: 10 }}>
-          <div style={{ position: "relative", width: 18, height: 18, flexShrink: 0, border: "1.8px solid #F5D100", animation: "ssBoxFill2 6s ease infinite" }}>
+          <div style={{ position: "relative", width: 18, height: 18, flexShrink: 0, border: "1.8px solid #355216", animation: "ssBoxFill2 6s ease infinite" }}>
             <svg width="18" height="18" viewBox="0 0 16 16" style={{ position: "absolute", top: 0, left: 0 }}>
-              <path d="M3.5 8.2l2.6 2.6 6-6.4" fill="none" stroke="#0A0A0A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="20" style={{ animation: "ssCheckDraw2 6s ease infinite" }} />
+              <path d="M3.5 8.2l2.6 2.6 6-6.4" fill="none" stroke="#F5EFDD" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="20" style={{ animation: "ssCheckDraw2 6s ease infinite" }} />
             </svg>
           </div>
-          <div style={{ position: "relative", display: "inline-block", fontSize: 14, fontWeight: 700, letterSpacing: "0.02em", textTransform: "uppercase", color: "#F5EFDD", animation: "ssLabelDim2 6s ease infinite" }}>
+          <div style={{ position: "relative", display: "inline-block", fontSize: 14, fontWeight: 700, letterSpacing: "0.02em", textTransform: "uppercase", color: "#355216", animation: "ssLabelDim2 6s ease infinite" }}>
             QA sign-off
-            <div style={{ position: "absolute", left: 0, right: 0, top: "50%", height: 0, borderTop: "2.5px solid #F5D100", transformOrigin: "left", animation: "ssStrike2 6s ease infinite" }} />
+            <div style={{ position: "absolute", left: 0, right: 0, top: "50%", height: 0, borderTop: "2.5px solid #355216", transformOrigin: "left", animation: "ssStrike2 6s ease infinite" }} />
           </div>
         </div>
 
         {/* Row 3 */}
         <div style={{ position: "absolute", top: 164, left: 14, display: "flex", alignItems: "center", gap: 10 }}>
-          <div style={{ position: "relative", width: 18, height: 18, flexShrink: 0, border: "1.8px solid #F5D100", animation: "ssBoxFill3 6s ease infinite" }}>
+          <div style={{ position: "relative", width: 18, height: 18, flexShrink: 0, border: "1.8px solid #355216", animation: "ssBoxFill3 6s ease infinite" }}>
             <svg width="18" height="18" viewBox="0 0 16 16" style={{ position: "absolute", top: 0, left: 0 }}>
-              <path d="M3.5 8.2l2.6 2.6 6-6.4" fill="none" stroke="#0A0A0A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="20" style={{ animation: "ssCheckDraw3 6s ease infinite" }} />
+              <path d="M3.5 8.2l2.6 2.6 6-6.4" fill="none" stroke="#F5EFDD" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="20" style={{ animation: "ssCheckDraw3 6s ease infinite" }} />
             </svg>
           </div>
-          <div style={{ position: "relative", display: "inline-block", fontSize: 14, fontWeight: 700, letterSpacing: "0.02em", textTransform: "uppercase", color: "#F5EFDD", animation: "ssLabelDim3 6s ease infinite" }}>
+          <div style={{ position: "relative", display: "inline-block", fontSize: 14, fontWeight: 700, letterSpacing: "0.02em", textTransform: "uppercase", color: "#355216", animation: "ssLabelDim3 6s ease infinite" }}>
             Invoice cleared
-            <div style={{ position: "absolute", left: 0, right: 0, top: "50%", height: 0, borderTop: "2.5px solid #F5D100", transformOrigin: "left", animation: "ssStrike3 6s ease infinite" }} />
+            <div style={{ position: "absolute", left: 0, right: 0, top: "50%", height: 0, borderTop: "2.5px solid #355216", transformOrigin: "left", animation: "ssStrike3 6s ease infinite" }} />
           </div>
         </div>
 
         {/* Ripples */}
-        <div style={{ position: "absolute", top: 92, left: 10, width: 26, height: 26, borderRadius: "50%", background: "#F5D100", animation: "ssRipple1 6s ease infinite" }} />
-        <div style={{ position: "absolute", top: 126, left: 10, width: 26, height: 26, borderRadius: "50%", background: "#F5D100", animation: "ssRipple2 6s ease infinite" }} />
-        <div style={{ position: "absolute", top: 160, left: 10, width: 26, height: 26, borderRadius: "50%", background: "#F5D100", animation: "ssRipple3 6s ease infinite" }} />
+        <div style={{ position: "absolute", top: 92, left: 10, width: 26, height: 26, borderRadius: "50%", background: "#355216", animation: "ssRipple1 6s ease infinite" }} />
+        <div style={{ position: "absolute", top: 126, left: 10, width: 26, height: 26, borderRadius: "50%", background: "#355216", animation: "ssRipple2 6s ease infinite" }} />
+        <div style={{ position: "absolute", top: 160, left: 10, width: 26, height: 26, borderRadius: "50%", background: "#355216", animation: "ssRipple3 6s ease infinite" }} />
 
         {/* Cursor */}
         <div style={{ position: "absolute", top: 0, left: 0, animation: "ssCursor 6s ease infinite", width: 42, height: 52, transformOrigin: "top left" }}>
