@@ -74,8 +74,7 @@ const badgeDark: React.CSSProperties = {
   fontSize: 10,
   fontWeight: 600,
   padding: "5px 9px",
-  borderTopRightRadius: 16,
-  borderBottomLeftRadius: 10,
+  borderRadius: 0,
 };
 
 const badgeLight: React.CSSProperties = {
@@ -86,8 +85,7 @@ const badgeLight: React.CSSProperties = {
   fontSize: 10,
   fontWeight: 600,
   padding: "5px 9px",
-  borderTopLeftRadius: 16,
-  borderBottomRightRadius: 10,
+  borderRadius: 0,
 };
 
 function EmploymentTile() {
