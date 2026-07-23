@@ -381,6 +381,7 @@ function Logo({ variant = "dark", size = 44 }: { variant?: "dark" | "light"; siz
   const badgeBg = variant === "dark" ? "#0A0A0A" : "#fbf3ee";
   const iconStroke = variant === "dark" ? "#FFFFFF" : "#0A0A0A";
   const text = variant === "dark" ? "#0A0A0A" : "#fbf3ee";
+  const red = "#EF4136";
   const iconSize = size * 0.62;
   return (
     <div
@@ -408,7 +409,9 @@ function Logo({ variant = "dark", size = 44 }: { variant?: "dark" | "light"; siz
         whiteSpace: "nowrap",
         transition: "max-width 0.35s ease, opacity 0.3s ease, margin-left 0.35s ease",
       }}>
-        <span style={{ fontFamily: "'Switzer', sans-serif", fontWeight: 700, fontSize: "1.05rem", letterSpacing: "-0.02em", color: text }}>NyaySetu</span>
+        <span style={{ fontFamily: "'Switzer', sans-serif", fontWeight: 700, fontSize: "1.05rem", letterSpacing: "-0.02em" }}>
+          <span style={{ color: text }}>Nyay</span><span style={{ color: red }}>Setu</span>
+        </span>
       </div>
     </div>
   );
