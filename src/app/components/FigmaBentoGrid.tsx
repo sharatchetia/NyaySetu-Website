@@ -1118,7 +1118,7 @@ function ShareholderTile() {
 
 function MergerTile() {
   return (
-    <div style={{ ...tileBase, background: "#5B4FE0" }}>
+    <div style={{ ...tileBase, background: "linear-gradient(135deg, #6E5FF0 0%, #5B4FE0 60%, #493CD0 100%)" }}>
       <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)", backgroundSize: "15px 15px" }} />
       <div style={{ ...badgeDark, background: "#C4B5FD", color: "#fff", zIndex: 10 }}>CORPORATE</div>
 
