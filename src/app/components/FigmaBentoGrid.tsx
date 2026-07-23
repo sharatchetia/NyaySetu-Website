@@ -24,12 +24,12 @@ const keyframeCss = `
   100%  { transform: translate(-105px, -10px); }
 }
 @keyframes fbg-cur1-test2 {
-  0%    { transform: translate(280px, 40px); }
+  0%    { transform: translate(440px, -60px); }
   18%   { transform: translate(148px, 88px); }
   32%   { transform: translate(148px, 88px); }
-  48%   { transform: translate(195px, 52px); }
-  72%   { transform: translate(-48px, 82px); }
-  100%  { transform: translate(-48px, 82px); }
+  48%   { transform: translate(220px, 40px); }
+  68%   { transform: translate(-120px, 82px); }
+  100%  { transform: translate(-120px, 82px); }
 }
 @keyframes fbg-clickRipple {
   0%,15% { transform:scale(0.15); opacity:0; }
