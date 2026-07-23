@@ -380,44 +380,35 @@ function Logo({ variant = "dark", size = 44 }: { variant?: "dark" | "light"; siz
   const [hov, setHov] = useState(false);
   const badgeBg = variant === "dark" ? "#0A0A0A" : "#fbf3ee";
   const iconStroke = variant === "dark" ? "#FFFFFF" : "#0A0A0A";
-  const textPrimary = variant === "dark" ? "#FFFFFF" : "#0A0A0A";
-  const red = "#EF4136";
+  const text = variant === "dark" ? "#0A0A0A" : "#fbf3ee";
   const iconSize = size * 0.62;
-  const expandedWidth = size + size * 2.45;
   return (
     <div
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
-      style={{
-        display: "inline-flex",
-        alignItems: "center",
-        height: size,
-        width: hov ? expandedWidth : size,
+      style={{ display: "inline-flex", alignItems: "center", cursor: "pointer" }}
+    >
+      <div style={{
+        width: size, height: size,
         borderRadius: size * 0.24,
         background: badgeBg,
-        overflow: "hidden",
-        cursor: "pointer",
-        transition: "width 0.35s cubic-bezier(.2,.8,.2,1)",
-      }}
-    >
-      <div style={{ width: size, height: size, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+        display: "flex", alignItems: "center", justifyContent: "center",
+        flexShrink: 0,
+      }}>
         <svg width={iconSize} height={iconSize} viewBox="0 0 64 64" fill="none">
           <path d="M32 6C32 6 14 12 14 12V30C14 44 22 54 32 58C42 54 50 44 50 30V12C50 12 32 6 32 6Z" stroke={iconStroke} strokeWidth={4.5} fill="none" strokeLinejoin="round" />
           <path d="M32 14V50M22 32H42" stroke={iconStroke} strokeWidth={4.5} strokeLinecap="round" />
         </svg>
       </div>
       <div style={{
+        maxWidth: hov ? 140 : 0,
         opacity: hov ? 1 : 0,
-        transition: hov ? "opacity 0.3s ease 0.08s" : "opacity 0.15s ease",
+        marginLeft: hov ? 12 : 0,
+        overflow: "hidden",
         whiteSpace: "nowrap",
-        paddingRight: size * 0.32,
-        fontFamily: "'Switzer', sans-serif",
-        fontWeight: 700,
-        fontSize: "1.05rem",
-        letterSpacing: "-0.02em",
-        flexShrink: 0,
+        transition: "max-width 0.35s ease, opacity 0.3s ease, margin-left 0.35s ease",
       }}>
-        <span style={{ color: textPrimary }}>Nyay</span><span style={{ color: red }}>Setu</span>
+        <span style={{ fontFamily: "'Switzer', sans-serif", fontWeight: 700, fontSize: "1.05rem", letterSpacing: "-0.02em", color: text }}>NyaySetu</span>
       </div>
     </div>
   );
