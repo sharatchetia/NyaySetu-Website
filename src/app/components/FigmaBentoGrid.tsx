@@ -307,18 +307,209 @@ function LeaseTile() {
 }
 
 function LicenseIpTile() {
+  const [isNonExclusive, setIsNonExclusive] = useState(false);
+  const [isClicking, setIsClicking] = useState(false);
+  const [rippleActive, setRippleActive] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsClicking(true);
+      setRippleActive(true);
+
+      setTimeout(() => {
+        setIsClicking(false);
+      }, 150);
+
+      setTimeout(() => {
+        setRippleActive(false);
+      }, 620);
+
+      setIsNonExclusive((prev) => !prev);
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div style={{ ...tileBase, background: "#34C77B" }}>
-      <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(45deg, rgba(255,255,255,0.07) 0 1px, transparent 1px 11px), repeating-linear-gradient(-45deg, rgba(255,255,255,0.07) 0 1px, transparent 1px 11px)" }} />
+    <div
+      style={{
+        ...tileBase,
+        background: isNonExclusive ? "#F4D03F" : "#34C77B",
+        transition: "background 0.25s ease",
+      }}
+    >
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage:
+            "repeating-linear-gradient(45deg, rgba(255,255,255,0.07) 0 1px, transparent 1px 11px), repeating-linear-gradient(-45deg, rgba(255,255,255,0.07) 0 1px, transparent 1px 11px)",
+        }}
+      />
       <div style={{ ...badgeDark }}>LICENSE &amp; IP</div>
-      <div style={{ position: "relative", padding: 14 }}>
-        <div style={{ fontSize: 14, fontWeight: 700, color: "#0A2E1B", maxWidth: 150 }}>License &amp; IP agreement</div>
+      <div style={{ position: "absolute", top: 14, left: 14, fontSize: 14, fontWeight: 700, color: "#0A2E1B", maxWidth: 150 }}>
+        License &amp; IP agreement
       </div>
-      <div style={{ position: "absolute", left: 14, right: 14, bottom: 14, background: "#fff", border: "1px solid #0A0A0A", borderRadius: 8, padding: "9px 10px", fontSize: 10, color: "#0A0A0A", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <span>EXCLUSIVE</span>
-        <div style={{ position: "relative", width: 38, height: 18, background: "#0A0A0A", borderRadius: 999, flexShrink: 0 }}>
-          <div style={{ position: "absolute", top: 2, width: 14, height: 14, background: "#34C77B", borderRadius: "50%", animation: "fbg-toggleMove 4s ease infinite" }} />
+
+      {/* Center Container */}
+      <div
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: 232,
+          textAlign: "center",
+        }}
+      >
+        <div style={{ fontSize: 9, fontWeight: 600, color: "rgba(10,46,27,0.7)", letterSpacing: "0.04em", marginBottom: 6 }}>
+          SCOPE OF USE
         </div>
+        <div
+          style={{
+            position: "relative",
+            background: "#fff",
+            border: "1px solid #0A0A0A",
+            borderRadius: 8,
+            padding: "9px 12px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            margin: "0 auto",
+            minWidth: 190,
+          }}
+        >
+          <div style={{ position: "relative", height: 14, width: 118, display: "flex", alignItems: "center" }}>
+            <span
+              style={{
+                position: "absolute",
+                left: 0,
+                fontSize: 10,
+                fontWeight: 700,
+                color: "#0A0A0A",
+                whiteSpace: "nowrap",
+                transition: "all 0.4s ease",
+                opacity: isNonExclusive ? 0 : 1,
+              }}
+            >
+              EXCLUSIVE
+            </span>
+            <span
+              style={{
+                position: "absolute",
+                left: 0,
+                fontSize: 10,
+                fontWeight: 700,
+                color: "#0A0A0A",
+                whiteSpace: "nowrap",
+                transition: "all 0.4s ease",
+                opacity: isNonExclusive ? 1 : 0,
+              }}
+            >
+              NON-EXCLUSIVE
+            </span>
+          </div>
+
+          <div style={{ position: "relative", width: 38, height: 18, background: "#0A0A0A", borderRadius: 999, flexShrink: 0, marginLeft: 12 }}>
+            <div
+              style={{
+                position: "absolute",
+                top: 2,
+                width: 14,
+                height: 14,
+                borderRadius: "50%",
+                transition: "all 0.4s ease",
+                left: isNonExclusive ? 20 : 2,
+                background: isNonExclusive ? "#ffffff" : "#34C77B",
+                boxShadow: isNonExclusive ? "0 0 0 2px rgba(10, 10, 10, 0.2)" : "none",
+              }}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Ripple Animation */}
+      <div
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          width: 34,
+          height: 34,
+          borderRadius: "50%",
+          background: "#fff",
+          pointerEvents: "none",
+          transform: rippleActive ? "translate(-50%, -38%) scale(2.8)" : "translate(-50%, -38%) scale(0.3)",
+          opacity: rippleActive ? 0 : 0.7,
+          transition: rippleActive ? "transform 0.6s ease, opacity 0.6s ease" : "none",
+        }}
+      />
+
+      {/* Retro Cursor */}
+      <div
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: isClicking ? "translate(-50%, 12px) scale(0.85)" : "translate(-50%, 12px) scale(1)",
+          width: 42,
+          height: 52,
+          zIndex: 5,
+          filter: "drop-shadow(2px 2px 1px rgba(0,0,0,0.6))",
+          transition: "transform 0.15s ease",
+        }}
+      >
+        <svg width="42" height="52" viewBox="0 0 394 420" fill="none">
+          <rect x="131.25" width="52.5" height="393.75" fill="#fff"/>
+          <rect x="78.75" y="183.75" width="26.25" height="131.25" fill="#fff"/>
+          <rect x="262.5" y="367.5" width="26.25" height="26.25" fill="#fff"/>
+          <rect x="105" y="236.25" width="236.25" height="105" fill="#fff"/>
+          <rect x="341.25" y="288.75" width="26.25" height="52.5" fill="#fff"/>
+          <rect x="367.5" y="157.5" width="26.25" height="131.25" fill="#fff"/>
+          <rect x="315" y="131.25" width="52.5" height="157.5" fill="#fff"/>
+          <rect x="315" y="157.5" width="26.25" height="26.25" fill="#fff"/>
+          <rect x="262.5" y="105" width="26.25" height="78.75" fill="#fff"/>
+          <rect x="236.25" y="236.25" width="26.25" height="105" fill="#fff"/>
+          <rect x="288.75" y="236.25" width="26.25" height="105" fill="#fff"/>
+          <rect x="315" y="341.25" width="26.25" height="78.75" fill="#fff"/>
+          <rect x="288.75" y="393.75" width="26.25" height="26.25" fill="#fff"/>
+          <rect x="131.25" y="393.75" width="131.25" height="26.25" fill="#fff"/>
+          <rect x="131.25" y="367.5" width="26.25" height="26.25" fill="#fff"/>
+          <rect x="105" y="341.25" width="26.25" height="26.25" fill="#fff"/>
+          <rect x="78.75" y="315" width="26.25" height="26.25" fill="#fff"/>
+          <rect x="52.5" y="262.5" width="26.25" height="52.5" fill="#fff"/>
+          <rect x="26.25" y="236.25" width="26.25" height="26.25" fill="#fff"/>
+          <rect y="183.75" width="26.25" height="52.5" fill="#fff"/>
+          <rect x="26.25" y="157.5" width="52.5" height="105" fill="#fff"/>
+          <rect x="183.75" y="105" width="131.25" height="288.75" fill="#fff"/>
+          <rect x="183.75" y="26.25" width="26.25" height="157.5" fill="#fff"/>
+          <rect x="105" y="26.25" width="26.25" height="236.25" fill="#fff"/>
+          {/* Black outlines */}
+          <rect x="131.25" width="52.5" height="26.25" fill="#0A0A0A"/>
+          <rect x="78.75" y="183.75" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="262.5" y="367.5" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="183.75" y="236.25" width="26.25" height="105" fill="#0A0A0A"/>
+          <rect x="341.25" y="288.75" width="26.25" height="52.5" fill="#0A0A0A"/>
+          <rect x="367.5" y="157.5" width="26.25" height="131.25" fill="#0A0A0A"/>
+          <rect x="315" y="131.25" width="52.5" height="26.25" fill="#0A0A0A"/>
+          <rect x="315" y="157.5" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="262.5" y="105" width="26.25" height="78.75" fill="#0A0A0A"/>
+          <rect x="236.25" y="236.25" width="26.25" height="105" fill="#0A0A0A"/>
+          <rect x="288.75" y="236.25" width="26.25" height="105" fill="#0A0A0A"/>
+          <rect x="315" y="341.25" width="26.25" height="78.75" fill="#0A0A0A"/>
+          <rect x="288.75" y="393.75" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="131.25" y="393.75" width="131.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="131.25" y="367.5" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="105" y="341.25" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="78.75" y="315" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="52.5" y="262.5" width="26.25" height="52.5" fill="#0A0A0A"/>
+          <rect x="26.25" y="236.25" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect y="183.75" width="26.25" height="52.5" fill="#0A0A0A"/>
+          <rect x="26.25" y="157.5" width="52.5" height="26.25" fill="#0A0A0A"/>
+          <rect x="183.75" y="105" width="131.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="183.75" y="26.25" width="26.25" height="157.5" fill="#0A0A0A"/>
+          <rect x="105" y="26.25" width="26.25" height="236.25" fill="#0A0A0A"/>
+        </svg>
       </div>
     </div>
   );
