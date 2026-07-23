@@ -23,6 +23,14 @@ const keyframeCss = `
   40%   { transform: translate(-105px, -10px); }
   100%  { transform: translate(-105px, -10px); }
 }
+@keyframes fbg-cur1-test2 {
+  0%    { transform: translate(280px, 40px); }
+  18%   { transform: translate(148px, 88px); }
+  32%   { transform: translate(148px, 88px); }
+  48%   { transform: translate(195px, 52px); }
+  72%   { transform: translate(-48px, 82px); }
+  100%  { transform: translate(-48px, 82px); }
+}
 @keyframes fbg-clickRipple {
   0%,15% { transform:scale(0.15); opacity:0; }
   19% { transform:scale(2.2); opacity:0.65; }
@@ -186,7 +194,7 @@ function LeaseTile() {
     const frame = () => {
       const elapsed = (Date.now() - startTime) / 1000;
       const t = elapsed % LOOP;
-      const frac = Math.min(t / (LOOP * 0.9), 1);
+      const frac = (1 - Math.cos((2 * Math.PI * t) / LOOP)) / 2;
       const currentDays = Math.round(47 - frac * 44);
       setDays(currentDays);
       setOffset(parseFloat((CIRC * frac).toFixed(1)));
@@ -238,6 +246,61 @@ function LeaseTile() {
           <div style={{ fontSize: 10, color: "#FBEAF0", letterSpacing: "0.03em" }}>RENEWAL IN</div>
           <div style={{ fontSize: 20, fontWeight: 500, color: "#fff", transition: "color 0.3s" }}>{days} days</div>
         </div>
+      </div>
+
+      {/* Retro Cursor */}
+      <div style={{ position: "absolute", top: 0, left: 0, animation: "fbg-cur1-test2 6.2s cubic-bezier(0.4, 0.0, 0.6, 1) infinite", width: 42, height: 52, transformOrigin: "top left", zIndex: 5 }}>
+        <svg width="42" height="52" viewBox="0 0 394 420" fill="none" style={{ filter: "drop-shadow(2px 2px 1px rgba(0,0,0,0.6))" }}>
+          <rect x="131.25" width="52.5" height="393.75" fill="#fff"/>
+          <rect x="78.75" y="183.75" width="26.25" height="131.25" fill="#fff"/>
+          <rect x="262.5" y="367.5" width="26.25" height="26.25" fill="#fff"/>
+          <rect x="105" y="236.25" width="236.25" height="105" fill="#fff"/>
+          <rect x="341.25" y="288.75" width="26.25" height="52.5" fill="#fff"/>
+          <rect x="367.5" y="157.5" width="26.25" height="131.25" fill="#fff"/>
+          <rect x="315" y="131.25" width="52.5" height="157.5" fill="#fff"/>
+          <rect x="315" y="157.5" width="26.25" height="26.25" fill="#fff"/>
+          <rect x="262.5" y="105" width="26.25" height="78.75" fill="#fff"/>
+          <rect x="236.25" y="236.25" width="26.25" height="105" fill="#fff"/>
+          <rect x="288.75" y="236.25" width="26.25" height="105" fill="#fff"/>
+          <rect x="315" y="341.25" width="26.25" height="78.75" fill="#fff"/>
+          <rect x="288.75" y="393.75" width="26.25" height="26.25" fill="#fff"/>
+          <rect x="131.25" y="393.75" width="131.25" height="26.25" fill="#fff"/>
+          <rect x="131.25" y="367.5" width="26.25" height="26.25" fill="#fff"/>
+          <rect x="105" y="341.25" width="26.25" height="26.25" fill="#fff"/>
+          <rect x="78.75" y="315" width="26.25" height="26.25" fill="#fff"/>
+          <rect x="52.5" y="262.5" width="26.25" height="52.5" fill="#fff"/>
+          <rect x="26.25" y="236.25" width="26.25" height="26.25" fill="#fff"/>
+          <rect y="183.75" width="26.25" height="52.5" fill="#fff"/>
+          <rect x="26.25" y="157.5" width="52.5" height="105" fill="#fff"/>
+          <rect x="183.75" y="105" width="131.25" height="288.75" fill="#fff"/>
+          <rect x="183.75" y="26.25" width="26.25" height="157.5" fill="#fff"/>
+          <rect x="105" y="26.25" width="26.25" height="236.25" fill="#fff"/>
+          {/* Black outlines */}
+          <rect x="131.25" width="52.5" height="26.25" fill="#0A0A0A"/>
+          <rect x="78.75" y="183.75" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="262.5" y="367.5" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="183.75" y="236.25" width="26.25" height="105" fill="#0A0A0A"/>
+          <rect x="341.25" y="288.75" width="26.25" height="52.5" fill="#0A0A0A"/>
+          <rect x="367.5" y="157.5" width="26.25" height="131.25" fill="#0A0A0A"/>
+          <rect x="315" y="131.25" width="52.5" height="26.25" fill="#0A0A0A"/>
+          <rect x="315" y="157.5" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="262.5" y="105" width="26.25" height="78.75" fill="#0A0A0A"/>
+          <rect x="236.25" y="236.25" width="26.25" height="105" fill="#0A0A0A"/>
+          <rect x="288.75" y="236.25" width="26.25" height="105" fill="#0A0A0A"/>
+          <rect x="315" y="341.25" width="26.25" height="78.75" fill="#0A0A0A"/>
+          <rect x="288.75" y="393.75" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="131.25" y="393.75" width="131.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="131.25" y="367.5" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="105" y="341.25" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="78.75" y="315" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="52.5" y="262.5" width="26.25" height="52.5" fill="#0A0A0A"/>
+          <rect x="26.25" y="236.25" width="26.25" height="26.25" fill="#0A0A0A"/>
+          <rect y="183.75" width="26.25" height="52.5" fill="#0A0A0A"/>
+          <rect x="26.25" y="157.5" width="52.5" height="26.25" fill="#0A0A0A"/>
+          <rect x="183.75" y="105" width="131.25" height="26.25" fill="#0A0A0A"/>
+          <rect x="183.75" y="26.25" width="26.25" height="157.5" fill="#0A0A0A"/>
+          <rect x="105" y="26.25" width="26.25" height="236.25" fill="#0A0A0A"/>
+        </svg>
       </div>
     </div>
   );
