@@ -380,7 +380,7 @@ function Logo({ variant = "dark", size = 44 }: { variant?: "dark" | "light"; siz
   const [hov, setHov] = useState(false);
   const badgeBg = variant === "dark" ? "#0A0A0A" : "#fbf3ee";
   const iconStroke = variant === "dark" ? "#FFFFFF" : "#0A0A0A";
-  const text = variant === "dark" ? "#0A0A0A" : "#fbf3ee";
+  const text = variant === "dark" ? C.charcoalSoft : "#fbf3ee";
   const red = "#EF4136";
   const iconSize = size * 0.62;
   return (
@@ -481,9 +481,9 @@ export default function App() {
             <div style={{ display: "flex", alignItems: "center" }}>
               <Logo />
             </div>
-            <div style={{ display: "flex", gap: 36, fontSize: "0.9rem", color: "#000000", alignItems: "center" }}>
+            <div style={{ display: "flex", gap: 36, fontSize: "0.9rem", color: C.charcoalSoft, alignItems: "center" }}>
               {["Analyze", "Lawyers", "Resources", "About"].map(l => (
-                <a key={l} href="#" style={{ textDecoration: "none", color: "#000000", fontWeight: 600 }}>{l}</a>
+                <a key={l} href="#" style={{ textDecoration: "none", color: "inherit", fontWeight: 500 }}>{l}</a>
               ))}
             </div>
             <button className="nyay-btn" style={{ display: "flex", alignItems: "center", justifyContent: "center", background: "#000000", color: "#ffffff", border: "none", height: 40, padding: "0 20px", fontSize: "0.88rem", fontWeight: 600, cursor: "pointer", fontFamily: "inherit" }}>
