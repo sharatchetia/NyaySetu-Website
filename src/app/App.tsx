@@ -387,7 +387,13 @@ function Logo({ variant = "dark", size = 44 }: { variant?: "dark" | "light"; siz
     <div
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
-      style={{ display: "inline-flex", alignItems: "center", cursor: "pointer" }}
+      style={{
+        position: "relative",
+        display: "inline-flex",
+        alignItems: "center",
+        height: size,
+        cursor: "pointer",
+      }}
     >
       <div style={{
         width: size, height: size,
@@ -402,12 +408,13 @@ function Logo({ variant = "dark", size = 44 }: { variant?: "dark" | "light"; siz
         </svg>
       </div>
       <div style={{
-        maxWidth: hov ? 140 : 0,
+        position: "absolute",
+        left: size + 10,
         opacity: hov ? 1 : 0,
-        marginLeft: hov ? 12 : 0,
-        overflow: "hidden",
+        transform: hov ? "translateX(0)" : "translateX(-6px)",
+        pointerEvents: hov ? "auto" : "none",
         whiteSpace: "nowrap",
-        transition: "max-width 0.35s ease, opacity 0.3s ease, margin-left 0.35s ease",
+        transition: "opacity 0.3s ease, transform 0.3s ease",
       }}>
         <span style={{ fontFamily: "'Switzer', sans-serif", fontWeight: 700, fontSize: "1.05rem", letterSpacing: "-0.02em" }}>
           <span style={{ color: text }}>Nyay</span><span style={{ color: red }}>Setu</span>
