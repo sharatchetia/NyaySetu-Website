@@ -123,7 +123,7 @@ export default function TestDiffCardStack() {
         const x = lerp(BASE_X[slot], targetX(slot), progress);
         const z = lerp(BASE_Z[slot], targetZ(slot), progress);
 
-        el.style.transform = `translateX(${x}px)`;
+        el.style.transform = `translate3d(${x}px, 0, 0)`;
         el.style.zIndex = `${Math.round(z)}`;
       });
 
@@ -171,9 +171,10 @@ export default function TestDiffCardStack() {
               display: "flex",
               flexDirection: "column",
               overflow: "hidden",
-              willChange: "transform",
               left: 0,
               top: 0,
+              backfaceVisibility: "hidden",
+              WebkitBackfaceVisibility: "hidden",
             }}
           >
             <div
@@ -185,16 +186,22 @@ export default function TestDiffCardStack() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
+                backfaceVisibility: "hidden",
+                WebkitBackfaceVisibility: "hidden",
               }}
             >
               <img
                 src={c.image}
                 alt={c.name}
+                loading="eager"
+                decoding="sync"
                 style={{
                   width: "100%",
                   height: "100%",
                   objectFit: "cover",
                   objectPosition: "center top",
+                  backfaceVisibility: "hidden",
+                  WebkitBackfaceVisibility: "hidden",
                 }}
               />
             </div>
