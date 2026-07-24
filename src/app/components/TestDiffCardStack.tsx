@@ -178,7 +178,7 @@ export default function TestDiffCardStack() {
           >
             <div
               style={{
-                height: 190,
+                height: 240,
                 background: "#FFFFFF",
                 position: "relative",
                 overflow: "hidden",
@@ -201,13 +201,13 @@ export default function TestDiffCardStack() {
             <div
               style={{
                 flex: 1,
-                padding: "24px 20px",
+                padding: "14px 16px",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
                 textAlign: "center",
-                gap: 8,
+                gap: 5,
               }}
             >
               <div
