@@ -978,60 +978,60 @@ export default function App() {
         </Section>
       </div>
 
-      {/* ── BOTTOM CTA BANNER ─── */}
-      <div style={{ background: C.off2, padding: "100px 64px 120px" }}>
+      {/* ── CTA STRIP ─── */}
+      <div style={{ background: C.off2, padding: "80px 64px" }}>
         <Section bg="transparent">
           <div style={{
-            maxWidth: 1200,
+            maxWidth: 900,
             margin: "0 auto",
-            background: C.charcoal,
-            borderRadius: R.card * 1.5,
-            padding: "80px 64px",
-            color: "#fff",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: 48,
+            background: C.cream,
+            borderRadius: R.card,
+            padding: "72px 64px",
+            textAlign: "center",
+            border: `1px solid ${C.beigeAlpha}`,
           }}>
-            <div>
-              <h2 style={{
-                fontFamily: "'Switzer', sans-serif",
-                fontWeight: 600,
-                fontSize: "clamp(2rem, 3.5vw, 3rem)",
-                letterSpacing: "-0.02em",
-                lineHeight: 1.1,
-                margin: "0 0 12px",
-              }}>
-                Ready to understand your document?
-              </h2>
-              <p style={{
-                fontSize: "1.1rem",
-                color: "rgba(255,255,255,0.7)",
-                margin: 0,
-                maxWidth: 540,
-              }}>
-                Upload any contract, agreement, or deed. Get plain-language clarity and expert matching in minutes.
-              </p>
-            </div>
-            <button className="nyay-btn" style={{
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-              height: 56,
-              background: C.burgundy,
-              color: "#ffffff",
-              border: "none",
-              borderRadius: R.btn,
-              padding: "0 36px",
-              fontSize: "1rem",
+            <div style={{ display: "flex", justifyContent: "center", marginBottom: 16 }}><Scale size={38} color={C.charcoal} /></div>
+            <h2 style={{
+              fontFamily: "'Switzer', sans-serif",
               fontWeight: 600,
-              fontFamily: "inherit",
-              cursor: "pointer",
-              whiteSpace: "nowrap",
-              flexShrink: 0,
-            }}>
-              Upload Document →
-            </button>
+              fontSize: "clamp(1.8rem, 2.8vw, 2.6rem)",
+              letterSpacing: "-0.02em",
+              color: C.charcoal,
+              margin: "0 0 16px",
+            }}>Your rights. Plain language.</h2>
+            <p style={{ color: C.charcoalSoft, fontSize: "1.08rem", margin: "0 0 40px", maxWidth: 440, marginLeft: "auto", marginRight: "auto" }}>
+              Upload any legal document and understand exactly what you're signing.
+            </p>
+            <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
+              <button className="nyay-btn" style={{
+                background: "#000000",
+                color: "#ffffff",
+                border: "none",
+                height: 48,
+                padding: "0 36px",
+                fontSize: "1rem",
+                fontWeight: 600,
+                fontFamily: "inherit",
+                cursor: "pointer",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}>Analyze Your Document →</button>
+              <button className="nyay-btn" style={{
+                background: "transparent",
+                color: "#000000",
+                border: "1px solid #000000",
+                height: 48,
+                padding: "0 28px",
+                fontSize: "1rem",
+                fontWeight: 500,
+                fontFamily: "inherit",
+                cursor: "pointer",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}>Browse Lawyers</button>
+            </div>
           </div>
         </Section>
       </div>
