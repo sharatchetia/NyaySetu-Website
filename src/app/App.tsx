@@ -934,9 +934,19 @@ function AIFlowSection() {
           </div>
 
           {/* Footer note */}
-          <div style={{ marginTop: 44, paddingTop: 28, borderTop: `1px solid ${C.beigeAlpha}`, display: "flex", alignItems: "center", gap: 10 }}>
-            <span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: "#8C3D46" }}></span>
-            <span style={{ fontSize: "0.85rem", color: C.charcoalSoft }}>Upload once. Everything after that is automatic.</span>
+          <div style={{ textAlign: "left", marginTop: 48, paddingTop: 32, borderTop: `1px solid ${C.beigeAlpha}` }}>
+            <p style={{
+              fontFamily: "'Switzer', sans-serif",
+              fontWeight: 400,
+              fontSize: "clamp(1.35rem, 2vw, 1.75rem)",
+              letterSpacing: "-0.015em",
+              lineHeight: 1.2,
+              color: C.charcoalSoft,
+              margin: 0,
+              maxWidth: 800,
+            }}>
+              Upload once. Everything after that is automatic.
+            </p>
           </div>
         </div>
       </Section>
