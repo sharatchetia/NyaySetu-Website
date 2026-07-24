@@ -152,7 +152,7 @@ export default function TestDiffCardStack() {
           position: "relative",
           width: 820,
           height: 440,
-          transform: "scale(0.55)",
+          transform: "scale(0.85)",
           transformOrigin: "center center",
           overflow: "visible",
         }}
