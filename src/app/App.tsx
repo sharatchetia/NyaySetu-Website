@@ -986,17 +986,9 @@ function TeamSection() {
             fontWeight: 600,
             fontSize: "0.95rem",
             letterSpacing: "-0.01em",
-            margin: "16px 0 4px",
+            margin: "16px 0 48px",
             color: C.charcoal,
           }}>The People Behind NyaySetu</p>
-          <p style={{
-            fontFamily: "'Switzer', sans-serif",
-            maxWidth: 480,
-            color: C.charcoalSoft,
-            fontSize: "0.92rem",
-            lineHeight: 1.6,
-            margin: "0 0 56px",
-          }}>Five students building an AI-powered legal assistant to make legal documents easier to understand.</p>
 
           <div className="ny-steps-wrap">
             <svg className="ny-connector" viewBox="0 0 1200 260" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
@@ -1078,6 +1070,22 @@ function TeamSection() {
               </div>
 
             </div>
+          </div>
+
+          {/* Footer note */}
+          <div style={{ textAlign: "left", marginTop: 48, paddingTop: 32, borderTop: `1px solid ${C.beigeAlpha}` }}>
+            <p style={{
+              fontFamily: "'Switzer', sans-serif",
+              fontWeight: 400,
+              fontSize: "clamp(1.35rem, 2vw, 1.75rem)",
+              letterSpacing: "-0.015em",
+              lineHeight: 1.2,
+              color: C.charcoalSoft,
+              margin: 0,
+              maxWidth: 800,
+            }}>
+              Five students building an AI-powered legal assistant to make legal documents easier to understand.
+            </p>
           </div>
         </div>
       </Section>
