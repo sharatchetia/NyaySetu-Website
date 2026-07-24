@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { Briefcase, Home, Users, Building2, Scale, Shield, FileText, Bot, Tag, UserCheck, Heart } from "lucide-react";
+import { Briefcase, Home, Users, Scale, Shield, FileText, Bot, Tag, UserCheck, Heart } from "lucide-react";
 import tableUploadImg from "../assets/table-upload.png";
 import howItWorksVideo from "../assets/hero-bg.mp4";
 import bentoPlaceholderVideo from "../assets/hero-bg.mp4";
@@ -57,12 +57,11 @@ const docTypes = [
 
 /* ─── legal specializations (original bento grid style with 6 tiles) ───── */
 const specializations = [
-  { id: "employment",         label: "Employment",           blurb: "Contracts, disputes, workplace rights", icon: Briefcase, bg: "#DBEAFE", fg: "#1E40AF", col: "1 / 7",  row: "1 / 3", useCardStack: true },
-  { id: "lease",              label: "Property & Lease",     blurb: "Leases, sale deeds, disputes",          icon: Home,      bg: "#FFEDD5", fg: "#9A3412", col: "7 / 12", row: "1 / 2" },
-  { id: "license_ip",         label: "License & IP",         blurb: "IP licensing, tech transfer, patents",  icon: Shield,    bg: "#FEF3C7", fg: "#92400E", col: "7 / 12", row: "2 / 3", useLoadingBar: true },
-  { id: "merger_acquisition", label: "Corporate & M&A",      blurb: "Incorporation, compliance, M&A",        icon: Building2, bg: "#D1FAE5", fg: "#065F46", col: "1 / 5",  row: "3 / 4" },
-  { id: "credit_loan",        label: "Credit & Loan",        blurb: "Loan facilities, credit, finance",      icon: Scale,     bg: "#EDE9FE", fg: "#5B21B6", col: "5 / 9",  row: "3 / 4" },
-  { id: "more",               label: "and many more →",      blurb: "Service, Supply, Settlement & 5+ classes", icon: Users, bg: "#CFFAFE", fg: "#155E75", col: "9 / 12", row: "3 / 4" },
+  { id: "employment",  label: "Employment",       blurb: "Contracts, disputes, workplace rights", icon: Briefcase, bg: "#DBEAFE", fg: "#1E40AF", col: "1 / 7",  row: "1 / 3", useCardStack: true, hideText: true },
+  { id: "license_ip",  label: "License & IP",     blurb: "IP licensing, tech transfer, patents",  icon: Shield,    bg: "#FEF3C7", fg: "#92400E", col: "7 / 12", row: "1 / 3", useLoadingBar: true, hideText: true },
+  { id: "lease",       label: "Property & Lease", blurb: "Leases, sale deeds, disputes",          icon: Home,      bg: "#FFEDD5", fg: "#9A3412", col: "1 / 5",  row: "3 / 4", tag: "real estate", photoCard: true },
+  { id: "credit_loan", label: "Credit & Loan",    blurb: "Loan facilities, credit, finance",       icon: Scale,     bg: "#EDE9FE", fg: "#5B21B6", col: "5 / 9",  row: "3 / 4" },
+  { id: "more",        label: "Explore all",      icon: Users,      bg: "#CFFAFE", fg: "#155E75", col: "9 / 12", row: "3 / 4", simpleButton: true },
 ];
 
 /* ─── testimonials ────────────────────────────────── */
@@ -193,12 +192,15 @@ function DocCard({ d, hovered, onHover, onLeave }: {
 }
 
 /* ─── Specialization Card (Original Style with borderRadius: 0) ─────────────────────────── */
-function SpecCard({ s }: { s: typeof specializations[0] & { video?: string; useCardStack?: boolean; useLoadingBar?: boolean } }) {
+function SpecCard({ s }: { s: typeof specializations[0] & { video?: string; useCardStack?: boolean; useLoadingBar?: boolean; hideText?: boolean; photoCard?: boolean; tag?: string; simpleButton?: boolean } }) {
   const [hov, setHov] = useState(false);
   const isTall = parseInt(s.row.split(" / ")[1]) - parseInt(s.row.split(" / ")[0]) >= 2;
   const hasVideo = Boolean(s.video);
   const hasCardStack = Boolean(s.useCardStack);
   const hasLoadingBar = Boolean(s.useLoadingBar);
+  const hideText = Boolean(s.hideText);
+  const isPhotoCard = Boolean(s.photoCard);
+  const isSimpleButton = Boolean(s.simpleButton);
   const IconComponent = s.icon;
 
   return (
@@ -253,61 +255,176 @@ function SpecCard({ s }: { s: typeof specializations[0] & { video?: string; useC
       {hasCardStack && <TestDiffCardStack />}
       {hasLoadingBar && <TestDiff1LoadingBar />}
 
-      <div style={{
-        position: "relative",
-        zIndex: 10,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        padding: (hasVideo || hasCardStack || hasLoadingBar) ? (isTall ? "24px 24px 0" : "20px 20px 0") : 0,
-        pointerEvents: "none",
-      }}>
-        <div style={{
-          width: isTall ? 52 : 42,
-          height: isTall ? 52 : 42,
-          borderRadius: 12,
-          background: "rgba(255,255,255,0.75)",
-          backdropFilter: (hasVideo || hasCardStack || hasLoadingBar) ? "blur(6px)" : undefined,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          color: s.fg,
-          flexShrink: 0,
-        }}>
-          <IconComponent size={isTall ? 22 : 18} />
-        </div>
-        <div style={{
-          width: 32, height: 32,
-          borderRadius: 9,
-          background: (hasVideo || hasCardStack || hasLoadingBar) ? "rgba(255,255,255,0.6)" : `${s.fg}18`,
-          color: s.fg,
-          backdropFilter: (hasVideo || hasCardStack || hasLoadingBar) ? "blur(6px)" : undefined,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontSize: "1rem",
-          opacity: hov ? 1 : 0.7,
-          transition: "opacity 0.2s ease",
-        }}>→</div>
-      </div>
+      {!isPhotoCard && !isSimpleButton && (
+        <>
+          <div style={{
+            position: "relative",
+            zIndex: 10,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: (hasVideo || hasCardStack || hasLoadingBar) ? (isTall ? "24px 24px 0" : "20px 20px 0") : 0,
+            pointerEvents: "none",
+          }}>
+            <div style={{
+              width: isTall ? 52 : 42,
+              height: isTall ? 52 : 42,
+              borderRadius: 12,
+              background: "rgba(255,255,255,0.75)",
+              backdropFilter: (hasVideo || hasCardStack || hasLoadingBar) ? "blur(6px)" : undefined,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: s.fg,
+              flexShrink: 0,
+            }}>
+              <IconComponent size={isTall ? 22 : 18} />
+            </div>
+            <div style={{
+              width: 32, height: 32,
+              borderRadius: 9,
+              background: (hasVideo || hasCardStack || hasLoadingBar) ? "rgba(255,255,255,0.6)" : `${s.fg}18`,
+              color: s.fg,
+              backdropFilter: (hasVideo || hasCardStack || hasLoadingBar) ? "blur(6px)" : undefined,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: "1rem",
+              opacity: hov ? 1 : 0.7,
+              transition: "opacity 0.2s ease",
+            }}>→</div>
+          </div>
 
-      <div style={{
-        position: "relative",
-        zIndex: 10,
-        padding: (hasVideo || hasCardStack || hasLoadingBar) ? (isTall ? "0 28px 26px" : "0 22px 20px") : 0,
-        pointerEvents: "none",
-      }}>
+          {!hideText && (
+            <div style={{
+              position: "relative",
+              zIndex: 10,
+              padding: (hasVideo || hasCardStack || hasLoadingBar) ? (isTall ? "0 28px 26px" : "0 22px 20px") : 0,
+              pointerEvents: "none",
+            }}>
+              <div style={{
+                fontFamily: "'Switzer', sans-serif",
+                fontWeight: 700,
+                fontSize: isTall ? "1.3rem" : "1.05rem",
+                color: C.charcoal,
+                marginBottom: 6,
+              }}>{s.label}</div>
+              <div style={{ fontSize: "0.86rem", color: s.fg, opacity: 0.95, lineHeight: 1.4, fontWeight: 500 }}>
+                {s.blurb}
+              </div>
+            </div>
+          )}
+        </>
+      )}
+
+      {isPhotoCard && (
+        <>
+          <div style={{
+            position: "absolute",
+            top: "50%",
+            right: -70,
+            width: 220,
+            height: 220,
+            borderRadius: "50%",
+            background: "#FFFFFF",
+            transform: "translateY(-50%)",
+          }} />
+          <div style={{
+            position: "absolute",
+            top: "50%",
+            right: 20,
+            transform: "translateY(-50%)",
+            width: 70,
+            height: 70,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}>
+            <svg width="55" height="70" viewBox="0 0 110 138" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="18" y="72" width="74" height="66" rx="20" fill="#3A3A3A" />
+              <circle cx="55" cy="52" r="29" fill="#3A3A3A" />
+            </svg>
+          </div>
+          <div style={{
+            position: "relative",
+            zIndex: 10,
+            padding: "16px 18px",
+            pointerEvents: "none",
+            display: "flex",
+            flexDirection: "column",
+            height: "100%",
+            justifyContent: "space-between",
+          }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+              <div style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 4,
+                background: "rgba(255,255,255,0.6)",
+                padding: "3px 8px 3px 5px",
+                borderRadius: 20,
+              }}>
+                <IconComponent size={11} color={s.fg} />
+                <span style={{ fontSize: 9, fontWeight: 500, color: s.fg }}>{s.tag}</span>
+              </div>
+              <div style={{
+                width: 32, height: 32,
+                borderRadius: 9,
+                background: `${s.fg}18`,
+                color: s.fg,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "1rem",
+                opacity: hov ? 1 : 0.7,
+                transition: "opacity 0.2s ease",
+              }}>→</div>
+            </div>
+            <div>
+              <div style={{
+                fontFamily: "'Switzer', sans-serif",
+                fontWeight: 700,
+                fontSize: "1.05rem",
+                lineHeight: 1.15,
+                color: C.charcoal,
+                marginBottom: 4,
+              }}>{s.label}</div>
+              <div style={{ fontSize: "0.78rem", color: s.fg, opacity: 0.95, lineHeight: 1.3, fontWeight: 500 }}>
+                {s.blurb}
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+
+      {isSimpleButton && (
         <div style={{
+          position: "relative",
+          zIndex: 10,
+          height: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 8,
           fontFamily: "'Switzer', sans-serif",
-          fontWeight: 700,
-          fontSize: isTall ? "1.3rem" : "1.05rem",
-          color: C.charcoal,
-          marginBottom: 6,
-        }}>{s.label}</div>
-        <div style={{ fontSize: "0.86rem", color: s.fg, opacity: 0.95, lineHeight: 1.4, fontWeight: 500 }}>
-          {s.blurb}
+          fontWeight: 600,
+          fontSize: "0.95rem",
+          color: s.fg,
+          pointerEvents: "none",
+        }}>
+          {s.label}
+          <span style={{
+            width: 28, height: 28,
+            borderRadius: 8,
+            background: `${s.fg}18`,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            transition: "transform 0.2s ease",
+            transform: hov ? "translateX(4px)" : "translateX(0)",
+          }}>→</span>
         </div>
-      </div>
+      )}
     </div>
   );
 }
@@ -807,8 +924,8 @@ export default function App() {
                 <span style={{
                   display: "inline-block",
                   width: 8, height: 8,
-                  background: C.charcoal,
-                  transform: "rotate(45deg)",
+                  borderRadius: "50%",
+                  background: C.burgundy,
                   marginBottom: 16,
                 }} />
                 <h3 style={{
@@ -817,138 +934,162 @@ export default function App() {
                   fontSize: "1.15rem",
                   color: C.charcoal,
                   margin: "0 0 6px",
-                }}>Talk to a specialist</h3>
+                }}>Connect with experts</h3>
                 <p style={{ color: C.charcoalSoft, fontSize: "0.95rem", lineHeight: 1.5, margin: "0 0 14px" }}>
-                  Get matched with a vetted lawyer based on your<br />document's category and case type.
+                  Matched with verified lawyers specializing in<br />your exact document classification.
                 </p>
                 <a href="#" style={{
-                  color: C.charcoal,
+                  color: C.burgundy,
                   fontSize: "0.95rem",
                   fontWeight: 500,
                   textDecoration: "underline",
                   display: "inline-flex",
                   alignItems: "center",
                   gap: 6,
-                }}>Explore the lawyer network →</a>
+                }}>Browse verified lawyers →</a>
               </div>
             </div>
-
           </div>
         </Section>
       </div>
 
-      {/* ── TESTIMONIALS ─── */}
-      <div style={{ background: C.off3, padding: "100px 64px" }}>
+      {/* ── USER STORIES / THREADS ─── */}
+      <div style={{ background: C.off1, padding: "100px 64px" }}>
         <Section bg="transparent">
           <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-            <p style={{
-              fontFamily: "'Switzer', sans-serif",
-              fontSize: "clamp(1.6rem, 2.8vw, 2.4rem)",
-              fontWeight: 600,
-              color: C.charcoal,
-              letterSpacing: "-0.02em",
-              margin: "0 0 12px",
-              textAlign: "center",
-            }}>Real conversations. Real help.</p>
-            <p style={{ textAlign: "center", color: C.charcoalSoft, fontSize: "1.05rem", margin: "0 0 56px" }}>
-              People use NyaySetu every day to understand their rights.
-            </p>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
+
+            {/* Heading block */}
+            <div style={{ maxWidth: 900, margin: "0 0 48px" }}>
+              <h2 style={{
+                fontFamily: "'Switzer', sans-serif",
+                fontWeight: 600,
+                fontSize: "clamp(1.35rem, 2vw, 1.75rem)",
+                letterSpacing: "-0.015em",
+                lineHeight: 1.2,
+                margin: 0,
+                color: C.charcoal,
+              }}>
+                Used by people navigating real legal situations.
+              </h2>
+              <p style={{
+                fontFamily: "'Switzer', sans-serif",
+                fontWeight: 400,
+                fontSize: "clamp(1.35rem, 2vw, 1.75rem)",
+                letterSpacing: "-0.015em",
+                lineHeight: 1.2,
+                margin: "2px 0 0",
+                color: C.charcoalFaint,
+              }}>
+                Here is how NyaySetu helps users understand complex contracts every day.
+              </p>
+            </div>
+
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 1fr)",
+              gap: 24,
+            }}>
               {testimonials.map(t => <TestimonialCard key={t.id} t={t} />)}
             </div>
           </div>
         </Section>
       </div>
 
-      {/* ── CTA STRIP ─── */}
-      <div style={{ background: C.off2, padding: "80px 64px" }}>
+      {/* ── BOTTOM CTA BANNER ─── */}
+      <div style={{ background: C.off2, padding: "100px 64px 120px" }}>
         <Section bg="transparent">
           <div style={{
-            maxWidth: 900,
+            maxWidth: 1200,
             margin: "0 auto",
-            background: C.cream,
-            borderRadius: R.card,
-            padding: "72px 64px",
-            textAlign: "center",
-            border: `1px solid ${C.beigeAlpha}`,
+            background: C.charcoal,
+            borderRadius: R.card * 1.5,
+            padding: "80px 64px",
+            color: "#fff",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: 48,
           }}>
-            <div style={{ display: "flex", justifyContent: "center", marginBottom: 16 }}><Scale size={38} color={C.charcoal} /></div>
-            <h2 style={{
-              fontFamily: "'Switzer', sans-serif",
-              fontWeight: 600,
-              fontSize: "clamp(1.8rem, 2.8vw, 2.6rem)",
-              letterSpacing: "-0.02em",
-              color: C.charcoal,
-              margin: "0 0 16px",
-            }}>Your rights. Plain language.</h2>
-            <p style={{ color: C.charcoalSoft, fontSize: "1.08rem", margin: "0 0 40px", maxWidth: 440, marginLeft: "auto", marginRight: "auto" }}>
-              Upload any legal document and understand exactly what you're signing.
-            </p>
-            <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
-              <button className="nyay-btn" style={{
-                background: "#000000",
-                color: "#ffffff",
-                border: "none",
-                height: 48,
-                padding: "0 36px",
-                fontSize: "1rem",
+            <div>
+              <h2 style={{
+                fontFamily: "'Switzer', sans-serif",
                 fontWeight: 600,
-                fontFamily: "inherit",
-                cursor: "pointer",
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}>Analyze Your Document →</button>
-              <button className="nyay-btn" style={{
-                background: "transparent",
-                color: "#000000",
-                border: "1px solid #000000",
-                height: 48,
-                padding: "0 28px",
-                fontSize: "1rem",
-                fontWeight: 500,
-                fontFamily: "inherit",
-                cursor: "pointer",
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}>Browse Lawyers</button>
+                fontSize: "clamp(2rem, 3.5vw, 3rem)",
+                letterSpacing: "-0.02em",
+                lineHeight: 1.1,
+                margin: "0 0 12px",
+              }}>
+                Ready to understand your document?
+              </h2>
+              <p style={{
+                fontSize: "1.1rem",
+                color: "rgba(255,255,255,0.7)",
+                margin: 0,
+                maxWidth: 540,
+              }}>
+                Upload any contract, agreement, or deed. Get plain-language clarity and expert matching in minutes.
+              </p>
             </div>
+            <button className="nyay-btn" style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              height: 56,
+              background: C.burgundy,
+              color: "#ffffff",
+              border: "none",
+              borderRadius: R.btn,
+              padding: "0 36px",
+              fontSize: "1rem",
+              fontWeight: 600,
+              fontFamily: "inherit",
+              cursor: "pointer",
+              whiteSpace: "nowrap",
+              flexShrink: 0,
+            }}>
+              Upload Document →
+            </button>
           </div>
         </Section>
       </div>
 
       {/* ── FOOTER ─── */}
-      <footer style={{ background: C.charcoal, padding: "64px 64px 48px" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 48, paddingBottom: 48, borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
-            <div>
-              <div style={{ marginBottom: 16 }}>
-                <Logo variant="light" size={26} />
-              </div>
-              <p style={{ color: "rgba(255,255,255,0.45)", fontSize: "0.92rem", lineHeight: 1.7, maxWidth: 280, margin: 0 }}>
-                Making the Indian legal system accessible to everyone — one document at a time.
-              </p>
+      <footer style={{ background: C.charcoal, color: "rgba(255,255,255,0.6)", padding: "64px 64px 40px", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "2fr repeat(3, 1fr)", gap: 48, paddingBottom: 48, borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+          <div>
+            <Logo variant="light" />
+            <p style={{ fontSize: "0.88rem", lineHeight: 1.6, marginTop: 16, maxWidth: 280, color: "rgba(255,255,255,0.5)" }}>
+              Democratizing legal understanding for everyone through intelligent document classification and verified expert matching.
+            </p>
+          </div>
+          <div>
+            <div style={{ color: "#fff", fontWeight: 600, fontSize: "0.9rem", marginBottom: 16 }}>Platform</div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 10, fontSize: "0.86rem" }}>
+              {["Document Analysis", "Lawyer Marketplace", "Risk Scanner", "Document Types"].map(l => (
+                <a key={l} href="#" style={{ color: "inherit", textDecoration: "none" }}>{l}</a>
+              ))}
             </div>
-            {[
-              { heading: "Product", links: ["Analyze Document", "Find Lawyers", "How it Works", "Pricing"] },
-              { heading: "Legal", links: ["Privacy Policy", "Terms of Use", "Cookie Policy"] },
-              { heading: "Company", links: ["About", "Blog", "Careers", "Contact"] },
-            ].map(col => (
-              <div key={col.heading}>
-                <div style={{ color: "rgba(255,255,255,0.28)", fontSize: "0.76rem", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 16 }}>{col.heading}</div>
-                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                  {col.links.map(l => (
-                    <a key={l} href="#" style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.92rem", textDecoration: "none" }}>{l}</a>
-                  ))}
-                </div>
-              </div>
-            ))}
           </div>
-          <div style={{ paddingTop: 32, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <span style={{ color: "rgba(255,255,255,0.28)", fontSize: "0.82rem" }}>© 2025 NyaySetu. All rights reserved.</span>
-            <span style={{ color: "rgba(255,255,255,0.28)", fontSize: "0.82rem", display: "inline-flex", alignItems: "center", gap: 4 }}>Made with <Heart size={12} color="#8C3D46" fill="#8C3D46" /> for India</span>
+          <div>
+            <div style={{ color: "#fff", fontWeight: 600, fontSize: "0.9rem", marginBottom: 16 }}>Resources</div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 10, fontSize: "0.86rem" }}>
+              {["Legal Guides", "Contract Templates", "Clause Library", "API Documentation"].map(l => (
+                <a key={l} href="#" style={{ color: "inherit", textDecoration: "none" }}>{l}</a>
+              ))}
+            </div>
           </div>
+          <div>
+            <div style={{ color: "#fff", fontWeight: 600, fontSize: "0.9rem", marginBottom: 16 }}>Company</div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 10, fontSize: "0.86rem" }}>
+              {["About Us", "Careers", "Privacy Policy", "Terms of Service"].map(l => (
+                <a key={l} href="#" style={{ color: "inherit", textDecoration: "none" }}>{l}</a>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div style={{ maxWidth: 1200, margin: "24px auto 0", display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: "0.82rem", color: "rgba(255,255,255,0.4)" }}>
+          <span>© 2026 NyaySetu. All rights reserved.</span>
+          <span>Built for legal clarity and accessibility.</span>
         </div>
       </footer>
 
