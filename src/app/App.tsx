@@ -675,6 +675,118 @@ function Section({ children, bg = C.off1 }: { children: React.ReactNode; bg?: st
 }
 
 /* ─── Main ────────────────────────────────────────── */
+/* ─── Upload Card Capability Carousel Overlay ────────────────────────── */
+const UPLOAD_CAPABILITIES = [
+  "Summarize legal documents",
+  "Explain complex clauses",
+  "Classify your document",
+  "Find the right lawyer",
+  "Understand your rights",
+];
+
+function RotatingCapabilityUploadOverlay() {
+  const [index, setIndex] = useState(0);
+  const [fadeState, setFadeState] = useState<"in" | "out">("in");
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFadeState("out");
+      setTimeout(() => {
+        setIndex(prev => (prev + 1) % UPLOAD_CAPABILITIES.length);
+        setFadeState("in");
+      }, 350);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div style={{
+      position: "absolute",
+      top: "49%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      zIndex: 2,
+      textAlign: "center",
+      pointerEvents: "none",
+      width: "100%",
+      maxWidth: 360,
+      padding: "0 16px",
+    }}>
+      {/* Permanent Title */}
+      <div style={{
+        fontFamily: "'Switzer', sans-serif",
+        fontWeight: 600,
+        fontSize: "clamp(1rem, 1.6vw, 1.3rem)",
+        color: C.charcoal,
+        marginBottom: 4,
+      }}>
+        Drop your document here
+      </div>
+
+      {/* Permanent Browse Subtitle */}
+      <div style={{
+        fontFamily: "'Switzer', sans-serif",
+        fontSize: "clamp(0.82rem, 1.1vw, 0.95rem)",
+        color: C.charcoalSoft,
+        marginBottom: 10,
+      }}>
+        or <span style={{ color: C.burgundy, fontWeight: 600 }}>browse your files</span>
+      </div>
+
+      {/* Animated Capability Line */}
+      <div style={{
+        height: 22,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        overflow: "hidden",
+        marginBottom: 14,
+      }}>
+        <span
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 6,
+            fontFamily: "'Switzer', sans-serif",
+            fontSize: "clamp(0.75rem, 0.95vw, 0.85rem)",
+            fontWeight: 500,
+            color: C.charcoalSoft,
+            letterSpacing: "-0.01em",
+            opacity: fadeState === "in" ? 1 : 0,
+            transform: fadeState === "in" ? "translateY(0px)" : "translateY(-4px)",
+            transition: "opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)",
+            willChange: "opacity, transform",
+          }}
+        >
+          <span style={{
+            width: 5,
+            height: 5,
+            borderRadius: "50%",
+            background: C.burgundy,
+            display: "inline-block",
+            flexShrink: 0,
+          }} />
+          {UPLOAD_CAPABILITIES[index]}
+        </span>
+      </div>
+
+      {/* Supported Formats Caption */}
+      <div style={{
+        fontFamily: "'Switzer', sans-serif",
+        fontSize: "0.72rem",
+        fontWeight: 500,
+        color: C.charcoalFaint,
+        letterSpacing: "0.04em",
+        textTransform: "uppercase",
+        opacity: 0.75,
+      }}>
+        Supports PDF • DOCX • JPG • PNG
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
   const [mobileOpen, setMobileOpen]       = useState(false);
   const [scrolled, setScrolled]           = useState(false);
@@ -817,28 +929,7 @@ export default function App() {
             />
 
             {/* text overlay on table surface */}
-            <div style={{
-              position: "absolute",
-              top: "49%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              zIndex: 2,
-              textAlign: "center",
-              pointerEvents: "none",
-            }}>
-              <div style={{
-                fontFamily: "'Switzer', sans-serif",
-                fontWeight: 600,
-                fontSize: "clamp(1rem, 1.6vw, 1.3rem)",
-                color: C.charcoal,
-                marginBottom: 6,
-              }}>
-                Drop your document here
-              </div>
-              <div style={{ fontSize: "clamp(0.82rem, 1.1vw, 0.95rem)", color: C.charcoalSoft }}>
-                or <span style={{ color: C.burgundy, fontWeight: 600 }}>browse your files</span>
-              </div>
-            </div>
+            <RotatingCapabilityUploadOverlay />
           </div>
           </div>
         </div>
