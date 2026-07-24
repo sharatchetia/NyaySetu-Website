@@ -12,9 +12,9 @@ import {
 import FigmaBentoGrid from "./components/FigmaBentoGrid";
 import TestDiffCardStack from "./components/TestDiffCardStack";
 import TestDiff1LoadingBar from "./components/TestDiff1LoadingBar";
-import lawyerWorkplace from "../assets/lawyer_workplace.jpg";
-import lawyerRealEstate from "../assets/lawyer_realestate.jpg";
-import lawyerFinance from "../assets/lawyer_finance.jpg";
+import lawyerWorkplace from "../assets/lawyer_white_6.jpg";
+import lawyerRealEstate from "../assets/lawyer_white_7.jpg";
+import lawyerFinance from "../assets/lawyer_white_8.jpg";
 
 /* ─── palette ─────────────────────────────────────── */
 const C = {
@@ -312,32 +312,26 @@ function SpecCard({ s }: { s: typeof specializations[0] & { video?: string; useC
         <>
           <div style={{
             position: "absolute",
-            top: "50%",
-            right: -70,
-            width: 220,
-            height: 220,
-            borderRadius: "50%",
+            top: 0,
+            bottom: 0,
+            right: 0,
+            width: 140,
             background: "#FFFFFF",
-            transform: "translateY(-50%)",
-          }} />
-          <div style={{
-            position: "absolute",
-            top: "50%",
-            right: 14,
-            transform: "translateY(-50%)",
-            width: 80,
-            height: 80,
-            borderRadius: "50%",
             overflow: "hidden",
-            border: "2px solid #FFFFFF",
-            boxShadow: "0 6px 16px rgba(0,0,0,0.15)",
-            zIndex: 5,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
           }}>
             {s.photo && (
               <img
                 src={s.photo}
                 alt={s.label}
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  objectPosition: "center top",
+                }}
               />
             )}
           </div>

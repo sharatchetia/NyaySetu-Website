@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from "react";
-import lawyerRohan from "../../assets/lawyer_rohan.jpg";
-import lawyerPriya from "../../assets/lawyer_priya.jpg";
-import lawyerArjun from "../../assets/lawyer_arjun.jpg";
-import lawyerAnanya from "../../assets/lawyer_ananya.jpg";
-import lawyerVikram from "../../assets/lawyer_vikram.jpg";
+import lawyer1 from "../../assets/lawyer_white_1.jpg";
+import lawyer2 from "../../assets/lawyer_white_2.jpg";
+import lawyer3 from "../../assets/lawyer_white_3.jpg";
+import lawyer4 from "../../assets/lawyer_white_4.jpg";
+import lawyer5 from "../../assets/lawyer_white_5.jpg";
 
 interface LawyerCardData {
   id: string;
@@ -27,7 +27,7 @@ const CARDS: LawyerCardData[] = [
     rating: "★★★★★ 4.9",
     buttonBg: "#111",
     buttonColor: "#fff",
-    image: lawyerRohan,
+    image: lawyer1,
   },
   {
     id: "lime",
@@ -37,7 +37,7 @@ const CARDS: LawyerCardData[] = [
     rating: "★★★★★ 4.8",
     buttonBg: "#111",
     buttonColor: "#fff",
-    image: lawyerPriya,
+    image: lawyer2,
   },
   {
     id: "tangerine",
@@ -49,7 +49,7 @@ const CARDS: LawyerCardData[] = [
     rating: "★★★★★ 4.95",
     buttonBg: "#fff",
     buttonColor: "#111",
-    image: lawyerArjun,
+    image: lawyer3,
   },
   {
     id: "lavender",
@@ -59,7 +59,7 @@ const CARDS: LawyerCardData[] = [
     rating: "★★★★★ 4.7",
     buttonBg: "#111",
     buttonColor: "#fff",
-    image: lawyerAnanya,
+    image: lawyer4,
   },
   {
     id: "blueberry",
@@ -71,7 +71,7 @@ const CARDS: LawyerCardData[] = [
     rating: "★★★★★ 4.85",
     buttonBg: "#fff",
     buttonColor: "#111",
-    image: lawyerVikram,
+    image: lawyer5,
   },
 ];
 
@@ -166,7 +166,7 @@ export default function TestDiffCardStack() {
     };
 
     animationFrameId = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(animationFrameId);
+    return () => cancelAnimationFrame(animate);
   }, []);
 
   return (
@@ -185,7 +185,7 @@ export default function TestDiffCardStack() {
       <div
         style={{
           position: "relative",
-          width: 580,
+          width: 310,
           height: 380,
           perspective: 1200,
           transform: "translateX(40px) scale(0.85)",
@@ -198,8 +198,8 @@ export default function TestDiffCardStack() {
             ref={(el) => { cardsRef.current[index] = el; }}
             style={{
               position: "absolute",
-              width: 540,
-              height: 360,
+              width: 310,
+              height: 380,
               background: c.bg,
               borderRadius: 0,
               border: "none",
@@ -208,80 +208,78 @@ export default function TestDiffCardStack() {
               flexDirection: "column",
               overflow: "hidden",
               willChange: "transform, opacity",
-              transition: "box-shadow 0.3s ease",
               left: 0,
-              top: 10,
+              top: 0,
             }}
           >
-            <div style={{ display: "flex", width: "100%", height: "100%" }}>
+            <div
+              style={{
+                height: 190,
+                background: "#FFFFFF",
+                position: "relative",
+                overflow: "hidden",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <img
+                src={c.image}
+                alt={c.name}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  objectPosition: "center top",
+                }}
+              />
+            </div>
+            <div
+              style={{
+                flex: 1,
+                padding: "24px 20px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                textAlign: "center",
+                gap: 8,
+              }}
+            >
               <div
                 style={{
-                  width: "50%",
-                  height: "100%",
-                  position: "relative",
-                  overflow: "hidden",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
+                  fontWeight: 600,
+                  fontSize: 22,
+                  lineHeight: 1.05,
+                  margin: 0,
+                  letterSpacing: "-0.4px",
+                  color: c.textColor || "#111",
                 }}
               >
-                <img
-                  src={c.image}
-                  alt={c.name}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                  }}
-                />
+                {c.name}
               </div>
               <div
                 style={{
-                  flex: 1,
-                  padding: "32px 32px 24px",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  textAlign: "center",
-                  gap: 12,
+                  fontSize: 15,
+                  fontWeight: 500,
+                  color: c.specialtyColor || "rgba(17, 17, 17, 0.75)",
+                  margin: 0,
+                  letterSpacing: "-0.1px",
                 }}
               >
-                <div
-                  style={{
-                    fontWeight: 600,
-                    fontSize: 23,
-                    lineHeight: 1.05,
-                    margin: 0,
-                    letterSpacing: "-0.4px",
-                    color: c.textColor || "#111",
-                  }}
-                >
-                  {c.name}
-                </div>
-                <div
-                  style={{
-                    fontSize: 15.5,
-                    fontWeight: 500,
-                    color: c.specialtyColor || "rgba(17, 17, 17, 0.75)",
-                    margin: 0,
-                    letterSpacing: "-0.1px",
-                  }}
-                >
-                  {c.specialty}
-                </div>
-                <div
-                  style={{
-                    fontSize: 15,
-                    fontWeight: 500,
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 6,
-                    color: c.textColor || "#111",
-                  }}
-                >
-                  {c.rating}
-                </div>
+                {c.specialty}
+              </div>
+              <div
+                style={{
+                  fontSize: 14.5,
+                  fontWeight: 500,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 6,
+                  color: c.textColor || "#111",
+                }}
+              >
+                {c.rating}
               </div>
             </div>
           </div>
