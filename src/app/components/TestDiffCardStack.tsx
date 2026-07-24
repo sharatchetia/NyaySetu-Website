@@ -13,8 +13,6 @@ interface LawyerCardData {
   specialty: string;
   specialtyColor?: string;
   rating: string;
-  buttonBg: string;
-  buttonColor: string;
   image: string;
 }
 
@@ -25,8 +23,6 @@ const CARDS: LawyerCardData[] = [
     name: "Adv. Rohan Sharma",
     specialty: "Corporate Law",
     rating: "★★★★★ 4.9",
-    buttonBg: "#111",
-    buttonColor: "#fff",
     image: lawyer1,
   },
   {
@@ -35,8 +31,6 @@ const CARDS: LawyerCardData[] = [
     name: "Adv. Priya Mehta",
     specialty: "Family Law",
     rating: "★★★★★ 4.8",
-    buttonBg: "#111",
-    buttonColor: "#fff",
     image: lawyer2,
   },
   {
@@ -47,8 +41,6 @@ const CARDS: LawyerCardData[] = [
     name: "Adv. Arjun Patel",
     specialty: "Criminal Law",
     rating: "★★★★★ 4.95",
-    buttonBg: "#fff",
-    buttonColor: "#111",
     image: lawyer3,
   },
   {
@@ -57,8 +49,6 @@ const CARDS: LawyerCardData[] = [
     name: "Adv. Ananya Singh",
     specialty: "Intellectual Property",
     rating: "★★★★★ 4.7",
-    buttonBg: "#111",
-    buttonColor: "#fff",
     image: lawyer4,
   },
   {
@@ -69,8 +59,6 @@ const CARDS: LawyerCardData[] = [
     name: "Adv. Vikram Rao",
     specialty: "Real Estate Law",
     rating: "★★★★★ 4.85",
-    buttonBg: "#fff",
-    buttonColor: "#111",
     image: lawyer5,
   },
 ];
@@ -116,57 +104,34 @@ export default function TestDiffCardStack() {
     let startTime: number | null = null;
 
     const animate = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const elapsed = (timestamp - startTime) / 1000;
-      const time = elapsed % CYCLE;
-      const stepIndex = Math.floor(time / SEGMENT);
-      const stepProgress = (time % SEGMENT) / SEGMENT;
+      if (startTime === null) startTime = timestamp;
+      const elapsed = ((timestamp - startTime) / 1000) % CYCLE;
 
-      ORDER.forEach((id, cardIndex) => {
-        const el = cardsRef.current[cardIndex];
+      const frontIndex = Math.floor(elapsed / SEGMENT) % N;
+      const localT = elapsed - frontIndex * SEGMENT;
+
+      let progress = 0;
+      if (localT > HOLD) {
+        progress = easeInOutQuad(Math.min(1, (localT - HOLD) / TRANSITION));
+      }
+
+      ORDER.forEach((id, i) => {
+        const el = cardsRef.current[i];
         if (!el) return;
 
-        const currentSlot = (cardIndex - stepIndex + N) % N;
-        const nextSlot = (currentSlot - 1 + N) % N;
+        const slot = (i - frontIndex + N) % N;
+        const x = lerp(BASE_X[slot], targetX(slot), progress);
+        const z = lerp(BASE_Z[slot], targetZ(slot), progress);
 
-        let x = BASE_X[currentSlot];
-        let z = BASE_Z[currentSlot];
-
-        if (stepProgress > HOLD / SEGMENT) {
-          const moveProgress = (stepProgress - HOLD / SEGMENT) / (TRANSITION / SEGMENT);
-          const eased = easeInOutQuad(moveProgress);
-
-          const txCurrent = targetX(currentSlot);
-          const txNext = targetX(nextSlot);
-          const tzCurrent = targetZ(currentSlot);
-          const tzNext = targetZ(nextSlot);
-
-          if (currentSlot === 0) {
-            x = lerp(BASE_X[0], txCurrent, eased);
-            z = lerp(BASE_Z[0], tzCurrent, eased);
-          } else if (currentSlot === 1) {
-            x = lerp(BASE_X[1], txCurrent, eased);
-            z = lerp(BASE_Z[1], tzCurrent, eased);
-          } else if (currentSlot === 2) {
-            x = lerp(BASE_X[2], txCurrent, eased);
-            z = lerp(BASE_Z[2], tzCurrent, eased);
-          } else {
-            x = lerp(BASE_X[currentSlot], txNext, eased);
-            z = lerp(BASE_Z[currentSlot], tzNext, eased);
-          }
-        }
-
-        const opacity = x <= -700 ? 0 : 1;
-        el.style.transform = `translateX(${x}px) translateZ(${z}px)`;
-        el.style.zIndex = `${Math.round(z * 10)}`;
-        el.style.opacity = `${opacity}`;
+        el.style.transform = `translateX(${x}px)`;
+        el.style.zIndex = `${Math.round(z)}`;
       });
 
       animationFrameId = requestAnimationFrame(animate);
     };
 
     animationFrameId = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrameId);
   }, []);
 
   return (
@@ -187,7 +152,6 @@ export default function TestDiffCardStack() {
           position: "relative",
           width: 310,
           height: 380,
-          perspective: 1200,
           transform: "translateX(40px) scale(0.85)",
           transformOrigin: "center center",
         }}
@@ -207,7 +171,7 @@ export default function TestDiffCardStack() {
               display: "flex",
               flexDirection: "column",
               overflow: "hidden",
-              willChange: "transform, opacity",
+              willChange: "transform",
               left: 0,
               top: 0,
             }}
