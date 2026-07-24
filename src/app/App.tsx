@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
-import { Briefcase, Home, Users, Scale, Shield, FileText, Bot, Tag, UserCheck, Heart } from "lucide-react";
+import { Briefcase, Home, Users, Scale, Shield, FileText, Bot, Tag, UserCheck, Heart, Upload, MessageSquare } from "lucide-react";
 import tableUploadImg from "../assets/table-upload.png";
 import howItWorksVideo from "../assets/loop_nyaysetu_process.mp4";
 import bentoPlaceholderVideo from "../assets/hero-bg.mp4";
@@ -99,6 +99,35 @@ const testimonials = [
       { from: "user", text: "Can you explain what 'force majeure' means in my employment contract?" },
       { from: "ai",   text: "Force majeure covers unforeseeable events like natural disasters that prevent fulfilling the contract without legal liability. Your employment agreement lists these specific events..." },
     ],
+  },
+];
+
+/* ─── AI workflow steps (upload → analysis → summary → classification → lawyer) ─── */
+const workflowSteps = [
+  {
+    id: "upload", num: "01", icon: Upload,
+    title: "Upload document", desc: "Drop in any contract, lease, or agreement",
+    bg: "linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%)", fg: "#1E40AF", offset: 0,
+  },
+  {
+    id: "analysis", num: "02", icon: Bot,
+    title: "AI analysis", desc: "Every clause read and cross-checked",
+    bg: "linear-gradient(135deg, #FAF5FF 0%, #F3E8FF 100%)", fg: "#6B21A8", offset: -26,
+  },
+  {
+    id: "summary", num: "03", icon: MessageSquare,
+    title: "Plain-language summary", desc: "Legal text, rewritten in words you use",
+    bg: "linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%)", fg: "#92400E", offset: 6,
+  },
+  {
+    id: "classification", num: "04", icon: Tag,
+    title: "Document classification", desc: "Sorted into the right legal category",
+    bg: "linear-gradient(135deg, #ECFEFF 0%, #CFFAFE 100%)", fg: "#155E75", offset: -26,
+  },
+  {
+    id: "lawyer", num: "05", icon: UserCheck,
+    title: "Lawyer recommendation", desc: "Matched to a specialist for this exact case",
+    bg: null, fg: "#8C3D46", offset: 6, final: true,
   },
 ];
 
