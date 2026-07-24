@@ -98,7 +98,7 @@ function lerp(a: number, b: number, t: number) {
 
 export default function TestDiffCardStack() {
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const frostRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const darkOverlayRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     let animationFrameId: number;
@@ -127,10 +127,12 @@ export default function TestDiffCardStack() {
         el.style.transform = `translate3d(${x}px, 0, 0)`;
         el.style.zIndex = `${Math.round(z)}`;
 
-        const frostEl = frostRefs.current[i];
-        if (frostEl) {
-          const frostOpacity = Math.min(0.85, Math.abs(x) / 160);
-          frostEl.style.opacity = `${frostOpacity}`;
+        const darkEl = darkOverlayRefs.current[i];
+        if (darkEl) {
+          // Front card (x = 0) is bright (darkOpacity = 0).
+          // Background cards (x > 0) are dimmed with a dark overlay.
+          const darkOpacity = Math.min(0.40, (Math.abs(x) / 160) * 0.40);
+          darkEl.style.opacity = `${darkOpacity}`;
         }
       });
 
@@ -261,15 +263,13 @@ export default function TestDiffCardStack() {
               </div>
             </div>
 
-            {/* Frosted Glass Overlay covering the ENTIRE CARD */}
+            {/* Darkening Overlay for background cards */}
             <div
-              ref={(el) => { frostRefs.current[index] = el; }}
+              ref={(el) => { darkOverlayRefs.current[index] = el; }}
               style={{
                 position: "absolute",
                 inset: 0,
-                background: "rgba(255, 255, 255, 0.32)",
-                backdropFilter: "blur(10px) saturate(1.1)",
-                WebkitBackdropFilter: "blur(10px) saturate(1.1)",
+                background: "rgba(0, 0, 0, 1.0)",
                 pointerEvents: "none",
                 willChange: "opacity",
                 zIndex: 20,
