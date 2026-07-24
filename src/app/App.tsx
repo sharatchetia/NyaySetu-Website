@@ -312,11 +312,13 @@ function SpecCard({ s }: { s: typeof specializations[0] & { video?: string; useC
         <>
           <div style={{
             position: "absolute",
-            top: 0,
-            bottom: 0,
-            right: 0,
-            width: 140,
+            top: "50%",
+            right: -60,
+            width: 220,
+            height: 220,
+            borderRadius: "50%",
             background: "#FFFFFF",
+            transform: "translateY(-50%)",
             overflow: "hidden",
             display: "flex",
             alignItems: "center",
