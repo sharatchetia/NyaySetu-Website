@@ -10,6 +10,7 @@ import {
   ModelClassId,
 } from "./constants/classes";
 import FigmaBentoGrid from "./components/FigmaBentoGrid";
+import TestDiffCardStack from "./components/TestDiffCardStack";
 
 /* ─── palette ─────────────────────────────────────── */
 const C = {
@@ -55,7 +56,7 @@ const docTypes = [
 
 /* ─── legal specializations (original bento grid style with 6 tiles) ───── */
 const specializations = [
-  { id: "employment",         label: "Employment",           blurb: "Contracts, disputes, workplace rights", icon: Briefcase, bg: "#DBEAFE", fg: "#1E40AF", col: "1 / 7",  row: "1 / 3", video: bentoPlaceholderVideo },
+  { id: "employment",         label: "Employment",           blurb: "Contracts, disputes, workplace rights", icon: Briefcase, bg: "#DBEAFE", fg: "#1E40AF", col: "1 / 7",  row: "1 / 3", useCardStack: true },
   { id: "lease",              label: "Property & Lease",     blurb: "Leases, sale deeds, disputes",          icon: Home,      bg: "#FFEDD5", fg: "#9A3412", col: "7 / 12", row: "1 / 2" },
   { id: "license_ip",         label: "License & IP",         blurb: "IP licensing, tech transfer, patents",  icon: Shield,    bg: "#FEF3C7", fg: "#92400E", col: "7 / 12", row: "2 / 3", video: bentoPlaceholderVideo },
   { id: "merger_acquisition", label: "Corporate & M&A",      blurb: "Incorporation, compliance, M&A",        icon: Building2, bg: "#D1FAE5", fg: "#065F46", col: "1 / 5",  row: "3 / 4" },
@@ -191,10 +192,11 @@ function DocCard({ d, hovered, onHover, onLeave }: {
 }
 
 /* ─── Specialization Card (Original Style with borderRadius: 0) ─────────────────────────── */
-function SpecCard({ s }: { s: typeof specializations[0] & { video?: string } }) {
+function SpecCard({ s }: { s: typeof specializations[0] & { video?: string; useCardStack?: boolean } }) {
   const [hov, setHov] = useState(false);
   const isTall = parseInt(s.row.split(" / ")[1]) - parseInt(s.row.split(" / ")[0]) >= 2;
   const hasVideo = Boolean(s.video);
+  const hasCardStack = Boolean(s.useCardStack);
   const IconComponent = s.icon;
 
   return (
@@ -208,7 +210,7 @@ function SpecCard({ s }: { s: typeof specializations[0] & { video?: string } }) 
         background: s.bg,
         borderRadius: 0,
         overflow: "hidden",
-        padding: hasVideo ? 0 : (isTall ? "32px 28px" : "26px 24px"),
+        padding: (hasVideo || hasCardStack) ? 0 : (isTall ? "32px 28px" : "26px 24px"),
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
@@ -246,24 +248,27 @@ function SpecCard({ s }: { s: typeof specializations[0] & { video?: string } }) 
         </>
       )}
 
+      {hasCardStack && <TestDiffCardStack />}
+
       <div style={{
         position: "relative",
-        zIndex: 1,
+        zIndex: 10,
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        padding: hasVideo ? (isTall ? "24px 24px 0" : "20px 20px 0") : 0,
+        padding: (hasVideo || hasCardStack) ? (isTall ? "24px 24px 0" : "20px 20px 0") : 0,
+        pointerEvents: "none",
       }}>
         <div style={{
           width: isTall ? 52 : 42,
           height: isTall ? 52 : 42,
           borderRadius: 12,
-          background: "rgba(255,255,255,0.55)",
-          backdropFilter: hasVideo ? "blur(6px)" : undefined,
+          background: "rgba(255,255,255,0.75)",
+          backdropFilter: (hasVideo || hasCardStack) ? "blur(6px)" : undefined,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          color: hasVideo ? "#fff" : s.fg,
+          color: s.fg,
           flexShrink: 0,
         }}>
           <IconComponent size={isTall ? 22 : 18} />
@@ -271,31 +276,32 @@ function SpecCard({ s }: { s: typeof specializations[0] & { video?: string } }) 
         <div style={{
           width: 32, height: 32,
           borderRadius: 9,
-          background: hasVideo ? "rgba(255,255,255,0.28)" : `${s.fg}18`,
-          color: hasVideo ? "#fff" : s.fg,
-          backdropFilter: hasVideo ? "blur(6px)" : undefined,
+          background: (hasVideo || hasCardStack) ? "rgba(255,255,255,0.6)" : `${s.fg}18`,
+          color: s.fg,
+          backdropFilter: (hasVideo || hasCardStack) ? "blur(6px)" : undefined,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           fontSize: "1rem",
-          opacity: hov ? 1 : 0.5,
+          opacity: hov ? 1 : 0.7,
           transition: "opacity 0.2s ease",
         }}>→</div>
       </div>
 
       <div style={{
         position: "relative",
-        zIndex: 1,
-        padding: hasVideo ? (isTall ? "0 28px 26px" : "0 22px 20px") : 0,
+        zIndex: 10,
+        padding: (hasVideo || hasCardStack) ? (isTall ? "0 28px 26px" : "0 22px 20px") : 0,
+        pointerEvents: "none",
       }}>
         <div style={{
           fontFamily: "'Switzer', sans-serif",
           fontWeight: 700,
           fontSize: isTall ? "1.3rem" : "1.05rem",
-          color: hasVideo ? "#fff" : C.charcoal,
+          color: C.charcoal,
           marginBottom: 6,
         }}>{s.label}</div>
-        <div style={{ fontSize: "0.86rem", color: hasVideo ? "rgba(255,255,255,0.82)" : s.fg, opacity: hasVideo ? 1 : 0.85, lineHeight: 1.4 }}>
+        <div style={{ fontSize: "0.86rem", color: s.fg, opacity: 0.95, lineHeight: 1.4, fontWeight: 500 }}>
           {s.blurb}
         </div>
       </div>
