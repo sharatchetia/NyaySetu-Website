@@ -129,7 +129,7 @@ export default function TestDiffCardStack() {
 
         const frostEl = frostRefs.current[i];
         if (frostEl) {
-          const frostOpacity = Math.min(0.65, Math.abs(x) / 220);
+          const frostOpacity = Math.min(0.85, Math.abs(x) / 160);
           frostEl.style.opacity = `${frostOpacity}`;
         }
       });
@@ -261,15 +261,15 @@ export default function TestDiffCardStack() {
               </div>
             </div>
 
-            {/* Soft Frosted Glass Overlay covering the ENTIRE CARD */}
+            {/* Frosted Glass Overlay covering the ENTIRE CARD */}
             <div
               ref={(el) => { frostRefs.current[index] = el; }}
               style={{
                 position: "absolute",
                 inset: 0,
-                background: "rgba(255, 255, 255, 0.22)",
-                backdropFilter: "blur(6px) saturate(1.05)",
-                WebkitBackdropFilter: "blur(6px) saturate(1.05)",
+                background: "rgba(255, 255, 255, 0.32)",
+                backdropFilter: "blur(10px) saturate(1.1)",
+                WebkitBackdropFilter: "blur(10px) saturate(1.1)",
                 pointerEvents: "none",
                 willChange: "opacity",
                 zIndex: 20,
