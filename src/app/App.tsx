@@ -258,30 +258,30 @@ function SpecCard({ s }: { s: typeof specializations[0] & { video?: string; useC
 
       {!isPhotoCard && !isSimpleButton && (
         <>
-          <div style={{
-            position: "relative",
-            zIndex: 10,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            padding: (hasVideo || hasCardStack || hasLoadingBar) ? (isTall ? "24px 24px 0" : "20px 20px 0") : 0,
-            pointerEvents: "none",
-          }}>
+          {(!hasCardStack && !hasLoadingBar && !hasVideo) && (
             <div style={{
-              width: isTall ? 52 : 42,
-              height: isTall ? 52 : 42,
-              borderRadius: 12,
-              background: "rgba(255,255,255,0.75)",
-              backdropFilter: (hasVideo || hasCardStack || hasLoadingBar) ? "blur(6px)" : undefined,
+              position: "relative",
+              zIndex: 10,
               display: "flex",
               alignItems: "center",
-              justifyContent: "center",
-              color: s.fg,
-              flexShrink: 0,
+              justifyContent: "space-between",
+              pointerEvents: "none",
             }}>
-              <IconComponent size={isTall ? 22 : 18} />
+              <div style={{
+                width: isTall ? 52 : 42,
+                height: isTall ? 52 : 42,
+                borderRadius: 12,
+                background: "rgba(255,255,255,0.75)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: s.fg,
+                flexShrink: 0,
+              }}>
+                <IconComponent size={isTall ? 22 : 18} />
+              </div>
             </div>
-          </div>
+          )}
 
           {!hideText && (
             <div style={{
