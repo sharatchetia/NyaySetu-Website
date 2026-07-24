@@ -152,7 +152,7 @@ export default function TestDiffCardStack() {
           position: "relative",
           width: 820,
           height: 440,
-          transform: "translateX(30px) scale(0.85)",
+          transform: "translateX(40px) scale(0.85)",
           transformOrigin: "center center",
           overflow: "visible",
         }}
@@ -169,11 +169,11 @@ export default function TestDiffCardStack() {
               top: "50%",
               width: 310,
               height: 380,
-              borderRadius: 28,
+              borderRadius: 0,
               boxShadow:
                 "0 20px 40px rgba(0, 0, 0, 0.18), 0 4px 8px rgba(0, 0, 0, 0.1)",
               overflow: "hidden",
-              border: "6px solid #111",
+              border: "none",
               boxSizing: "border-box",
               userSelect: "none",
               transform: "translate(-50%, -50%)",
