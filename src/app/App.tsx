@@ -729,9 +729,9 @@ function RotatingCapabilityUploadOverlay() {
         fontFamily: "'Switzer', sans-serif",
         fontSize: "clamp(0.82rem, 1.1vw, 0.95rem)",
         color: C.charcoalSoft,
-        marginBottom: 10,
+        marginBottom: 8,
       }}>
-        or <span style={{ color: C.burgundy, fontWeight: 600 }}>browse your files</span>
+        or <span style={{ color: "#EF4136", fontWeight: 600 }}>browse your files</span>
       </div>
 
       {/* Animated Capability Line */}
@@ -741,7 +741,7 @@ function RotatingCapabilityUploadOverlay() {
         alignItems: "center",
         justifyContent: "center",
         overflow: "hidden",
-        marginBottom: 14,
+        marginBottom: 2,
       }}>
         <span
           style={{
@@ -763,7 +763,7 @@ function RotatingCapabilityUploadOverlay() {
             width: 5,
             height: 5,
             borderRadius: "50%",
-            background: C.burgundy,
+            background: "#EF4136",
             display: "inline-block",
             flexShrink: 0,
           }} />
@@ -774,12 +774,13 @@ function RotatingCapabilityUploadOverlay() {
       {/* Supported Formats Caption */}
       <div style={{
         fontFamily: "'Switzer', sans-serif",
-        fontSize: "0.72rem",
+        fontSize: "0.67rem",
         fontWeight: 500,
         color: C.charcoalFaint,
         letterSpacing: "0.04em",
         textTransform: "uppercase",
-        opacity: 0.75,
+        opacity: 0.5,
+        marginTop: 10,
       }}>
         Supports PDF • DOCX • JPG • PNG
       </div>
