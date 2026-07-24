@@ -230,6 +230,30 @@ function SpecCard({ s }: { s: typeof specializations[0] & { video?: string; useC
           : "0 2px 8px -2px rgba(0,0,0,0.06)",
       }}
     >
+      {s.tag && !hasCardStack && !hasLoadingBar && (
+        <div style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          zIndex: 25,
+          pointerEvents: "none",
+        }}>
+          <span style={{
+            display: "inline-block",
+            fontSize: "0.72rem",
+            fontWeight: 600,
+            letterSpacing: "0.04em",
+            textTransform: "uppercase",
+            color: s.fg,
+            background: "rgba(255, 255, 255, 0.90)",
+            padding: "6px 12px",
+            borderRadius: "0 0 10px 0",
+            width: "fit-content",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+          }}>{s.tag}</span>
+        </div>
+      )}
+
       {hasVideo && (
         <>
           <video
@@ -341,26 +365,13 @@ function SpecCard({ s }: { s: typeof specializations[0] & { video?: string; useC
           <div style={{
             position: "relative",
             zIndex: 10,
-            padding: "16px 18px",
+            padding: "18px 20px",
             pointerEvents: "none",
             display: "flex",
             flexDirection: "column",
             height: "100%",
-            justifyContent: "space-between",
+            justifyContent: "flex-end",
           }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-              <div style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 4,
-                background: "rgba(255,255,255,0.6)",
-                padding: "3px 8px 3px 5px",
-                borderRadius: 20,
-              }}>
-                <IconComponent size={11} color={s.fg} />
-                <span style={{ fontSize: 9, fontWeight: 500, color: s.fg }}>{s.tag}</span>
-              </div>
-            </div>
             <div>
               <div style={{
                 fontFamily: "'Switzer', sans-serif",

@@ -177,7 +177,7 @@ export default function TestDiffCardStack() {
                   height: "100%",
                   objectFit: "cover",
                   objectPosition: c.objectPosition || "center 18%",
-                  transform: c.imageTransform || "translateY(56px) scale(1.12)",
+                  transform: c.imageTransform || "translateY(26px) scale(1.12)",
                 }}
               />
             </div>
