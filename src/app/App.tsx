@@ -749,7 +749,7 @@ function RotatingCapabilityUploadOverlay() {
             fontFamily: "'Switzer', sans-serif",
             fontSize: "clamp(0.75rem, 0.95vw, 0.85rem)",
             fontWeight: 500,
-            color: C.charcoalSoft,
+            color: C.burgundy,
             letterSpacing: "-0.01em",
             opacity: fadeState === "in" ? 1 : 0,
             transition: "opacity 0.35s ease-in-out",
