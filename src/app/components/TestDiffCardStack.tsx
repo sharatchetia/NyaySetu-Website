@@ -263,28 +263,6 @@ export default function TestDiffCardStack() {
                   {c.rating}
                 </div>
               </div>
-              <button
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: 6,
-                  padding: "11px 20px",
-                  borderRadius: 15,
-                  fontSize: 14,
-                  fontWeight: 500,
-                  letterSpacing: "-0.2px",
-                  textDecoration: "none",
-                  border: "none",
-                  cursor: "pointer",
-                  marginBottom: 32,
-                  alignSelf: "center",
-                  background: c.buttonBg,
-                  color: c.buttonColor,
-                }}
-              >
-                View →
-              </button>
             </div>
           </div>
         ))}
