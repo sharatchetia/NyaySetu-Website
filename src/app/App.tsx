@@ -860,8 +860,7 @@ export default function App() {
               width: "calc(100% + 128px)",
               marginLeft: -64,
               marginRight: -64,
-              borderRadius: 16,
-              boxShadow: "0 24px 60px -12px rgba(0,0,0,0.18)",
+              borderRadius: 0,
             }}>
               <video
                 src={howItWorksVideo}
