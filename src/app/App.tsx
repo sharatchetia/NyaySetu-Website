@@ -752,9 +752,8 @@ function RotatingCapabilityUploadOverlay() {
             color: C.charcoalSoft,
             letterSpacing: "-0.01em",
             opacity: fadeState === "in" ? 1 : 0,
-            transform: fadeState === "in" ? "translateY(0px)" : "translateY(-4px)",
-            transition: "opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)",
-            willChange: "opacity, transform",
+            transition: "opacity 0.35s ease-in-out",
+            willChange: "opacity",
           }}
         >
           {UPLOAD_CAPABILITIES[index]}

@@ -38,7 +38,7 @@
 .nyay-eyebrow   { animation: nyay-fadeUp 0.7s ease both 0.05s; }
 .nyay-headline  { animation: nyay-fadeUp 0.75s ease both 0.12s; }
 .nyay-subtitle  { animation: nyay-fadeUp 0.75s ease both 0.2s; }
-.nyay-card      { animation: nyay-fadeUp 0.8s ease both 0.3s, nyay-floaty 6.5s ease-in-out infinite 1.1s; position: relative; z-index: 9999; }
+.nyay-card      { animation: nyay-fadeUp 0.8s ease both 0.3s; position: relative; z-index: 9999; }
 .nyay-rail      { animation: nyay-fadeIn 0.8s ease both 0.15s; }
 
 .nyay-sheen::after {
