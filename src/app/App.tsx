@@ -984,10 +984,11 @@ function TeamSection() {
           <p style={{
             fontFamily: "'Switzer', sans-serif",
             fontWeight: 600,
-            fontSize: "0.95rem",
-            letterSpacing: "-0.01em",
+            fontSize: "clamp(1.35rem, 2vw, 1.75rem)",
+            letterSpacing: "-0.015em",
+            lineHeight: 1.2,
             margin: "16px 0 48px",
-            color: C.charcoal,
+            color: "#EF4136",
           }}>The People Behind NyaySetu</p>
 
           <div className="ny-steps-wrap">
