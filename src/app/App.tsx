@@ -60,7 +60,7 @@ const docTypes = [
 
 /* ─── legal specializations (original bento grid style with 6 tiles) ───── */
 const specializations = [
-  { id: "employment",   label: "Employment",       blurb: "Contracts, disputes, workplace rights", icon: Briefcase, bg: "#DBEAFE", fg: "#1E40AF", col: "1 / 7",  row: "1 / 3", useCardStack: true, hideText: true },
+  { id: "employment",   label: "Employment",       blurb: "Contracts, disputes, workplace rights", icon: Briefcase, bg: "#FFFFFF", fg: "#1E40AF", col: "1 / 7",  row: "1 / 3", useCardStack: true, hideText: true },
   { id: "employee_card",label: "Employment",       blurb: "Offer letters, HR policies, exits",     icon: Briefcase, bg: "#DBEAFE", fg: "#1E40AF", col: "7 / 12", row: "1 / 2", tag: "workplace law", photoCard: true, photo: lawyerWorkplace },
   { id: "license_ip",   label: "License & IP",     blurb: "IP licensing, tech transfer, patents",  icon: Shield,    bg: "#FEF3C7", fg: "#92400E", col: "7 / 12", row: "2 / 3", useLoadingBar: true, hideText: true },
   { id: "lease",        label: "Property & Lease", blurb: "Leases, sale deeds, disputes",          icon: Home,      bg: "#FFEDD5", fg: "#9A3412", col: "1 / 5",  row: "3 / 4", tag: "real estate", photoCard: true, photo: lawyerRealEstate },

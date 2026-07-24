@@ -123,7 +123,7 @@ export default function TestDiffCardStack() {
         display: "flex",
         alignItems: "stretch",
         overflow: "hidden",
-        background: "#DBEAFE",
+        background: "#FFFFFF",
         userSelect: "none",
       }}
     >
