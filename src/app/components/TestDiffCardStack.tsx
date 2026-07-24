@@ -63,78 +63,45 @@ const CARDS: LawyerCardData[] = [
   },
 ];
 
-const ORDER = ["bubblegum", "lime", "tangerine", "lavender", "blueberry"];
-const N = ORDER.length;
+// 3 full cycles of cards for seamless continuous scrolling
+const TRIPLE_CARDS = [...CARDS, ...CARDS, ...CARDS];
 
-const HOLD = 1.05;
-const TRANSITION = 0.52;
-const SEGMENT = HOLD + TRANSITION;
-const CYCLE = SEGMENT * N;
-
-const BASE_X = [0, 160, 620, 620, 620];
-const BASE_Z = [20, 12, 6, 4, 3];
-
-function targetX(slot: number) {
-  if (slot === 0) return -820;
-  if (slot === 1) return BASE_X[0];
-  if (slot === 2) return BASE_X[1];
-  return BASE_X[slot];
-}
-
-function targetZ(slot: number) {
-  if (slot === 0) return 5;
-  if (slot === 1) return BASE_Z[0];
-  if (slot === 2) return BASE_Z[1];
-  return BASE_Z[slot];
-}
-
-function easeInOutQuad(t: number) {
-  return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
-}
-
-function lerp(a: number, b: number, t: number) {
-  return a + (b - a) * t;
-}
+const CYCLE_DURATION = 12000; // ms per cycle
 
 export default function TestDiffCardStack() {
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const darkOverlayRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const scrollerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     let animationFrameId: number;
-    let startTime: number | null = null;
+    let lastTimestamp: number | null = null;
+    let offset = 0;
 
     const animate = (timestamp: number) => {
-      if (startTime === null) startTime = timestamp;
-      const elapsed = ((timestamp - startTime) / 1000) % CYCLE;
-
-      const frontIndex = Math.floor(elapsed / SEGMENT) % N;
-      const localT = elapsed - frontIndex * SEGMENT;
-
-      let progress = 0;
-      if (localT > HOLD) {
-        progress = easeInOutQuad(Math.min(1, (localT - HOLD) / TRANSITION));
+      if (lastTimestamp === null) {
+        lastTimestamp = timestamp;
       }
+      const deltaTime = Math.min(timestamp - lastTimestamp, 32);
+      lastTimestamp = timestamp;
 
-      ORDER.forEach((id, i) => {
-        const el = cardsRef.current[i];
-        if (!el) return;
+      if (scrollerRef.current) {
+        const children = scrollerRef.current.children;
+        if (children.length >= CARDS.length * 2) {
+          const firstCard = children[0] as HTMLElement;
+          const secondCycleCard = children[CARDS.length] as HTMLElement;
+          const cycleWidth = secondCycleCard.offsetLeft - firstCard.offsetLeft;
 
-        const slot = (i - frontIndex + N) % N;
-        const x = lerp(BASE_X[slot], targetX(slot), progress);
-        const z = lerp(BASE_Z[slot], targetZ(slot), progress);
+          if (cycleWidth > 0) {
+            const distancePerFrame = (cycleWidth / CYCLE_DURATION) * deltaTime;
+            offset -= distancePerFrame;
 
-        el.style.transform = `translate3d(${x}px, 0, 0)`;
-        el.style.zIndex = `${Math.round(z)}`;
+            if (offset <= -cycleWidth) {
+              offset += cycleWidth;
+            }
 
-        const darkEl = darkOverlayRefs.current[i];
-        if (darkEl) {
-          // Front card (x = 0) is bright (darkOpacity = 0).
-          // Background cards (x > 0) are dimmed with a dark overlay.
-          const darkOpacity = Math.min(0.40, (Math.abs(x) / 160) * 0.40);
-          darkEl.style.opacity = `${darkOpacity}`;
+            scrollerRef.current.style.transform = `translate3d(${offset}px, 0px, 0px)`;
+          }
         }
-      });
+      }
 
       animationFrameId = requestAnimationFrame(animate);
     };
@@ -151,52 +118,48 @@ export default function TestDiffCardStack() {
         height: "100%",
         display: "flex",
         alignItems: "center",
-        justifyContent: "center",
         overflow: "hidden",
         background: "#DBEAFE",
+        userSelect: "none",
       }}
     >
+      {/* Horizontal Scroller Container (testdiff2 horizontal logic) */}
       <div
+        ref={scrollerRef}
         style={{
-          position: "relative",
-          width: 310,
-          height: 380,
-          transform: "translateX(40px) scale(0.85)",
-          transformOrigin: "center center",
+          display: "flex",
+          flexDirection: "row",
+          gap: 16,
+          alignItems: "center",
+          willChange: "transform",
+          transform: "translate3d(0px, 0px, 0px)",
         }}
       >
-        {CARDS.map((c, index) => (
+        {TRIPLE_CARDS.map((c, index) => (
           <div
-            key={c.id}
-            ref={(el) => { cardsRef.current[index] = el; }}
+            key={`${c.id}-${index}`}
             style={{
-              position: "absolute",
-              width: 310,
-              height: 380,
+              flexShrink: 0,
+              width: 220,
+              height: 290,
               background: c.bg,
-              borderRadius: 0,
-              border: "none",
-              boxShadow: "0 25px 50px -12px rgba(0,0,0,0.35)",
+              borderRadius: 14,
+              boxShadow: "0 12px 30px -8px rgba(0, 0, 0, 0.18)",
               display: "flex",
               flexDirection: "column",
               overflow: "hidden",
-              left: 0,
-              top: 0,
-              backfaceVisibility: "hidden",
-              WebkitBackfaceVisibility: "hidden",
             }}
           >
+            {/* Image Container */}
             <div
               style={{
-                height: 240,
+                height: 180,
                 background: "#FFFFFF",
                 position: "relative",
                 overflow: "hidden",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                backfaceVisibility: "hidden",
-                WebkitBackfaceVisibility: "hidden",
               }}
             >
               <img
@@ -209,31 +172,31 @@ export default function TestDiffCardStack() {
                   height: "100%",
                   objectFit: "cover",
                   objectPosition: "center 18%",
-                  transform: "translateY(56px) scale(1.12)",
-                  backfaceVisibility: "hidden",
-                  WebkitBackfaceVisibility: "hidden",
+                  transform: "translateY(36px) scale(1.12)",
                 }}
               />
             </div>
+
+            {/* Info Container */}
             <div
               style={{
                 flex: 1,
-                padding: "14px 16px",
+                padding: "10px 14px",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
                 textAlign: "center",
-                gap: 5,
+                gap: 3,
               }}
             >
               <div
                 style={{
                   fontWeight: 600,
-                  fontSize: 22,
-                  lineHeight: 1.05,
+                  fontSize: 16,
+                  lineHeight: 1.15,
                   margin: 0,
-                  letterSpacing: "-0.4px",
+                  letterSpacing: "-0.3px",
                   color: c.textColor || "#111",
                 }}
               >
@@ -241,7 +204,7 @@ export default function TestDiffCardStack() {
               </div>
               <div
                 style={{
-                  fontSize: 15,
+                  fontSize: 12.5,
                   fontWeight: 500,
                   color: c.specialtyColor || "rgba(17, 17, 17, 0.75)",
                   margin: 0,
@@ -252,33 +215,35 @@ export default function TestDiffCardStack() {
               </div>
               <div
                 style={{
-                  fontSize: 14.5,
+                  fontSize: 12,
                   fontWeight: 500,
                   display: "flex",
                   alignItems: "center",
-                  gap: 6,
+                  gap: 4,
                   color: c.textColor || "#111",
                 }}
               >
                 {c.rating}
               </div>
             </div>
-
-            {/* Darkening Overlay for background cards */}
-            <div
-              ref={(el) => { darkOverlayRefs.current[index] = el; }}
-              style={{
-                position: "absolute",
-                inset: 0,
-                background: "rgba(0, 0, 0, 1.0)",
-                pointerEvents: "none",
-                willChange: "opacity",
-                zIndex: 20,
-              }}
-            />
           </div>
         ))}
       </div>
+
+      {/* Side Fade Gradient Overlay */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          pointerEvents: "none",
+          background:
+            "linear-gradient(to right, rgba(219, 234, 254, 0.95) 0%, rgba(219, 234, 254, 0) 12%, rgba(219, 234, 254, 0) 88%, rgba(219, 234, 254, 0.95) 100%)",
+          zIndex: 10,
+        }}
+      />
     </div>
   );
 }
