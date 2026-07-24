@@ -745,9 +745,7 @@ function RotatingCapabilityUploadOverlay() {
       }}>
         <span
           style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 6,
+            display: "inline-block",
             fontFamily: "'Switzer', sans-serif",
             fontSize: "clamp(0.75rem, 0.95vw, 0.85rem)",
             fontWeight: 500,
@@ -759,14 +757,6 @@ function RotatingCapabilityUploadOverlay() {
             willChange: "opacity, transform",
           }}
         >
-          <span style={{
-            width: 5,
-            height: 5,
-            borderRadius: "50%",
-            background: "#EF4136",
-            display: "inline-block",
-            flexShrink: 0,
-          }} />
           {UPLOAD_CAPABILITIES[index]}
         </span>
       </div>
