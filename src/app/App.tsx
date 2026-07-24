@@ -12,9 +12,9 @@ import {
 import FigmaBentoGrid from "./components/FigmaBentoGrid";
 import TestDiffCardStack from "./components/TestDiffCardStack";
 import TestDiff1LoadingBar from "./components/TestDiff1LoadingBar";
-import lawyerWorkplace from "../assets/lawyer_white_6.jpg";
-import lawyerRealEstate from "../assets/lawyer_white_7.jpg";
-import lawyerFinance from "../assets/lawyer_white_8.jpg";
+import lawyerWorkplace from "../assets/lawyer_white_2.jpg";
+import lawyerRealEstate from "../assets/lawyer_white_1.jpg";
+import lawyerFinance from "../assets/lawyer_white_4.jpg";
 
 /* ─── palette ─────────────────────────────────────── */
 const C = {
@@ -332,7 +332,8 @@ function SpecCard({ s }: { s: typeof specializations[0] & { video?: string; useC
                   width: "100%",
                   height: "100%",
                   objectFit: "cover",
-                  objectPosition: "center top",
+                  objectPosition: "center 20%",
+                  transform: "translateY(8px) scale(1.05)",
                 }}
               />
             )}
