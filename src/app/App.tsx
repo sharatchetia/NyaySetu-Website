@@ -11,6 +11,7 @@ import {
 } from "./constants/classes";
 import FigmaBentoGrid from "./components/FigmaBentoGrid";
 import TestDiffCardStack from "./components/TestDiffCardStack";
+import TestDiff1LoadingBar from "./components/TestDiff1LoadingBar";
 
 /* ─── palette ─────────────────────────────────────── */
 const C = {
@@ -58,7 +59,7 @@ const docTypes = [
 const specializations = [
   { id: "employment",         label: "Employment",           blurb: "Contracts, disputes, workplace rights", icon: Briefcase, bg: "#DBEAFE", fg: "#1E40AF", col: "1 / 7",  row: "1 / 3", useCardStack: true },
   { id: "lease",              label: "Property & Lease",     blurb: "Leases, sale deeds, disputes",          icon: Home,      bg: "#FFEDD5", fg: "#9A3412", col: "7 / 12", row: "1 / 2" },
-  { id: "license_ip",         label: "License & IP",         blurb: "IP licensing, tech transfer, patents",  icon: Shield,    bg: "#FEF3C7", fg: "#92400E", col: "7 / 12", row: "2 / 3", video: bentoPlaceholderVideo },
+  { id: "license_ip",         label: "License & IP",         blurb: "IP licensing, tech transfer, patents",  icon: Shield,    bg: "#FEF3C7", fg: "#92400E", col: "7 / 12", row: "2 / 3", useLoadingBar: true },
   { id: "merger_acquisition", label: "Corporate & M&A",      blurb: "Incorporation, compliance, M&A",        icon: Building2, bg: "#D1FAE5", fg: "#065F46", col: "1 / 5",  row: "3 / 4" },
   { id: "credit_loan",        label: "Credit & Loan",        blurb: "Loan facilities, credit, finance",      icon: Scale,     bg: "#EDE9FE", fg: "#5B21B6", col: "5 / 9",  row: "3 / 4" },
   { id: "more",               label: "and many more →",      blurb: "Service, Supply, Settlement & 5+ classes", icon: Users, bg: "#CFFAFE", fg: "#155E75", col: "9 / 12", row: "3 / 4" },
@@ -192,11 +193,12 @@ function DocCard({ d, hovered, onHover, onLeave }: {
 }
 
 /* ─── Specialization Card (Original Style with borderRadius: 0) ─────────────────────────── */
-function SpecCard({ s }: { s: typeof specializations[0] & { video?: string; useCardStack?: boolean } }) {
+function SpecCard({ s }: { s: typeof specializations[0] & { video?: string; useCardStack?: boolean; useLoadingBar?: boolean } }) {
   const [hov, setHov] = useState(false);
   const isTall = parseInt(s.row.split(" / ")[1]) - parseInt(s.row.split(" / ")[0]) >= 2;
   const hasVideo = Boolean(s.video);
   const hasCardStack = Boolean(s.useCardStack);
+  const hasLoadingBar = Boolean(s.useLoadingBar);
   const IconComponent = s.icon;
 
   return (
@@ -210,7 +212,7 @@ function SpecCard({ s }: { s: typeof specializations[0] & { video?: string; useC
         background: s.bg,
         borderRadius: 0,
         overflow: "hidden",
-        padding: (hasVideo || hasCardStack) ? 0 : (isTall ? "32px 28px" : "26px 24px"),
+        padding: (hasVideo || hasCardStack || hasLoadingBar) ? 0 : (isTall ? "32px 28px" : "26px 24px"),
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
@@ -249,6 +251,7 @@ function SpecCard({ s }: { s: typeof specializations[0] & { video?: string; useC
       )}
 
       {hasCardStack && <TestDiffCardStack />}
+      {hasLoadingBar && <TestDiff1LoadingBar />}
 
       <div style={{
         position: "relative",
@@ -256,7 +259,7 @@ function SpecCard({ s }: { s: typeof specializations[0] & { video?: string; useC
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        padding: (hasVideo || hasCardStack) ? (isTall ? "24px 24px 0" : "20px 20px 0") : 0,
+        padding: (hasVideo || hasCardStack || hasLoadingBar) ? (isTall ? "24px 24px 0" : "20px 20px 0") : 0,
         pointerEvents: "none",
       }}>
         <div style={{
@@ -264,7 +267,7 @@ function SpecCard({ s }: { s: typeof specializations[0] & { video?: string; useC
           height: isTall ? 52 : 42,
           borderRadius: 12,
           background: "rgba(255,255,255,0.75)",
-          backdropFilter: (hasVideo || hasCardStack) ? "blur(6px)" : undefined,
+          backdropFilter: (hasVideo || hasCardStack || hasLoadingBar) ? "blur(6px)" : undefined,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -276,9 +279,9 @@ function SpecCard({ s }: { s: typeof specializations[0] & { video?: string; useC
         <div style={{
           width: 32, height: 32,
           borderRadius: 9,
-          background: (hasVideo || hasCardStack) ? "rgba(255,255,255,0.6)" : `${s.fg}18`,
+          background: (hasVideo || hasCardStack || hasLoadingBar) ? "rgba(255,255,255,0.6)" : `${s.fg}18`,
           color: s.fg,
-          backdropFilter: (hasVideo || hasCardStack) ? "blur(6px)" : undefined,
+          backdropFilter: (hasVideo || hasCardStack || hasLoadingBar) ? "blur(6px)" : undefined,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -291,7 +294,7 @@ function SpecCard({ s }: { s: typeof specializations[0] & { video?: string; useC
       <div style={{
         position: "relative",
         zIndex: 10,
-        padding: (hasVideo || hasCardStack) ? (isTall ? "0 28px 26px" : "0 22px 20px") : 0,
+        padding: (hasVideo || hasCardStack || hasLoadingBar) ? (isTall ? "0 28px 26px" : "0 22px 20px") : 0,
         pointerEvents: "none",
       }}>
         <div style={{
