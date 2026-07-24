@@ -1,4 +1,9 @@
 import React, { useEffect, useRef } from "react";
+import lawyerRohan from "../../assets/lawyer_rohan.jpg";
+import lawyerPriya from "../../assets/lawyer_priya.jpg";
+import lawyerArjun from "../../assets/lawyer_arjun.jpg";
+import lawyerAnanya from "../../assets/lawyer_ananya.jpg";
+import lawyerVikram from "../../assets/lawyer_vikram.jpg";
 
 interface LawyerCardData {
   id: string;
@@ -10,6 +15,7 @@ interface LawyerCardData {
   rating: string;
   buttonBg: string;
   buttonColor: string;
+  image: string;
 }
 
 const CARDS: LawyerCardData[] = [
@@ -21,6 +27,7 @@ const CARDS: LawyerCardData[] = [
     rating: "★★★★★ 4.9",
     buttonBg: "#111",
     buttonColor: "#fff",
+    image: lawyerRohan,
   },
   {
     id: "lime",
@@ -30,6 +37,7 @@ const CARDS: LawyerCardData[] = [
     rating: "★★★★★ 4.8",
     buttonBg: "#111",
     buttonColor: "#fff",
+    image: lawyerPriya,
   },
   {
     id: "tangerine",
@@ -41,6 +49,7 @@ const CARDS: LawyerCardData[] = [
     rating: "★★★★★ 4.95",
     buttonBg: "#fff",
     buttonColor: "#111",
+    image: lawyerArjun,
   },
   {
     id: "lavender",
@@ -50,6 +59,7 @@ const CARDS: LawyerCardData[] = [
     rating: "★★★★★ 4.7",
     buttonBg: "#111",
     buttonColor: "#fff",
+    image: lawyerAnanya,
   },
   {
     id: "blueberry",
@@ -61,6 +71,7 @@ const CARDS: LawyerCardData[] = [
     rating: "★★★★★ 4.85",
     buttonBg: "#fff",
     buttonColor: "#111",
+    image: lawyerVikram,
   },
 ];
 
@@ -98,105 +109,115 @@ function lerp(a: number, b: number, t: number) {
 }
 
 export default function TestDiffCardStack() {
-  const cardRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    let animId: number;
+    let animationFrameId: number;
     let startTime: number | null = null;
 
-    function render(now: number) {
-      if (startTime === null) startTime = now;
-      const elapsed = ((now - startTime) / 1000) % CYCLE;
+    const animate = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const elapsed = (timestamp - startTime) / 1000;
+      const time = elapsed % CYCLE;
+      const stepIndex = Math.floor(time / SEGMENT);
+      const stepProgress = (time % SEGMENT) / SEGMENT;
 
-      const frontIndex = Math.floor(elapsed / SEGMENT) % N;
-      const localT = elapsed - frontIndex * SEGMENT;
+      ORDER.forEach((id, cardIndex) => {
+        const el = cardsRef.current[cardIndex];
+        if (!el) return;
 
-      let progress = 0;
-      if (localT > HOLD) {
-        progress = easeInOutQuad(Math.min(1, (localT - HOLD) / TRANSITION));
-      }
+        const currentSlot = (cardIndex - stepIndex + N) % N;
+        const nextSlot = (currentSlot - 1 + N) % N;
 
-      ORDER.forEach((id, i) => {
-        const slot = (i - frontIndex + N) % N;
-        const x = lerp(BASE_X[slot], targetX(slot), progress);
-        const z = lerp(BASE_Z[slot], targetZ(slot), progress);
+        let x = BASE_X[currentSlot];
+        let z = BASE_Z[currentSlot];
 
-        const card = cardRefs.current[id];
-        if (card) {
-          card.style.transform = `translate(-50%, -50%) translateX(${x}px)`;
-          card.style.zIndex = `${Math.round(z)}`;
+        if (stepProgress > HOLD / SEGMENT) {
+          const moveProgress = (stepProgress - HOLD / SEGMENT) / (TRANSITION / SEGMENT);
+          const eased = easeInOutQuad(moveProgress);
+
+          const txCurrent = targetX(currentSlot);
+          const txNext = targetX(nextSlot);
+          const tzCurrent = targetZ(currentSlot);
+          const tzNext = targetZ(nextSlot);
+
+          if (currentSlot === 0) {
+            x = lerp(BASE_X[0], txCurrent, eased);
+            z = lerp(BASE_Z[0], tzCurrent, eased);
+          } else if (currentSlot === 1) {
+            x = lerp(BASE_X[1], txCurrent, eased);
+            z = lerp(BASE_Z[1], tzCurrent, eased);
+          } else if (currentSlot === 2) {
+            x = lerp(BASE_X[2], txCurrent, eased);
+            z = lerp(BASE_Z[2], tzCurrent, eased);
+          } else {
+            x = lerp(BASE_X[currentSlot], txNext, eased);
+            z = lerp(BASE_Z[currentSlot], tzNext, eased);
+          }
         }
+
+        const opacity = x <= -700 ? 0 : 1;
+        el.style.transform = `translateX(${x}px) translateZ(${z}px)`;
+        el.style.zIndex = `${Math.round(z * 10)}`;
+        el.style.opacity = `${opacity}`;
       });
 
-      animId = requestAnimationFrame(render);
-    }
+      animationFrameId = requestAnimationFrame(animate);
+    };
 
-    animId = requestAnimationFrame(render);
-    return () => cancelAnimationFrame(animId);
+    animationFrameId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrameId);
   }, []);
 
   return (
     <div
       style={{
-        position: "absolute",
-        inset: 0,
+        position: "relative",
+        width: "100%",
+        height: "100%",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         overflow: "hidden",
-        pointerEvents: "none",
+        background: "#0A0A0A",
       }}
     >
       <div
         style={{
           position: "relative",
-          width: 820,
-          height: 440,
+          width: 580,
+          height: 380,
+          perspective: 1200,
           transform: "translateX(40px) scale(0.85)",
           transformOrigin: "center center",
-          overflow: "visible",
         }}
       >
-        {CARDS.map((c) => (
+        {CARDS.map((c, index) => (
           <div
             key={c.id}
-            ref={(el) => {
-              cardRefs.current[c.id] = el;
-            }}
+            ref={(el) => { cardsRef.current[index] = el; }}
             style={{
               position: "absolute",
-              left: "50%",
-              top: "50%",
-              width: 310,
-              height: 380,
+              width: 540,
+              height: 360,
+              background: c.bg,
               borderRadius: 0,
-              boxShadow:
-                "0 20px 40px rgba(0, 0, 0, 0.18), 0 4px 8px rgba(0, 0, 0, 0.1)",
-              overflow: "hidden",
               border: "none",
-              boxSizing: "border-box",
-              userSelect: "none",
-              transform: "translate(-50%, -50%)",
+              boxShadow: "0 25px 50px -12px rgba(0,0,0,0.35)",
               display: "flex",
               flexDirection: "column",
-              willChange: "transform",
-              transition: "opacity 0.1s ease-out",
-              background: c.bg,
-              color: c.textColor || "#111",
+              overflow: "hidden",
+              willChange: "transform, opacity",
+              transition: "box-shadow 0.3s ease",
+              left: 0,
+              top: 10,
             }}
           >
-            <div
-              style={{
-                padding: 0,
-                height: "100%",
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
+            <div style={{ display: "flex", width: "100%", height: "100%" }}>
               <div
                 style={{
-                  height: 178,
-                  background: "#ECECEC",
+                  width: "50%",
+                  height: "100%",
                   position: "relative",
                   overflow: "hidden",
                   display: "flex",
@@ -204,16 +225,15 @@ export default function TestDiffCardStack() {
                   justifyContent: "center",
                 }}
               >
-                <svg
-                  width="110"
-                  height="138"
-                  viewBox="0 0 110 138"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <rect x="18" y="72" width="74" height="66" rx="20" fill="#3A3A3A" />
-                  <circle cx="55" cy="52" r="29" fill="#3A3A3A" />
-                </svg>
+                <img
+                  src={c.image}
+                  alt={c.name}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
+                />
               </div>
               <div
                 style={{

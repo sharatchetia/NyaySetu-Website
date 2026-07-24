@@ -12,6 +12,9 @@ import {
 import FigmaBentoGrid from "./components/FigmaBentoGrid";
 import TestDiffCardStack from "./components/TestDiffCardStack";
 import TestDiff1LoadingBar from "./components/TestDiff1LoadingBar";
+import lawyerWorkplace from "../assets/lawyer_workplace.jpg";
+import lawyerRealEstate from "../assets/lawyer_realestate.jpg";
+import lawyerFinance from "../assets/lawyer_finance.jpg";
 
 /* ─── palette ─────────────────────────────────────── */
 const C = {
@@ -58,10 +61,10 @@ const docTypes = [
 /* ─── legal specializations (original bento grid style with 6 tiles) ───── */
 const specializations = [
   { id: "employment",   label: "Employment",       blurb: "Contracts, disputes, workplace rights", icon: Briefcase, bg: "#DBEAFE", fg: "#1E40AF", col: "1 / 7",  row: "1 / 3", useCardStack: true, hideText: true },
-  { id: "employee_card",label: "Employment",       blurb: "Offer letters, HR policies, exits",     icon: Briefcase, bg: "#DBEAFE", fg: "#1E40AF", col: "7 / 12", row: "1 / 2", tag: "workplace law", photoCard: true },
+  { id: "employee_card",label: "Employment",       blurb: "Offer letters, HR policies, exits",     icon: Briefcase, bg: "#DBEAFE", fg: "#1E40AF", col: "7 / 12", row: "1 / 2", tag: "workplace law", photoCard: true, photo: lawyerWorkplace },
   { id: "license_ip",   label: "License & IP",     blurb: "IP licensing, tech transfer, patents",  icon: Shield,    bg: "#FEF3C7", fg: "#92400E", col: "7 / 12", row: "2 / 3", useLoadingBar: true, hideText: true },
-  { id: "lease",        label: "Property & Lease", blurb: "Leases, sale deeds, disputes",          icon: Home,      bg: "#FFEDD5", fg: "#9A3412", col: "1 / 5",  row: "3 / 4", tag: "real estate", photoCard: true },
-  { id: "credit_loan",  label: "Credit & Loan",    blurb: "Loan facilities, credit, finance",       icon: Scale,     bg: "#EDE9FE", fg: "#5B21B6", col: "5 / 9",  row: "3 / 4", tag: "finance", photoCard: true },
+  { id: "lease",        label: "Property & Lease", blurb: "Leases, sale deeds, disputes",          icon: Home,      bg: "#FFEDD5", fg: "#9A3412", col: "1 / 5",  row: "3 / 4", tag: "real estate", photoCard: true, photo: lawyerRealEstate },
+  { id: "credit_loan",  label: "Credit & Loan",    blurb: "Loan facilities, credit, finance",       icon: Scale,     bg: "#EDE9FE", fg: "#5B21B6", col: "5 / 9",  row: "3 / 4", tag: "finance", photoCard: true, photo: lawyerFinance },
   { id: "more",         label: "Explore all",      icon: Users,      bg: "#CFFAFE", fg: "#155E75", col: "9 / 12", row: "3 / 4", simpleButton: true },
 ];
 
@@ -320,18 +323,23 @@ function SpecCard({ s }: { s: typeof specializations[0] & { video?: string; useC
           <div style={{
             position: "absolute",
             top: "50%",
-            right: 20,
+            right: 14,
             transform: "translateY(-50%)",
-            width: 70,
-            height: 70,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
+            width: 80,
+            height: 80,
+            borderRadius: "50%",
+            overflow: "hidden",
+            border: "2px solid #FFFFFF",
+            boxShadow: "0 6px 16px rgba(0,0,0,0.15)",
+            zIndex: 5,
           }}>
-            <svg width="55" height="70" viewBox="0 0 110 138" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="18" y="72" width="74" height="66" rx="20" fill="#3A3A3A" />
-              <circle cx="55" cy="52" r="29" fill="#3A3A3A" />
-            </svg>
+            {s.photo && (
+              <img
+                src={s.photo}
+                alt={s.label}
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
+            )}
           </div>
           <div style={{
             position: "relative",
