@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Briefcase, Home, Users, Scale, Shield, FileText, Bot, Tag, UserCheck, Heart } from "lucide-react";
 import tableUploadImg from "../assets/table-upload.png";
-import howItWorksVideo from "../assets/hero-bg.mp4";
+import howItWorksVideo from "../assets/loop_nyaysetu_process.mp4";
 import bentoPlaceholderVideo from "../assets/hero-bg.mp4";
 import {
   MODEL_CLASSES,
