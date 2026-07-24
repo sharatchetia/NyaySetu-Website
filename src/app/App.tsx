@@ -333,7 +333,7 @@ function SpecCard({ s }: { s: typeof specializations[0] & { video?: string; useC
                   height: "100%",
                   objectFit: "cover",
                   objectPosition: "center 5%",
-                  transform: "translateY(44px) scale(1.15)",
+                  transform: "translateY(64px) scale(1.18)",
                 }}
               />
             )}
