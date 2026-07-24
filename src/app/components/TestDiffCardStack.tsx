@@ -209,7 +209,7 @@ export default function TestDiffCardStack() {
                   height: "100%",
                   objectFit: "cover",
                   objectPosition: "center 18%",
-                  transform: "translateY(6px)",
+                  transform: "translateY(56px) scale(1.12)",
                   backfaceVisibility: "hidden",
                   WebkitBackfaceVisibility: "hidden",
                 }}
