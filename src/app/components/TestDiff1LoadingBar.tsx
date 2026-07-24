@@ -226,7 +226,7 @@ export default function TestDiff1LoadingBar() {
 
       <div
         style={{
-          transform: "scale(1.1)",
+          transform: "translateX(30px) scale(1.1)",
           transformOrigin: "center center",
         }}
       >
