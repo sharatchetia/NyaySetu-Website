@@ -151,7 +151,7 @@ export default function TestDiffCardStack() {
         alignItems: "center",
         justifyContent: "center",
         overflow: "hidden",
-        background: "#0A0A0A",
+        background: "#DBEAFE",
       }}
     >
       <div
