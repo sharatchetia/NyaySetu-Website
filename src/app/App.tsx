@@ -954,6 +954,137 @@ function AIFlowSection() {
   );
 }
 
+/* ─── Team Section (Built with curiosity. Designed with purpose.) ──── */
+function TeamSection() {
+  return (
+    <div style={{ background: "#FFFFFF", padding: "80px 64px 100px" }}>
+      <Section bg="transparent">
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+
+          <div style={{ textAlign: "left", marginBottom: 8 }}>
+            <h2 style={{
+              fontFamily: "'Switzer', sans-serif",
+              fontWeight: 600,
+              fontSize: "clamp(1.35rem, 2vw, 1.75rem)",
+              letterSpacing: "-0.015em",
+              lineHeight: 1.2,
+              margin: 0,
+              color: C.charcoal,
+            }}>Built with curiosity.</h2>
+            <p style={{
+              fontFamily: "'Switzer', sans-serif",
+              fontWeight: 400,
+              fontSize: "clamp(1.35rem, 2vw, 1.75rem)",
+              letterSpacing: "-0.015em",
+              lineHeight: 1.2,
+              margin: "2px 0 0",
+              color: C.charcoalFaint,
+            }}>Designed with purpose.</p>
+          </div>
+          <p style={{
+            fontFamily: "'Switzer', sans-serif",
+            fontWeight: 600,
+            fontSize: "0.95rem",
+            letterSpacing: "-0.01em",
+            margin: "16px 0 4px",
+            color: C.charcoal,
+          }}>The People Behind NyaySetu</p>
+          <p style={{
+            fontFamily: "'Switzer', sans-serif",
+            maxWidth: 480,
+            color: C.charcoalSoft,
+            fontSize: "0.92rem",
+            lineHeight: 1.6,
+            margin: "0 0 56px",
+          }}>Five students building an AI-powered legal assistant to make legal documents easier to understand.</p>
+
+          <div className="ny-steps-wrap">
+            <svg className="ny-connector" viewBox="0 0 1200 260" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="ny-blob-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#8FB6FF"/>
+                  <stop offset="50%" stopColor="#C58FE0"/>
+                  <stop offset="100%" stopColor="#E0A15A"/>
+                </linearGradient>
+                <filter id="ny-blob-shadow" x="-100%" y="-100%" width="300%" height="300%">
+                  <feDropShadow dx="0" dy="2" stdDeviation="4" floodColor="#2B2620" floodOpacity="0.25"/>
+                </filter>
+              </defs>
+
+              <path id="ny-path" d="M 108.8 88
+                C 149.73 82.67, 272.53 54.33, 354.4 56
+                C 436.27 57.67, 518.13 98, 600 98
+                C 681.87 98, 763.73 59.33, 845.6 56
+                C 927.47 52.67, 1050.27 74.33, 1091.2 78"
+                stroke="#D8D3CB" strokeWidth="2" strokeDasharray="5 6" fill="none"/>
+
+              <circle r="9" fill="url(#ny-blob-grad)" filter="url(#ny-blob-shadow)">
+                <animateMotion dur="7s" repeatCount="indefinite" rotate="auto">
+                  <mpath href="#ny-path"/>
+                </animateMotion>
+              </circle>
+            </svg>
+
+            <div className="ny-steps-row">
+
+              {/* Member 1 */}
+              <div className="ny-step-card" style={{ background: "linear-gradient(160deg, #D9E6FC, #EEF4FE)", marginTop: 32 }}>
+                <div className="ny-avatar" style={{ color: "#2B3A66" }}>SC</div>
+                <div className="ny-name" style={{ color: "#2B3A66" }}>Sharat Chetia</div>
+                <div className="ny-icons">
+                  <div className="ny-social" style={{ color: "#3B5FC2" }}><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.58.23 2.75.11 3.04.73.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.13 0 1.54-.01 2.78-.01 3.16 0 .31.21.66.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></div>
+                  <div className="ny-social" style={{ color: "#3B5FC2" }}><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27ZM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45Z"/></svg></div>
+                </div>
+              </div>
+
+              {/* Member 2 */}
+              <div className="ny-step-card" style={{ background: "linear-gradient(160deg, #E7D8F5, #F4EBFA)", marginTop: 0 }}>
+                <div className="ny-avatar" style={{ color: "#442B66" }}>TN</div>
+                <div className="ny-name" style={{ color: "#442B66" }}>Teammate Name</div>
+                <div className="ny-icons">
+                  <div className="ny-social" style={{ color: "#6B36C2" }}><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.58.23 2.75.11 3.04.73.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.13 0 1.54-.01 2.78-.01 3.16 0 .31.21.66.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></div>
+                  <div className="ny-social" style={{ color: "#6B36C2" }}><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27ZM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45Z"/></svg></div>
+                </div>
+              </div>
+
+              {/* Member 3 */}
+              <div className="ny-step-card" style={{ background: "linear-gradient(160deg, #F8E3B9, #FBF2DC)", marginTop: 42 }}>
+                <div className="ny-avatar" style={{ color: "#6A431C" }}>TN</div>
+                <div className="ny-name" style={{ color: "#6A431C" }}>Teammate Name</div>
+                <div className="ny-icons">
+                  <div className="ny-social" style={{ color: "#B26B1F" }}><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.58.23 2.75.11 3.04.73.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.13 0 1.54-.01 2.78-.01 3.16 0 .31.21.66.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></div>
+                  <div className="ny-social" style={{ color: "#B26B1F" }}><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27ZM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45Z"/></svg></div>
+                </div>
+              </div>
+
+              {/* Member 4 */}
+              <div className="ny-step-card" style={{ background: "linear-gradient(160deg, #C8EEEE, #E5FAFA)", marginTop: 0 }}>
+                <div className="ny-avatar" style={{ color: "#175C5C" }}>TN</div>
+                <div className="ny-name" style={{ color: "#175C5C" }}>Teammate Name</div>
+                <div className="ny-icons">
+                  <div className="ny-social" style={{ color: "#1F8686" }}><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.58.23 2.75.11 3.04.73.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.13 0 1.54-.01 2.78-.01 3.16 0 .31.21.66.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></div>
+                  <div className="ny-social" style={{ color: "#1F8686" }}><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27ZM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45Z"/></svg></div>
+                </div>
+              </div>
+
+              {/* Member 5 */}
+              <div className="ny-step-card" style={{ background: "#FCF2F2", border: "1px solid #D89999", marginTop: 22 }}>
+                <div className="ny-avatar" style={{ color: "#7A2E2E", background: "#FBEAEA" }}>TN</div>
+                <div className="ny-name" style={{ color: "#7A2E2E" }}>Teammate Name</div>
+                <div className="ny-icons">
+                  <div className="ny-social" style={{ color: "#B23A3A" }}><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.58.23 2.75.11 3.04.73.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.13 0 1.54-.01 2.78-.01 3.16 0 .31.21.66.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></div>
+                  <div className="ny-social" style={{ color: "#B23A3A" }}><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27ZM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45Z"/></svg></div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </Section>
+    </div>
+  );
+}
+
 export default function App() {
   const [mobileOpen, setMobileOpen]       = useState(false);
   const [scrolled, setScrolled]           = useState(false);
@@ -1369,6 +1500,9 @@ export default function App() {
 
       {/* ── TESTIMONIALS ─── */}
       <TestimonialsSection />
+
+      {/* ── TEAM SECTION (Built with curiosity. Designed with purpose.) ─── */}
+      <TeamSection />
 
       {/* ── CTA STRIP ─── */}
       <div style={{ background: C.off2, padding: "80px 64px" }}>

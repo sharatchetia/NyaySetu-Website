@@ -138,3 +138,132 @@
   transform: translateY(0);
   filter: blur(0);
 }
+
+/* Team Section Styles & Animations */
+.ny-steps-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 28px;
+  position: relative;
+  z-index: 2;
+  align-items: start;
+}
+.ny-step-card {
+  border-radius: 16px;
+  padding: 26px 18px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.ny-step-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 22px rgba(43,38,32,0.08);
+}
+
+.ny-steps-row > .ny-step-card:nth-child(1) { animation: ny-pulse-1 7s ease-in-out infinite; }
+.ny-steps-row > .ny-step-card:nth-child(2) { animation: ny-pulse-2 7s ease-in-out infinite; }
+.ny-steps-row > .ny-step-card:nth-child(3) { animation: ny-pulse-3 7s ease-in-out infinite; }
+.ny-steps-row > .ny-step-card:nth-child(4) { animation: ny-pulse-4 7s ease-in-out infinite; }
+.ny-steps-row > .ny-step-card:nth-child(5) { animation: ny-pulse-5 7s ease-in-out infinite; }
+
+@keyframes ny-pulse-1 {
+  0%   { transform: scale(1.07); animation-timing-function: ease-in-out; }
+  8%   { transform: scale(1.07); animation-timing-function: ease-in-out; }
+  16%  { transform: scale(1); }
+  100% { transform: scale(1); }
+}
+@keyframes ny-pulse-2 {
+  0%   { transform: scale(1); }
+  17%  { transform: scale(1); animation-timing-function: ease-in-out; }
+  25%  { transform: scale(1.07); animation-timing-function: ease-in-out; }
+  33%  { transform: scale(1.07); animation-timing-function: ease-in-out; }
+  41%  { transform: scale(1); }
+  100% { transform: scale(1); }
+}
+@keyframes ny-pulse-3 {
+  0%   { transform: scale(1); }
+  42%  { transform: scale(1); animation-timing-function: ease-in-out; }
+  50%  { transform: scale(1.07); animation-timing-function: ease-in-out; }
+  58%  { transform: scale(1.07); animation-timing-function: ease-in-out; }
+  66%  { transform: scale(1); }
+  100% { transform: scale(1); }
+}
+@keyframes ny-pulse-4 {
+  0%   { transform: scale(1); }
+  67%  { transform: scale(1); animation-timing-function: ease-in-out; }
+  75%  { transform: scale(1.07); animation-timing-function: ease-in-out; }
+  83%  { transform: scale(1.07); animation-timing-function: ease-in-out; }
+  91%  { transform: scale(1); }
+  100% { transform: scale(1); }
+}
+@keyframes ny-pulse-5 {
+  0%   { transform: scale(1); }
+  86%  { transform: scale(1); animation-timing-function: ease-in-out; }
+  94%  { transform: scale(1.07); animation-timing-function: ease-in-out; }
+  100% { transform: scale(1.07); }
+}
+
+.ny-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 14px;
+  background: rgba(255,255,255,0.65);
+}
+.ny-name {
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin: 0 0 12px;
+  line-height: 1.3;
+}
+.ny-icons {
+  display: flex;
+  gap: 8px;
+}
+.ny-social {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid rgba(43,38,32,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+}
+.ny-social:hover {
+  background: #2B2620;
+  color: #fff;
+  border-color: #2B2620;
+}
+
+@media (max-width: 900px) {
+  .ny-steps-row { grid-template-columns: 1fr 1fr; }
+  .ny-step-card { margin-top: 0 !important; }
+}
+@media (max-width: 560px) {
+  .ny-steps-row { grid-template-columns: 1fr; }
+}
+
+.ny-steps-wrap { position: relative; }
+.ny-connector {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: visible;
+  pointer-events: none;
+}
+@media (max-width: 900px) {
+  .ny-connector { display: none; }
+}
