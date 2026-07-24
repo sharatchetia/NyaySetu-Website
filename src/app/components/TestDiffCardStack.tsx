@@ -98,6 +98,7 @@ function lerp(a: number, b: number, t: number) {
 
 export default function TestDiffCardStack() {
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const frostRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     let animationFrameId: number;
@@ -125,6 +126,12 @@ export default function TestDiffCardStack() {
 
         el.style.transform = `translate3d(${x}px, 0, 0)`;
         el.style.zIndex = `${Math.round(z)}`;
+
+        const frostEl = frostRefs.current[i];
+        if (frostEl) {
+          const frostOpacity = Math.min(1, Math.abs(x) / 140);
+          frostEl.style.opacity = `${frostOpacity}`;
+        }
       });
 
       animationFrameId = requestAnimationFrame(animate);
@@ -202,6 +209,19 @@ export default function TestDiffCardStack() {
                   objectPosition: "center top",
                   backfaceVisibility: "hidden",
                   WebkitBackfaceVisibility: "hidden",
+                }}
+              />
+              {/* Frosted Glass Overlay layer matching top navbar style */}
+              <div
+                ref={(el) => { frostRefs.current[index] = el; }}
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: "rgba(255, 255, 255, 0.45)",
+                  backdropFilter: "blur(12px) saturate(1.2)",
+                  WebkitBackdropFilter: "blur(12px) saturate(1.2)",
+                  pointerEvents: "none",
+                  willChange: "opacity",
                 }}
               />
             </div>
