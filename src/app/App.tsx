@@ -850,84 +850,74 @@ function AIFlowSection() {
               </circle>
             </svg>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 20, position: "relative" }}>
+            <div className="ny-steps-row">
               {/* Step 1 */}
-              <div style={{ transform: "translateY(0px)" }}>
-                <div style={{ background: "linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%)", borderRadius: 16, padding: "22px 18px", minHeight: 170, display: "flex", flexDirection: "column", justifyContent: "space-between", boxShadow: "0 2px 8px -2px rgba(0,0,0,0.06)" }}>
-                  <div>
-                    <span style={{ fontSize: "0.7rem", fontWeight: 700, color: "#1E40AF", opacity: 0.55, letterSpacing: "0.04em" }}>01</span>
-                    <div style={{ marginTop: 10, width: 32, height: 32, borderRadius: 8, background: "rgba(255,255,255,0.6)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <Upload size={16} color="#1E40AF" />
-                    </div>
+              <div className="ny-step-card" style={{ background: "linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%)", minHeight: 170, boxShadow: "0 2px 8px -2px rgba(0,0,0,0.06)", marginTop: 0 }}>
+                <div>
+                  <span style={{ fontSize: "0.7rem", fontWeight: 700, color: "#1E40AF", opacity: 0.55, letterSpacing: "0.04em" }}>01</span>
+                  <div style={{ marginTop: 10, width: 32, height: 32, borderRadius: 8, background: "rgba(255,255,255,0.6)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <Upload size={16} color="#1E40AF" />
                   </div>
-                  <div>
-                    <div style={{ fontWeight: 600, fontSize: "0.92rem", color: "#1E40AF", marginBottom: 4 }}>Upload document</div>
-                    <div style={{ fontSize: "0.78rem", color: "#1E40AF", opacity: 0.75, lineHeight: 1.4 }}>Drop in any contract, lease, or agreement</div>
-                  </div>
+                </div>
+                <div>
+                  <div style={{ fontWeight: 600, fontSize: "0.92rem", color: "#1E40AF", marginBottom: 4 }}>Upload document</div>
+                  <div style={{ fontSize: "0.78rem", color: "#1E40AF", opacity: 0.75, lineHeight: 1.4 }}>Drop in any contract, lease, or agreement</div>
                 </div>
               </div>
 
               {/* Step 2 */}
-              <div style={{ transform: "translateY(-26px)" }}>
-                <div style={{ background: "linear-gradient(135deg, #FAF5FF 0%, #F3E8FF 100%)", borderRadius: 16, padding: "22px 18px", minHeight: 170, display: "flex", flexDirection: "column", justifyContent: "space-between", boxShadow: "0 2px 8px -2px rgba(0,0,0,0.06)" }}>
-                  <div>
-                    <span style={{ fontSize: "0.7rem", fontWeight: 700, color: "#6B21A8", opacity: 0.55, letterSpacing: "0.04em" }}>02</span>
-                    <div style={{ marginTop: 10, width: 32, height: 32, borderRadius: 8, background: "rgba(255,255,255,0.6)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <Scan size={16} color="#6B21A8" />
-                    </div>
+              <div className="ny-step-card" style={{ background: "linear-gradient(135deg, #FAF5FF 0%, #F3E8FF 100%)", minHeight: 170, boxShadow: "0 2px 8px -2px rgba(0,0,0,0.06)", marginTop: 0 }}>
+                <div>
+                  <span style={{ fontSize: "0.7rem", fontWeight: 700, color: "#6B21A8", opacity: 0.55, letterSpacing: "0.04em" }}>02</span>
+                  <div style={{ marginTop: 10, width: 32, height: 32, borderRadius: 8, background: "rgba(255,255,255,0.6)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <Scan size={16} color="#6B21A8" />
                   </div>
-                  <div>
-                    <div style={{ fontWeight: 600, fontSize: "0.92rem", color: "#6B21A8", marginBottom: 4 }}>AI analysis</div>
-                    <div style={{ fontSize: "0.78rem", color: "#6B21A8", opacity: 0.75, lineHeight: 1.4 }}>Every clause read and cross-checked</div>
-                  </div>
+                </div>
+                <div>
+                  <div style={{ fontWeight: 600, fontSize: "0.92rem", color: "#6B21A8", marginBottom: 4 }}>AI analysis</div>
+                  <div style={{ fontSize: "0.78rem", color: "#6B21A8", opacity: 0.75, lineHeight: 1.4 }}>Every clause read and cross-checked</div>
                 </div>
               </div>
 
               {/* Step 3 */}
-              <div style={{ transform: "translateY(6px)" }}>
-                <div style={{ background: "linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%)", borderRadius: 16, padding: "22px 18px", minHeight: 170, display: "flex", flexDirection: "column", justifyContent: "space-between", boxShadow: "0 2px 8px -2px rgba(0,0,0,0.06)" }}>
-                  <div>
-                    <span style={{ fontSize: "0.7rem", fontWeight: 700, color: "#92400E", opacity: 0.55, letterSpacing: "0.04em" }}>03</span>
-                    <div style={{ marginTop: 10, width: 32, height: 32, borderRadius: 8, background: "rgba(255,255,255,0.6)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <MessageSquare size={16} color="#92400E" />
-                    </div>
+              <div className="ny-step-card" style={{ background: "linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%)", minHeight: 170, boxShadow: "0 2px 8px -2px rgba(0,0,0,0.06)", marginTop: 0 }}>
+                <div>
+                  <span style={{ fontSize: "0.7rem", fontWeight: 700, color: "#92400E", opacity: 0.55, letterSpacing: "0.04em" }}>03</span>
+                  <div style={{ marginTop: 10, width: 32, height: 32, borderRadius: 8, background: "rgba(255,255,255,0.6)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <MessageSquare size={16} color="#92400E" />
                   </div>
-                  <div>
-                    <div style={{ fontWeight: 600, fontSize: "0.92rem", color: "#92400E", marginBottom: 4 }}>Plain-language summary</div>
-                    <div style={{ fontSize: "0.78rem", color: "#92400E", opacity: 0.75, lineHeight: 1.4 }}>Legal text, rewritten in words you use</div>
-                  </div>
+                </div>
+                <div>
+                  <div style={{ fontWeight: 600, fontSize: "0.92rem", color: "#92400E", marginBottom: 4 }}>Plain-language summary</div>
+                  <div style={{ fontSize: "0.78rem", color: "#92400E", opacity: 0.75, lineHeight: 1.4 }}>Legal text, rewritten in words you use</div>
                 </div>
               </div>
 
               {/* Step 4 */}
-              <div style={{ transform: "translateY(-26px)" }}>
-                <div style={{ background: "linear-gradient(135deg, #ECFEFF 0%, #CFFAFE 100%)", borderRadius: 16, padding: "22px 18px", minHeight: 170, display: "flex", flexDirection: "column", justifyContent: "space-between", boxShadow: "0 2px 8px -2px rgba(0,0,0,0.06)" }}>
-                  <div>
-                    <span style={{ fontSize: "0.7rem", fontWeight: 700, color: "#155E75", opacity: 0.55, letterSpacing: "0.04em" }}>04</span>
-                    <div style={{ marginTop: 10, width: 32, height: 32, borderRadius: 8, background: "rgba(255,255,255,0.6)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <Tag size={16} color="#155E75" />
-                    </div>
+              <div className="ny-step-card" style={{ background: "linear-gradient(135deg, #ECFEFF 0%, #CFFAFE 100%)", minHeight: 170, boxShadow: "0 2px 8px -2px rgba(0,0,0,0.06)", marginTop: 0 }}>
+                <div>
+                  <span style={{ fontSize: "0.7rem", fontWeight: 700, color: "#155E75", opacity: 0.55, letterSpacing: "0.04em" }}>04</span>
+                  <div style={{ marginTop: 10, width: 32, height: 32, borderRadius: 8, background: "rgba(255,255,255,0.6)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <Tag size={16} color="#155E75" />
                   </div>
-                  <div>
-                    <div style={{ fontWeight: 600, fontSize: "0.92rem", color: "#155E75", marginBottom: 4 }}>Document classification</div>
-                    <div style={{ fontSize: "0.78rem", color: "#155E75", opacity: 0.75, lineHeight: 1.4 }}>Sorted into the right legal category</div>
-                  </div>
+                </div>
+                <div>
+                  <div style={{ fontWeight: 600, fontSize: "0.92rem", color: "#155E75", marginBottom: 4 }}>Document classification</div>
+                  <div style={{ fontSize: "0.78rem", color: "#155E75", opacity: 0.75, lineHeight: 1.4 }}>Sorted into the right legal category</div>
                 </div>
               </div>
 
               {/* Step 5 */}
-              <div style={{ transform: "translateY(6px)" }}>
-                <div style={{ background: "#FFFFFF", border: "1.5px solid #8C3D46", borderRadius: 16, padding: "22px 18px", minHeight: 170, display: "flex", flexDirection: "column", justifyContent: "space-between", boxShadow: "0 8px 24px -12px rgba(140,61,70,0.35)" }}>
-                  <div>
-                    <span style={{ fontSize: "0.7rem", fontWeight: 700, color: "#8C3D46", opacity: 0.7, letterSpacing: "0.04em" }}>05</span>
-                    <div style={{ marginTop: 10, width: 32, height: 32, borderRadius: 8, background: "rgba(140,61,70,0.08)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <UserCheck size={16} color="#8C3D46" />
-                    </div>
+              <div className="ny-step-card" style={{ background: "#FFFFFF", border: "1.5px solid #8C3D46", minHeight: 170, boxShadow: "0 8px 24px -12px rgba(140,61,70,0.35)", marginTop: 0 }}>
+                <div>
+                  <span style={{ fontSize: "0.7rem", fontWeight: 700, color: "#8C3D46", opacity: 0.7, letterSpacing: "0.04em" }}>05</span>
+                  <div style={{ marginTop: 10, width: 32, height: 32, borderRadius: 8, background: "rgba(140,61,70,0.08)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <UserCheck size={16} color="#8C3D46" />
                   </div>
-                  <div>
-                    <div style={{ fontWeight: 600, fontSize: "0.92rem", color: "#2B2620", marginBottom: 4 }}>Lawyer recommendation</div>
-                    <div style={{ fontSize: "0.78rem", color: "#5A5348", lineHeight: 1.4 }}>Matched to a specialist for this exact case</div>
-                  </div>
+                </div>
+                <div>
+                  <div style={{ fontWeight: 600, fontSize: "0.92rem", color: "#2B2620", marginBottom: 4 }}>Lawyer recommendation</div>
+                  <div style={{ fontSize: "0.78rem", color: "#5A5348", lineHeight: 1.4 }}>Matched to a specialist for this exact case</div>
                 </div>
               </div>
             </div>
