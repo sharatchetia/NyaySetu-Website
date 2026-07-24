@@ -210,6 +210,72 @@
   100% { transform: scale(1); }
 }
 
+/* AI Flow Section Slower, Gentle Card Animations (10s timeline) */
+.ny-flow-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.ny-flow-card {
+  border-radius: 16px;
+  padding: 22px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.ny-flow-row > .ny-flow-card:nth-child(1) { animation: ny-slow-pulse-1 10s ease-in-out infinite; }
+.ny-flow-row > .ny-flow-card:nth-child(2) { animation: ny-slow-pulse-2 10s ease-in-out infinite; }
+.ny-flow-row > .ny-flow-card:nth-child(3) { animation: ny-slow-pulse-3 10s ease-in-out infinite; }
+.ny-flow-row > .ny-flow-card:nth-child(4) { animation: ny-slow-pulse-4 10s ease-in-out infinite; }
+.ny-flow-row > .ny-flow-card:nth-child(5) { animation: ny-slow-pulse-5 10s ease-in-out infinite; }
+
+@keyframes ny-slow-pulse-1 {
+  0%   { transform: scale(1); }
+  4%   { transform: scale(1.05); }
+  14%  { transform: scale(1.05); }
+  18%  { transform: scale(1); }
+  100% { transform: scale(1); }
+}
+@keyframes ny-slow-pulse-2 {
+  0%   { transform: scale(1); }
+  20%  { transform: scale(1); }
+  24%  { transform: scale(1.05); }
+  34%  { transform: scale(1.05); }
+  38%  { transform: scale(1); }
+  100% { transform: scale(1); }
+}
+@keyframes ny-slow-pulse-3 {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1); }
+  44%  { transform: scale(1.05); }
+  54%  { transform: scale(1.05); }
+  58%  { transform: scale(1); }
+  100% { transform: scale(1); }
+}
+@keyframes ny-slow-pulse-4 {
+  0%   { transform: scale(1); }
+  60%  { transform: scale(1); }
+  64%  { transform: scale(1.05); }
+  74%  { transform: scale(1.05); }
+  78%  { transform: scale(1); }
+  100% { transform: scale(1); }
+}
+@keyframes ny-slow-pulse-5 {
+  0%   { transform: scale(1); }
+  80%  { transform: scale(1); }
+  84%  { transform: scale(1.05); }
+  94%  { transform: scale(1.05); }
+  98%  { transform: scale(1); }
+  100% { transform: scale(1); }
+}
+
 .ny-avatar {
   width: 60px;
   height: 60px;

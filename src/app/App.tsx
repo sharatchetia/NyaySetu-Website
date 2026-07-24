@@ -843,16 +843,16 @@ function AIFlowSection() {
             <svg viewBox="0 0 1100 200" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "auto", overflow: "visible" }} preserveAspectRatio="none">
               <path d="M 70 100 C 200 30, 260 30, 290 100 S 480 170, 510 100 S 700 30, 730 100 S 920 170, 950 100" fill="none" stroke="#2B2620" strokeOpacity="0.2" strokeWidth="2"/>
               <circle r="6" fill="#8C3D46">
-                <animateMotion dur="7s" repeatCount="indefinite" path="M 70 100 C 200 30, 260 30, 290 100 S 480 170, 510 100 S 700 30, 730 100 S 920 170, 950 100"/>
+                <animateMotion dur="10s" repeatCount="indefinite" path="M 70 100 C 200 30, 260 30, 290 100 S 480 170, 510 100 S 700 30, 730 100 S 920 170, 950 100"/>
               </circle>
               <circle r="10" fill="#8C3D46" fillOpacity="0.18">
-                <animateMotion dur="7s" repeatCount="indefinite" path="M 70 100 C 200 30, 260 30, 290 100 S 480 170, 510 100 S 700 30, 730 100 S 920 170, 950 100"/>
+                <animateMotion dur="10s" repeatCount="indefinite" path="M 70 100 C 200 30, 260 30, 290 100 S 480 170, 510 100 S 700 30, 730 100 S 920 170, 950 100"/>
               </circle>
             </svg>
 
-            <div className="ny-steps-row">
+            <div className="ny-flow-row">
               {/* Step 1 */}
-              <div className="ny-step-card" style={{ background: "linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%)", minHeight: 170, boxShadow: "0 2px 8px -2px rgba(0,0,0,0.06)", marginTop: 0 }}>
+              <div className="ny-flow-card" style={{ background: "linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%)", minHeight: 170, boxShadow: "0 2px 8px -2px rgba(0,0,0,0.06)", marginTop: 0 }}>
                 <div>
                   <span style={{ fontSize: "0.7rem", fontWeight: 700, color: "#1E40AF", opacity: 0.55, letterSpacing: "0.04em" }}>01</span>
                   <div style={{ marginTop: 10, width: 32, height: 32, borderRadius: 8, background: "rgba(255,255,255,0.6)", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -866,7 +866,7 @@ function AIFlowSection() {
               </div>
 
               {/* Step 2 */}
-              <div className="ny-step-card" style={{ background: "linear-gradient(135deg, #FAF5FF 0%, #F3E8FF 100%)", minHeight: 170, boxShadow: "0 2px 8px -2px rgba(0,0,0,0.06)", marginTop: 0 }}>
+              <div className="ny-flow-card" style={{ background: "linear-gradient(135deg, #FAF5FF 0%, #F3E8FF 100%)", minHeight: 170, boxShadow: "0 2px 8px -2px rgba(0,0,0,0.06)", marginTop: 0 }}>
                 <div>
                   <span style={{ fontSize: "0.7rem", fontWeight: 700, color: "#6B21A8", opacity: 0.55, letterSpacing: "0.04em" }}>02</span>
                   <div style={{ marginTop: 10, width: 32, height: 32, borderRadius: 8, background: "rgba(255,255,255,0.6)", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -880,7 +880,7 @@ function AIFlowSection() {
               </div>
 
               {/* Step 3 */}
-              <div className="ny-step-card" style={{ background: "linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%)", minHeight: 170, boxShadow: "0 2px 8px -2px rgba(0,0,0,0.06)", marginTop: 0 }}>
+              <div className="ny-flow-card" style={{ background: "linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%)", minHeight: 170, boxShadow: "0 2px 8px -2px rgba(0,0,0,0.06)", marginTop: 0 }}>
                 <div>
                   <span style={{ fontSize: "0.7rem", fontWeight: 700, color: "#92400E", opacity: 0.55, letterSpacing: "0.04em" }}>03</span>
                   <div style={{ marginTop: 10, width: 32, height: 32, borderRadius: 8, background: "rgba(255,255,255,0.6)", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -894,7 +894,7 @@ function AIFlowSection() {
               </div>
 
               {/* Step 4 */}
-              <div className="ny-step-card" style={{ background: "linear-gradient(135deg, #ECFEFF 0%, #CFFAFE 100%)", minHeight: 170, boxShadow: "0 2px 8px -2px rgba(0,0,0,0.06)", marginTop: 0 }}>
+              <div className="ny-flow-card" style={{ background: "linear-gradient(135deg, #ECFEFF 0%, #CFFAFE 100%)", minHeight: 170, boxShadow: "0 2px 8px -2px rgba(0,0,0,0.06)", marginTop: 0 }}>
                 <div>
                   <span style={{ fontSize: "0.7rem", fontWeight: 700, color: "#155E75", opacity: 0.55, letterSpacing: "0.04em" }}>04</span>
                   <div style={{ marginTop: 10, width: 32, height: 32, borderRadius: 8, background: "rgba(255,255,255,0.6)", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -908,7 +908,7 @@ function AIFlowSection() {
               </div>
 
               {/* Step 5 */}
-              <div className="ny-step-card" style={{ background: "#FFFFFF", border: "1.5px solid #8C3D46", minHeight: 170, boxShadow: "0 8px 24px -12px rgba(140,61,70,0.35)", marginTop: 0 }}>
+              <div className="ny-flow-card" style={{ background: "#FFFFFF", border: "1.5px solid #8C3D46", minHeight: 170, boxShadow: "0 8px 24px -12px rgba(140,61,70,0.35)", marginTop: 0 }}>
                 <div>
                   <span style={{ fontSize: "0.7rem", fontWeight: 700, color: "#8C3D46", opacity: 0.7, letterSpacing: "0.04em" }}>05</span>
                   <div style={{ marginTop: 10, width: 32, height: 32, borderRadius: 8, background: "rgba(140,61,70,0.08)", display: "flex", alignItems: "center", justifyContent: "center" }}>
