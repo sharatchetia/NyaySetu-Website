@@ -14,6 +14,8 @@ interface LawyerCardData {
   specialtyColor?: string;
   rating: string;
   image: string;
+  imageTransform?: string;
+  objectPosition?: string;
 }
 
 const CARDS: LawyerCardData[] = [
@@ -60,6 +62,8 @@ const CARDS: LawyerCardData[] = [
     specialty: "Real Estate Law",
     rating: "★★★★★ 4.85",
     image: lawyer5,
+    imageTransform: "translateY(12px) scale(0.98)",
+    objectPosition: "center 10%",
   },
 ];
 
@@ -172,8 +176,8 @@ export default function TestDiffCardStack() {
                   width: "100%",
                   height: "100%",
                   objectFit: "cover",
-                  objectPosition: "center 18%",
-                  transform: "translateY(56px) scale(1.12)",
+                  objectPosition: c.objectPosition || "center 18%",
+                  transform: c.imageTransform || "translateY(56px) scale(1.12)",
                 }}
               />
             </div>
