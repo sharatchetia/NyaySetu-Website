@@ -62,8 +62,8 @@ const CARDS: LawyerCardData[] = [
     specialty: "Real Estate Law",
     rating: "★★★★★ 4.85",
     image: lawyer5,
-    imageTransform: "translateY(12px) scale(0.98)",
-    objectPosition: "center 10%",
+    imageTransform: "translateY(10px) scale(1.28)",
+    objectPosition: "center 5%",
   },
 ];
 
@@ -147,7 +147,7 @@ export default function TestDiffCardStack() {
               flexShrink: 0,
               width: 240,
               height: "100%",
-              background: c.bg,
+              background: "#FFFFFF",
               borderRadius: 0,
               display: "flex",
               flexDirection: "column",
@@ -177,7 +177,7 @@ export default function TestDiffCardStack() {
                   height: "100%",
                   objectFit: "cover",
                   objectPosition: c.objectPosition || "center 18%",
-                  transform: c.imageTransform || "translateY(26px) scale(1.12)",
+                  transform: c.imageTransform || "translateY(20px) scale(1.35)",
                 }}
               />
             </div>
@@ -185,6 +185,7 @@ export default function TestDiffCardStack() {
             {/* Info Container */}
             <div
               style={{
+                background: c.bg,
                 padding: "16px 14px",
                 display: "flex",
                 flexDirection: "column",
