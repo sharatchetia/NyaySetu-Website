@@ -211,19 +211,6 @@ export default function TestDiffCardStack() {
                   WebkitBackfaceVisibility: "hidden",
                 }}
               />
-              {/* Frosted Glass Overlay layer matching top navbar style */}
-              <div
-                ref={(el) => { frostRefs.current[index] = el; }}
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  background: "rgba(255, 255, 255, 0.45)",
-                  backdropFilter: "blur(12px) saturate(1.2)",
-                  WebkitBackdropFilter: "blur(12px) saturate(1.2)",
-                  pointerEvents: "none",
-                  willChange: "opacity",
-                }}
-              />
             </div>
             <div
               style={{
@@ -273,6 +260,21 @@ export default function TestDiffCardStack() {
                 {c.rating}
               </div>
             </div>
+
+            {/* Frosted Glass Overlay covering the ENTIRE CARD */}
+            <div
+              ref={(el) => { frostRefs.current[index] = el; }}
+              style={{
+                position: "absolute",
+                inset: 0,
+                background: "rgba(255, 255, 255, 0.45)",
+                backdropFilter: "blur(14px) saturate(1.2)",
+                WebkitBackdropFilter: "blur(14px) saturate(1.2)",
+                pointerEvents: "none",
+                willChange: "opacity",
+                zIndex: 20,
+              }}
+            />
           </div>
         ))}
       </div>
