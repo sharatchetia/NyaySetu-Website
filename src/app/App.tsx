@@ -604,16 +604,26 @@ function TestimonialsSection() {
     <div style={{ background: C.off3, padding: "100px 64px" }}>
       <Section bg="transparent">
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          <h2 style={{
+            fontFamily: "'Switzer', sans-serif",
+            fontWeight: 600,
+            fontSize: "clamp(1.35rem, 2vw, 1.75rem)",
+            letterSpacing: "-0.015em",
+            lineHeight: 1.2,
+            margin: 0,
+            color: C.charcoal,
+            textAlign: "center",
+          }}>Real conversations. Real help.</h2>
           <p style={{
             fontFamily: "'Switzer', sans-serif",
-            fontSize: "clamp(1.6rem, 2.8vw, 2.4rem)",
-            fontWeight: 600,
-            color: C.charcoal,
-            letterSpacing: "-0.02em",
-            margin: "0 0 12px",
+            fontWeight: 400,
+            fontSize: "clamp(1.35rem, 2vw, 1.75rem)",
+            letterSpacing: "-0.015em",
+            lineHeight: 1.2,
+            margin: "2px 0 56px",
+            color: C.charcoalFaint,
             textAlign: "center",
-          }}>Real conversations. Real help.</p>
-          <p style={{ textAlign: "center", color: C.charcoalSoft, fontSize: "1.05rem", margin: "0 0 56px" }}>
+          }}>
             People use NyaySetu every day to understand their rights.
           </p>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
