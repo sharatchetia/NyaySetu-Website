@@ -57,11 +57,12 @@ const docTypes = [
 
 /* ─── legal specializations (original bento grid style with 6 tiles) ───── */
 const specializations = [
-  { id: "employment",  label: "Employment",       blurb: "Contracts, disputes, workplace rights", icon: Briefcase, bg: "#DBEAFE", fg: "#1E40AF", col: "1 / 7",  row: "1 / 3", useCardStack: true, hideText: true },
-  { id: "license_ip",  label: "License & IP",     blurb: "IP licensing, tech transfer, patents",  icon: Shield,    bg: "#FEF3C7", fg: "#92400E", col: "7 / 12", row: "1 / 3", useLoadingBar: true, hideText: true },
-  { id: "lease",       label: "Property & Lease", blurb: "Leases, sale deeds, disputes",          icon: Home,      bg: "#FFEDD5", fg: "#9A3412", col: "1 / 5",  row: "3 / 4", tag: "real estate", photoCard: true },
-  { id: "credit_loan", label: "Credit & Loan",    blurb: "Loan facilities, credit, finance",       icon: Scale,     bg: "#EDE9FE", fg: "#5B21B6", col: "5 / 9",  row: "3 / 4" },
-  { id: "more",        label: "Explore all",      icon: Users,      bg: "#CFFAFE", fg: "#155E75", col: "9 / 12", row: "3 / 4", simpleButton: true },
+  { id: "employment",   label: "Employment",       blurb: "Contracts, disputes, workplace rights", icon: Briefcase, bg: "#DBEAFE", fg: "#1E40AF", col: "1 / 7",  row: "1 / 3", useCardStack: true, hideText: true },
+  { id: "employee_card",label: "Employment",       blurb: "Offer letters, HR policies, exits",     icon: Briefcase, bg: "#DBEAFE", fg: "#1E40AF", col: "7 / 12", row: "1 / 2", tag: "workplace law", photoCard: true },
+  { id: "license_ip",   label: "License & IP",     blurb: "IP licensing, tech transfer, patents",  icon: Shield,    bg: "#FEF3C7", fg: "#92400E", col: "7 / 12", row: "2 / 3", useLoadingBar: true, hideText: true },
+  { id: "lease",        label: "Property & Lease", blurb: "Leases, sale deeds, disputes",          icon: Home,      bg: "#FFEDD5", fg: "#9A3412", col: "1 / 5",  row: "3 / 4", tag: "real estate", photoCard: true },
+  { id: "credit_loan",  label: "Credit & Loan",    blurb: "Loan facilities, credit, finance",       icon: Scale,     bg: "#EDE9FE", fg: "#5B21B6", col: "5 / 9",  row: "3 / 4", tag: "finance", photoCard: true },
+  { id: "more",         label: "Explore all",      icon: Users,      bg: "#CFFAFE", fg: "#155E75", col: "9 / 12", row: "3 / 4", simpleButton: true },
 ];
 
 /* ─── testimonials ────────────────────────────────── */
@@ -924,8 +925,8 @@ export default function App() {
                 <span style={{
                   display: "inline-block",
                   width: 8, height: 8,
-                  borderRadius: "50%",
-                  background: C.burgundy,
+                  background: C.charcoal,
+                  transform: "rotate(45deg)",
                   marginBottom: 16,
                 }} />
                 <h3 style={{
@@ -934,61 +935,43 @@ export default function App() {
                   fontSize: "1.15rem",
                   color: C.charcoal,
                   margin: "0 0 6px",
-                }}>Connect with experts</h3>
+                }}>Talk to a specialist</h3>
                 <p style={{ color: C.charcoalSoft, fontSize: "0.95rem", lineHeight: 1.5, margin: "0 0 14px" }}>
-                  Matched with verified lawyers specializing in<br />your exact document classification.
+                  Get matched with a vetted lawyer based on your<br />document's category and case type.
                 </p>
                 <a href="#" style={{
-                  color: C.burgundy,
+                  color: C.charcoal,
                   fontSize: "0.95rem",
                   fontWeight: 500,
                   textDecoration: "underline",
                   display: "inline-flex",
                   alignItems: "center",
                   gap: 6,
-                }}>Browse verified lawyers →</a>
+                }}>Explore the lawyer network →</a>
               </div>
             </div>
+
           </div>
         </Section>
       </div>
 
-      {/* ── USER STORIES / THREADS ─── */}
-      <div style={{ background: C.off1, padding: "100px 64px" }}>
+      {/* ── TESTIMONIALS ─── */}
+      <div style={{ background: C.off3, padding: "100px 64px" }}>
         <Section bg="transparent">
           <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-
-            {/* Heading block */}
-            <div style={{ maxWidth: 900, margin: "0 0 48px" }}>
-              <h2 style={{
-                fontFamily: "'Switzer', sans-serif",
-                fontWeight: 600,
-                fontSize: "clamp(1.35rem, 2vw, 1.75rem)",
-                letterSpacing: "-0.015em",
-                lineHeight: 1.2,
-                margin: 0,
-                color: C.charcoal,
-              }}>
-                Used by people navigating real legal situations.
-              </h2>
-              <p style={{
-                fontFamily: "'Switzer', sans-serif",
-                fontWeight: 400,
-                fontSize: "clamp(1.35rem, 2vw, 1.75rem)",
-                letterSpacing: "-0.015em",
-                lineHeight: 1.2,
-                margin: "2px 0 0",
-                color: C.charcoalFaint,
-              }}>
-                Here is how NyaySetu helps users understand complex contracts every day.
-              </p>
-            </div>
-
-            <div style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(3, 1fr)",
-              gap: 24,
-            }}>
+            <p style={{
+              fontFamily: "'Switzer', sans-serif",
+              fontSize: "clamp(1.6rem, 2.8vw, 2.4rem)",
+              fontWeight: 600,
+              color: C.charcoal,
+              letterSpacing: "-0.02em",
+              margin: "0 0 12px",
+              textAlign: "center",
+            }}>Real conversations. Real help.</p>
+            <p style={{ textAlign: "center", color: C.charcoalSoft, fontSize: "1.05rem", margin: "0 0 56px" }}>
+              People use NyaySetu every day to understand their rights.
+            </p>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
               {testimonials.map(t => <TestimonialCard key={t.id} t={t} />)}
             </div>
           </div>
@@ -1054,42 +1037,36 @@ export default function App() {
       </div>
 
       {/* ── FOOTER ─── */}
-      <footer style={{ background: C.charcoal, color: "rgba(255,255,255,0.6)", padding: "64px 64px 40px", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "2fr repeat(3, 1fr)", gap: 48, paddingBottom: 48, borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
-          <div>
-            <Logo variant="light" />
-            <p style={{ fontSize: "0.88rem", lineHeight: 1.6, marginTop: 16, maxWidth: 280, color: "rgba(255,255,255,0.5)" }}>
-              Democratizing legal understanding for everyone through intelligent document classification and verified expert matching.
-            </p>
-          </div>
-          <div>
-            <div style={{ color: "#fff", fontWeight: 600, fontSize: "0.9rem", marginBottom: 16 }}>Platform</div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 10, fontSize: "0.86rem" }}>
-              {["Document Analysis", "Lawyer Marketplace", "Risk Scanner", "Document Types"].map(l => (
-                <a key={l} href="#" style={{ color: "inherit", textDecoration: "none" }}>{l}</a>
-              ))}
+      <footer style={{ background: C.charcoal, padding: "64px 64px 48px" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 48, paddingBottom: 48, borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+            <div>
+              <div style={{ marginBottom: 16 }}>
+                <Logo variant="light" size={26} />
+              </div>
+              <p style={{ color: "rgba(255,255,255,0.45)", fontSize: "0.92rem", lineHeight: 1.7, maxWidth: 280, margin: 0 }}>
+                Making the Indian legal system accessible to everyone — one document at a time.
+              </p>
             </div>
+            {[
+              { heading: "Product", links: ["Analyze Document", "Find Lawyers", "How it Works", "Pricing"] },
+              { heading: "Legal", links: ["Privacy Policy", "Terms of Use", "Cookie Policy"] },
+              { heading: "Company", links: ["About", "Blog", "Careers", "Contact"] },
+            ].map(col => (
+              <div key={col.heading}>
+                <div style={{ color: "rgba(255,255,255,0.28)", fontSize: "0.76rem", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 16 }}>{col.heading}</div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                  {col.links.map(l => (
+                    <a key={l} href="#" style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.92rem", textDecoration: "none" }}>{l}</a>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
-          <div>
-            <div style={{ color: "#fff", fontWeight: 600, fontSize: "0.9rem", marginBottom: 16 }}>Resources</div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 10, fontSize: "0.86rem" }}>
-              {["Legal Guides", "Contract Templates", "Clause Library", "API Documentation"].map(l => (
-                <a key={l} href="#" style={{ color: "inherit", textDecoration: "none" }}>{l}</a>
-              ))}
-            </div>
+          <div style={{ paddingTop: 32, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <span style={{ color: "rgba(255,255,255,0.28)", fontSize: "0.82rem" }}>© 2025 NyaySetu. All rights reserved.</span>
+            <span style={{ color: "rgba(255,255,255,0.28)", fontSize: "0.82rem", display: "inline-flex", alignItems: "center", gap: 4 }}>Made with <Heart size={12} color="#8C3D46" fill="#8C3D46" /> for India</span>
           </div>
-          <div>
-            <div style={{ color: "#fff", fontWeight: 600, fontSize: "0.9rem", marginBottom: 16 }}>Company</div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 10, fontSize: "0.86rem" }}>
-              {["About Us", "Careers", "Privacy Policy", "Terms of Service"].map(l => (
-                <a key={l} href="#" style={{ color: "inherit", textDecoration: "none" }}>{l}</a>
-              ))}
-            </div>
-          </div>
-        </div>
-        <div style={{ maxWidth: 1200, margin: "24px auto 0", display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: "0.82rem", color: "rgba(255,255,255,0.4)" }}>
-          <span>© 2026 NyaySetu. All rights reserved.</span>
-          <span>Built for legal clarity and accessibility.</span>
         </div>
       </footer>
 
