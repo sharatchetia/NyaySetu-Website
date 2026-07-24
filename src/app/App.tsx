@@ -389,6 +389,16 @@ function SpecCard({ s }: { s: typeof specializations[0] & { video?: string; useC
           pointerEvents: "none",
         }}>
           {s.label}
+          <div style={{
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            animation: "fbg-arrowNudge 1.6s ease infinite",
+          }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={s.fg} strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </div>
         </div>
       )}
     </div>
@@ -508,6 +518,12 @@ export default function App() {
     const onScroll = () => setScrolled(window.scrollY >= window.innerHeight * 0.5);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
+    if (!document.getElementById("fbg-arrow-nudge-style")) {
+      const style = document.createElement("style");
+      style.id = "fbg-arrow-nudge-style";
+      style.innerHTML = `@keyframes fbg-arrowNudge { 0%,100% { transform:translateX(0); } 50% { transform:translateX(6px); } }`;
+      document.head.appendChild(style);
+    }
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
