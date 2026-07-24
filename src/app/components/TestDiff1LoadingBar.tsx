@@ -193,13 +193,13 @@ export default function TestDiff1LoadingBar() {
             animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
           }
           20% {
-            width: 480px;
+            width: 520px;
             padding-left: 24px;
             padding-right: 24px;
             animation-timing-function: linear;
           }
           95% {
-            width: 480px;
+            width: 520px;
             padding-left: 24px;
             padding-right: 24px;
             animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
@@ -226,14 +226,14 @@ export default function TestDiff1LoadingBar() {
 
       <div
         style={{
-          transform: "scale(0.68)",
+          transform: "scale(1.1)",
           transformOrigin: "center center",
         }}
       >
         <div
           ref={loadingBarRef}
           style={{
-            width: 480,
+            width: 520,
             background: "#111",
             borderRadius: 9999,
             padding: "14px 24px",
