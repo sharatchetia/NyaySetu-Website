@@ -4,6 +4,11 @@
    is used site-wide here in its place. */
 @import url('https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap');
 
+html {
+  scrollbar-gutter: stable;
+  overflow-y: scroll;
+}
+
 /* Keyframes used by the hero section */
 @keyframes nyay-fadeUp {
   from { opacity: 0; transform: translateY(16px); }

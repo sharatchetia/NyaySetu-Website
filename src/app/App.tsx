@@ -576,22 +576,35 @@ function TestimonialCard({
               }}>NyaySetu AI</div>
             )}
             {m.from === "ai" ? (
-              isTyping ? (
-                <span className="nyay-typing-dots">
-                  <span></span><span></span><span></span>
-                </span>
-              ) : visibleCount !== null ? (
-                words.map((w, idx) => (
-                  <span
-                    key={idx}
-                    className={`nyay-word ${idx < visibleCount ? "show" : ""}`}
-                  >
-                    {w}{idx < words.length - 1 ? "\u00A0" : ""}
-                  </span>
-                ))
-              ) : (
-                m.text
-              )
+              <div style={{ position: "relative" }}>
+                {/* Full text rendered in invisible flow container to preserve exact card layout height */}
+                <div style={{
+                  visibility: (isTyping || visibleCount !== null) ? "hidden" : "visible",
+                  lineHeight: 1.55,
+                }}>
+                  {m.text}
+                </div>
+
+                {/* Animated Typing & Word-by-Word Overlay */}
+                {(isTyping || visibleCount !== null) && (
+                  <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}>
+                    {isTyping ? (
+                      <span className="nyay-typing-dots">
+                        <span></span><span></span><span></span>
+                      </span>
+                    ) : (
+                      words.map((w, idx) => (
+                        <span
+                          key={idx}
+                          className={`nyay-word ${idx < (visibleCount ?? 0) ? "show" : ""}`}
+                        >
+                          {w}{idx < words.length - 1 ? "\u00A0" : ""}
+                        </span>
+                      ))
+                    )}
+                  </div>
+                )}
+              </div>
             ) : (
               m.text
             )}
