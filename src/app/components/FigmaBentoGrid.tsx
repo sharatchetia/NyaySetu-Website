@@ -286,7 +286,7 @@ const badgeLight: React.CSSProperties = {
 
 function EmploymentTile({ onClick }: { onClick?: () => void }) {
   return (
-    <div className="fbg-tile" style={{ ...tileBase, background: "#2451D6" }} onClick={onClick}>
+    <div className="fbg-tile" style={{ ...tileBase, background: "linear-gradient(135deg, #3B66EB 0%, #2451D6 50%, #1B3FA7 100%)" }} onClick={onClick}>
       <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(45deg, rgba(255,255,255,0.07) 0 2px, transparent 2px 9px)" }} />
       <div style={{ ...badgeDark, zIndex: 10 }}>EMPLOYMENT</div>
 
@@ -395,7 +395,7 @@ function LeaseTile({ onClick }: { onClick?: () => void }) {
   }, []);
 
   return (
-    <div className="fbg-tile" style={{ ...tileBase, background: "#7CAEE0" }} onClick={onClick}>
+    <div className="fbg-tile" style={{ ...tileBase, background: "linear-gradient(135deg, #93C2F5 0%, #7CAEE0 50%, #6395C7 100%)" }} onClick={onClick}>
       <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(rgba(255,255,255,0.35) 1px, transparent 1px)", backgroundSize: "8px 8px" }} />
       <div style={{ ...badgeLight, color: "#1D4488", zIndex: 2 }}>RENTAL AND LEASE</div>
       <div style={{
@@ -822,7 +822,7 @@ function SettlementTile({ onClick }: { onClick?: () => void }) {
   const amtVal = (4.2 + (7.8 - 4.2) * dragProgress).toFixed(1);
 
   return (
-    <div ref={tileRef} className="fbg-tile" onClick={onClick} style={{ ...tileBase, background: "#00F5C4" }}>
+    <div ref={tileRef} className="fbg-tile" onClick={onClick} style={{ ...tileBase, background: "linear-gradient(135deg, #33FFD5 0%, #00F5C4 50%, #00D4AA 100%)" }}>
       {/* Grain & Glow Background */}
       <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(rgba(36,26,8,0.16) 1px, transparent 1px)", backgroundSize: "8px 8px" }} />
       <div style={{
@@ -1090,7 +1090,7 @@ function ServiceSupplyTile({ onClick }: { onClick?: () => void }) {
 
 function ShareholderTile({ onClick }: { onClick?: () => void }) {
   return (
-    <div className="fbg-tile" style={{ ...tileBase, background: "#3F6B4E" }} onClick={onClick}>
+    <div className="fbg-tile" style={{ ...tileBase, background: "linear-gradient(135deg, #528563 0%, #3F6B4E 50%, #2D4F38 100%)" }} onClick={onClick}>
       <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-radial-gradient(circle at 78% 22%, rgba(255,255,255,0.12) 0 1px, transparent 1px 13px)" }} />
       <div style={{ ...badgeDark, background: "#D9F99D", color: "#0A0A0A", zIndex: 10 }}>SHAREHOLDER</div>
 
@@ -1223,7 +1223,7 @@ function MergerTile({ onClick }: { onClick?: () => void }) {
 
 function LitigationTile({ onClick }: { onClick?: () => void }) {
   return (
-    <div className="fbg-tile" style={{ ...tileBase, background: "#B5482E" }} onClick={onClick}>
+    <div className="fbg-tile" style={{ ...tileBase, background: "linear-gradient(135deg, #CB5A3E 0%, #B5482E 50%, #9B371E 100%)" }} onClick={onClick}>
       <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(70deg, rgba(255,255,255,0.14) 0 3px, transparent 3px 12px)" }} />
       <div style={{ ...badgeLight, color: "#7A2E1B", zIndex: 10 }}>DISPUTE</div>
 

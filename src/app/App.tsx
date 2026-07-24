@@ -48,24 +48,24 @@ const R = {
 
 /* ─── document types (original bento grid style with 8 tiles) ──────────────── */
 const docTypes = [
-  { id: "employment",         label: "Employment\nAgreement", tag: "Employment",         bg: "#DBEAFE", fg: "#1E40AF", col: "1 / 5",  row: "1 / 3" },
-  { id: "lease",              label: "Rental & Lease\nAgreement", tag: "Lease",          bg: "#FFEDD5", fg: "#9A3412", col: "5 / 9",  row: "1 / 2" },
-  { id: "license_ip",         label: "License & IP\nAgreement", tag: "License IP",       bg: "#FEF3C7", fg: "#92400E", col: "9 / 12", row: "1 / 2" },
-  { id: "settlement_release", label: "Settlement\nDeed",      tag: "Settlement",        bg: "#F3E8FF", fg: "#6B21A8", col: "5 / 8",  row: "2 / 3" },
-  { id: "service_supply",     label: "Service &\nSupply",     tag: "Service Supply",     bg: "#CFFAFE", fg: "#155E75", col: "8 / 10", row: "2 / 3" },
-  { id: "shareholder_rights", label: "Shareholder\nRights",   tag: "Shareholder",        bg: "#FCE7F3", fg: "#9D174D", col: "10 / 12",row: "2 / 3" },
-  { id: "merger_acquisition", label: "Merger & Acquisition",  tag: "Corporate",          bg: "#D1FAE5", fg: "#065F46", col: "1 / 7",  row: "3 / 4" },
-  { id: "more",               label: "and many more →",       tag: "9 Classes",          bg: "#FEF9C3", fg: "#713F12", col: "7 / 12", row: "3 / 4" },
+  { id: "employment",         label: "Employment\nAgreement", tag: "Employment",         bg: "linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%)", fg: "#1E40AF", col: "1 / 5",  row: "1 / 3" },
+  { id: "lease",              label: "Rental & Lease\nAgreement", tag: "Lease",          bg: "linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%)", fg: "#9A3412", col: "5 / 9",  row: "1 / 2" },
+  { id: "license_ip",         label: "License & IP\nAgreement", tag: "License IP",       bg: "linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%)", fg: "#92400E", col: "9 / 12", row: "1 / 2" },
+  { id: "settlement_release", label: "Settlement\nDeed",      tag: "Settlement",        bg: "linear-gradient(135deg, #FAF5FF 0%, #F3E8FF 100%)", fg: "#6B21A8", col: "5 / 8",  row: "2 / 3" },
+  { id: "service_supply",     label: "Service &\nSupply",     tag: "Service Supply",     bg: "linear-gradient(135deg, #ECFEFF 0%, #CFFAFE 100%)", fg: "#155E75", col: "8 / 10", row: "2 / 3" },
+  { id: "shareholder_rights", label: "Shareholder\nRights",   tag: "Shareholder",        bg: "linear-gradient(135deg, #FDF2F8 0%, #FCE7F3 100%)", fg: "#9D174D", col: "10 / 12",row: "2 / 3" },
+  { id: "merger_acquisition", label: "Merger & Acquisition",  tag: "Corporate",          bg: "linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%)", fg: "#065F46", col: "1 / 7",  row: "3 / 4" },
+  { id: "more",               label: "and many more →",       tag: "9 Classes",          bg: "linear-gradient(135deg, #FEFCE8 0%, #FEF9C3 100%)", fg: "#713F12", col: "7 / 12", row: "3 / 4" },
 ];
 
 /* ─── legal specializations (original bento grid style with 6 tiles) ───── */
 const specializations = [
   { id: "employment",   label: "Employment",       blurb: "Contracts, disputes, workplace rights", icon: Briefcase, bg: "#FFFFFF", fg: "#1E40AF", col: "1 / 7",  row: "1 / 3", useCardStack: true, hideText: true },
-  { id: "employee_card",label: "Employment",       blurb: "Offer letters, HR policies, exits",     icon: Briefcase, bg: "#DBEAFE", fg: "#1E40AF", col: "7 / 12", row: "1 / 2", tag: "workplace law", photoCard: true, photo: lawyerWorkplace },
-  { id: "license_ip",   label: "License & IP",     blurb: "IP licensing, tech transfer, patents",  icon: Shield,    bg: "#FEF3C7", fg: "#92400E", col: "7 / 12", row: "2 / 3", useLoadingBar: true, hideText: true },
-  { id: "lease",        label: "Property & Lease", blurb: "Leases, sale deeds, disputes",          icon: Home,      bg: "#FFEDD5", fg: "#9A3412", col: "1 / 5",  row: "3 / 4", tag: "real estate", photoCard: true, photo: lawyerRealEstate },
-  { id: "credit_loan",  label: "Credit & Loan",    blurb: "Loan facilities, credit, finance",       icon: Scale,     bg: "#EDE9FE", fg: "#5B21B6", col: "5 / 9",  row: "3 / 4", tag: "finance", photoCard: true, photo: lawyerFinance },
-  { id: "more",         label: "Explore all",      icon: Users,      bg: "#CFFAFE", fg: "#155E75", col: "9 / 12", row: "3 / 4", simpleButton: true },
+  { id: "employee_card",label: "Employment",       blurb: "Offer letters, HR policies, exits",     icon: Briefcase, bg: "linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%)", fg: "#1E40AF", col: "7 / 12", row: "1 / 2", tag: "workplace law", photoCard: true, photo: lawyerWorkplace },
+  { id: "license_ip",   label: "License & IP",     blurb: "IP licensing, tech transfer, patents",  icon: Shield,    bg: "linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%)", fg: "#92400E", col: "7 / 12", row: "2 / 3", useLoadingBar: true, hideText: true },
+  { id: "lease",        label: "Property & Lease", blurb: "Leases, sale deeds, disputes",          icon: Home,      bg: "linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%)", fg: "#9A3412", col: "1 / 5",  row: "3 / 4", tag: "real estate", photoCard: true, photo: lawyerRealEstate },
+  { id: "credit_loan",  label: "Credit & Loan",    blurb: "Loan facilities, credit, finance",       icon: Scale,     bg: "linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 100%)", fg: "#5B21B6", col: "5 / 9",  row: "3 / 4", tag: "finance", photoCard: true, photo: lawyerFinance },
+  { id: "more",         label: "Explore all",      icon: Users,      bg: "linear-gradient(135deg, #ECFEFF 0%, #CFFAFE 100%)", fg: "#155E75", col: "9 / 12", row: "3 / 4", simpleButton: true },
 ];
 
 /* ─── testimonials ────────────────────────────────── */

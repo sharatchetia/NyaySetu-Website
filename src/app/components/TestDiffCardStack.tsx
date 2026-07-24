@@ -4,6 +4,8 @@ import lawyer2 from "../../assets/lawyer_white_2.jpg";
 import lawyer3 from "../../assets/lawyer_white_3.jpg";
 import lawyer4 from "../../assets/lawyer_white_4.jpg";
 import lawyer5 from "../../assets/lawyer_white_5.jpg";
+import lawyer9 from "../../assets/lawyer_white_9.jpg";
+import lawyer10 from "../../assets/lawyer_white_10.jpg";
 
 interface LawyerCardData {
   id: string;
@@ -21,7 +23,7 @@ interface LawyerCardData {
 const CARDS: LawyerCardData[] = [
   {
     id: "bubblegum",
-    bg: "#FFBCF9",
+    bg: "linear-gradient(135deg, #FFE4FD 0%, #FFBCF9 100%)",
     name: "Adv. Rohan Sharma",
     specialty: "Corporate Law",
     rating: "★★★★★ 4.9",
@@ -29,7 +31,7 @@ const CARDS: LawyerCardData[] = [
   },
   {
     id: "lime",
-    bg: "#B8FF8F",
+    bg: "linear-gradient(135deg, #DCFFC4 0%, #B8FF8F 100%)",
     name: "Adv. Priya Mehta",
     specialty: "Family Law",
     rating: "★★★★★ 4.8",
@@ -37,40 +39,58 @@ const CARDS: LawyerCardData[] = [
   },
   {
     id: "tangerine",
-    bg: "#FF6E06",
+    bg: "linear-gradient(135deg, #FF8C38 0%, #FF6E06 100%)",
     textColor: "#fff",
     specialtyColor: "rgba(255,255,255,0.9)",
     name: "Adv. Arjun Patel",
     specialty: "Criminal Law",
     rating: "★★★★★ 4.95",
-    image: lawyer3,
-  },
-  {
-    id: "lavender",
-    bg: "#CAB1FF",
-    name: "Adv. Ananya Singh",
-    specialty: "Intellectual Property",
-    rating: "★★★★★ 4.7",
     image: lawyer4,
   },
   {
+    id: "lavender",
+    bg: "linear-gradient(135deg, #E2D4FF 0%, #CAB1FF 100%)",
+    name: "Adv. Ananya Singh",
+    specialty: "Intellectual Property",
+    rating: "★★★★★ 4.7",
+    image: lawyer3,
+  },
+  {
     id: "blueberry",
-    bg: "#4C79FF",
+    bg: "linear-gradient(135deg, #6B92FF 0%, #4C79FF 100%)",
     textColor: "#fff",
     specialtyColor: "rgba(255,255,255,0.9)",
     name: "Adv. Vikram Rao",
     specialty: "Real Estate Law",
     rating: "★★★★★ 4.85",
     image: lawyer5,
-    imageTransform: "translateY(10px) scale(1.28)",
-    objectPosition: "center 5%",
+  },
+  {
+    id: "mint",
+    bg: "linear-gradient(135deg, #A7F3D0 0%, #6EE7B7 100%)",
+    textColor: "#064E3B",
+    specialtyColor: "#047857",
+    name: "Adv. Kavya Nair",
+    specialty: "Tax & Revenue Law",
+    rating: "★★★★★ 4.92",
+    image: lawyer9,
+  },
+  {
+    id: "gold",
+    bg: "linear-gradient(135deg, #FEF08A 0%, #FDE047 100%)",
+    textColor: "#713F12",
+    specialtyColor: "#A16207",
+    name: "Adv. Kabir Kapoor",
+    specialty: "Arbitration & Disputes",
+    rating: "★★★★★ 4.88",
+    image: lawyer10,
   },
 ];
 
 // 3 full cycles of cards for seamless continuous scrolling
 const TRIPLE_CARDS = [...CARDS, ...CARDS, ...CARDS];
 
-const CYCLE_DURATION = 12000; // ms per cycle
+const CYCLE_DURATION = 38000; // ms per cycle (slower, gentle scroll speed)
 
 export default function TestDiffCardStack() {
   const scrollerRef = useRef<HTMLDivElement | null>(null);
