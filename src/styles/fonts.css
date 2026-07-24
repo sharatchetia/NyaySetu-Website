@@ -100,3 +100,41 @@
   transform: scale(0.95) !important;
   transition-duration: 0.1s !important;
 }
+
+/* Testimonial chat animation preview (testing.html style) */
+@keyframes nyay-dots-bounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+
+.nyay-typing-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 2px;
+}
+.nyay-typing-dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #5A5348;
+  opacity: 0.4;
+  animation: nyay-dots-bounce 1.1s infinite ease-in-out;
+}
+.nyay-typing-dots span:nth-child(2) { animation-delay: 0.15s; }
+.nyay-typing-dots span:nth-child(3) { animation-delay: 0.3s; }
+
+.nyay-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(5px);
+  filter: blur(2px);
+  transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+              filter 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nyay-word.show {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}

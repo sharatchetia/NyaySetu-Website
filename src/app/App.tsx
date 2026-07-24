@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import { Briefcase, Home, Users, Scale, Shield, FileText, Bot, Tag, UserCheck, Heart } from "lucide-react";
 import tableUploadImg from "../assets/table-upload.png";
 import howItWorksVideo from "../assets/loop_nyaysetu_process.mp4";
@@ -421,9 +421,64 @@ function SpecCard({ s }: { s: typeof specializations[0] & { video?: string; useC
   );
 }
 
-/* ─── Testimonial Thread ──────────────────────────── */
-function TestimonialCard({ t }: { t: typeof testimonials[0] }) {
+/* ─── Testimonial Thread with Live Animated Generation (testing.html style) ──── */
+function TestimonialCard({
+  t,
+  isAnimTarget,
+  onAnimDone,
+}: {
+  t: typeof testimonials[0];
+  isAnimTarget: boolean;
+  onAnimDone: () => void;
+}) {
   const { ref, visible } = useInView(0.2);
+  const [isTyping, setIsTyping] = useState(false);
+  const [visibleCount, setVisibleCount] = useState<number | null>(null);
+
+  const aiMessage = t.messages.find(m => m.from === "ai")?.text || "";
+  const words = useMemo(() => aiMessage.split(" "), [aiMessage]);
+
+  useEffect(() => {
+    if (!isAnimTarget) return;
+
+    let isMounted = true;
+    setIsTyping(true);
+    setVisibleCount(0);
+
+    const thinkTime = Math.floor(Math.random() * 500 + 900); // 900ms - 1400ms
+
+    const thinkTimer = setTimeout(() => {
+      if (!isMounted) return;
+      setIsTyping(false);
+
+      let currentWord = 0;
+      const typeNextWord = () => {
+        if (!isMounted) return;
+        currentWord++;
+        setVisibleCount(currentWord);
+
+        if (currentWord < words.length) {
+          const delay = Math.floor(Math.random() * 40 + 90); // 90ms - 130ms
+          setTimeout(typeNextWord, delay);
+        } else {
+          setTimeout(() => {
+            if (isMounted) {
+              setVisibleCount(null); // Return to normal static state
+              onAnimDone();
+            }
+          }, 1200);
+        }
+      };
+
+      typeNextWord();
+    }, thinkTime);
+
+    return () => {
+      isMounted = false;
+      clearTimeout(thinkTimer);
+    };
+  }, [isAnimTarget, words, onAnimDone]);
+
   return (
     <div
       ref={ref}
@@ -436,6 +491,7 @@ function TestimonialCard({ t }: { t: typeof testimonials[0] }) {
         display: "flex",
         flexDirection: "column",
         gap: 16,
+        overflow: "hidden",
       }}
     >
       <div style={{
@@ -470,13 +526,16 @@ function TestimonialCard({ t }: { t: typeof testimonials[0] }) {
           }}
         >
           <div style={{
-            maxWidth: "82%",
+            maxWidth: "100%",
+            width: "100%",
             background: m.from === "user" ? t.bg : C.cream,
             borderRadius: m.from === "user" ? "18px 18px 4px 18px" : "18px 18px 18px 4px",
             padding: "12px 16px",
             fontSize: "0.88rem",
             lineHeight: 1.55,
             color: C.charcoal,
+            wordWrap: "break-word",
+            overflowWrap: "break-word",
           }}>
             {m.from === "ai" && (
               <div style={{
@@ -487,10 +546,88 @@ function TestimonialCard({ t }: { t: typeof testimonials[0] }) {
                 letterSpacing: "0.03em",
               }}>NyaySetu AI</div>
             )}
-            {m.text}
+            {m.from === "ai" ? (
+              isTyping ? (
+                <span className="nyay-typing-dots">
+                  <span></span><span></span><span></span>
+                </span>
+              ) : visibleCount !== null ? (
+                words.map((w, idx) => (
+                  <span
+                    key={idx}
+                    className={`nyay-word ${idx < visibleCount ? "show" : ""}`}
+                  >
+                    {w}{idx < words.length - 1 ? "\u00A0" : ""}
+                  </span>
+                ))
+              ) : (
+                m.text
+              )
+            ) : (
+              m.text
+            )}
           </div>
         </div>
       ))}
+    </div>
+  );
+}
+
+function TestimonialsSection() {
+  const [animTargetIndex, setAnimTargetIndex] = useState<number | null>(null);
+  const lastCardRef = useRef<number>(-1);
+
+  const scheduleNext = useCallback(() => {
+    const delay = Math.floor(Math.random() * 7000 + 4000); // 4000ms - 11000ms
+    const timer = setTimeout(() => {
+      let next = Math.floor(Math.random() * testimonials.length);
+      while (next === lastCardRef.current && testimonials.length > 1) {
+        next = Math.floor(Math.random() * testimonials.length);
+      }
+      lastCardRef.current = next;
+      setAnimTargetIndex(next);
+    }, delay);
+    return timer;
+  }, []);
+
+  useEffect(() => {
+    const timer = scheduleNext();
+    return () => clearTimeout(timer);
+  }, [scheduleNext]);
+
+  const handleAnimDone = useCallback(() => {
+    setAnimTargetIndex(null);
+    scheduleNext();
+  }, [scheduleNext]);
+
+  return (
+    <div style={{ background: C.off3, padding: "100px 64px" }}>
+      <Section bg="transparent">
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          <p style={{
+            fontFamily: "'Switzer', sans-serif",
+            fontSize: "clamp(1.6rem, 2.8vw, 2.4rem)",
+            fontWeight: 600,
+            color: C.charcoal,
+            letterSpacing: "-0.02em",
+            margin: "0 0 12px",
+            textAlign: "center",
+          }}>Real conversations. Real help.</p>
+          <p style={{ textAlign: "center", color: C.charcoalSoft, fontSize: "1.05rem", margin: "0 0 56px" }}>
+            People use NyaySetu every day to understand their rights.
+          </p>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
+            {testimonials.map((t, idx) => (
+              <TestimonialCard
+                key={t.id}
+                t={t}
+                isAnimTarget={animTargetIndex === idx}
+                onAnimDone={handleAnimDone}
+              />
+            ))}
+          </div>
+        </div>
+      </Section>
     </div>
   );
 }
@@ -957,27 +1094,7 @@ export default function App() {
       </div>
 
       {/* ── TESTIMONIALS ─── */}
-      <div style={{ background: C.off3, padding: "100px 64px" }}>
-        <Section bg="transparent">
-          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-            <p style={{
-              fontFamily: "'Switzer', sans-serif",
-              fontSize: "clamp(1.6rem, 2.8vw, 2.4rem)",
-              fontWeight: 600,
-              color: C.charcoal,
-              letterSpacing: "-0.02em",
-              margin: "0 0 12px",
-              textAlign: "center",
-            }}>Real conversations. Real help.</p>
-            <p style={{ textAlign: "center", color: C.charcoalSoft, fontSize: "1.05rem", margin: "0 0 56px" }}>
-              People use NyaySetu every day to understand their rights.
-            </p>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
-              {testimonials.map(t => <TestimonialCard key={t.id} t={t} />)}
-            </div>
-          </div>
-        </Section>
-      </div>
+      <TestimonialsSection />
 
       {/* ── CTA STRIP ─── */}
       <div style={{ background: C.off2, padding: "80px 64px" }}>
