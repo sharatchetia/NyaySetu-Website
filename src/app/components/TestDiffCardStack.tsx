@@ -117,20 +117,21 @@ export default function TestDiffCardStack() {
         width: "100%",
         height: "100%",
         display: "flex",
-        alignItems: "center",
+        alignItems: "stretch",
         overflow: "hidden",
         background: "#DBEAFE",
         userSelect: "none",
       }}
     >
-      {/* Horizontal Scroller Container (testdiff2 horizontal logic) */}
+      {/* Horizontal Scroller Container */}
       <div
         ref={scrollerRef}
         style={{
           display: "flex",
           flexDirection: "row",
           gap: 16,
-          alignItems: "center",
+          alignItems: "stretch",
+          height: "100%",
           willChange: "transform",
           transform: "translate3d(0px, 0px, 0px)",
         }}
@@ -140,11 +141,10 @@ export default function TestDiffCardStack() {
             key={`${c.id}-${index}`}
             style={{
               flexShrink: 0,
-              width: 220,
-              height: 290,
+              width: 240,
+              height: "100%",
               background: c.bg,
-              borderRadius: 14,
-              boxShadow: "0 12px 30px -8px rgba(0, 0, 0, 0.18)",
+              borderRadius: 0,
               display: "flex",
               flexDirection: "column",
               overflow: "hidden",
@@ -153,7 +153,8 @@ export default function TestDiffCardStack() {
             {/* Image Container */}
             <div
               style={{
-                height: 180,
+                flex: 1,
+                width: "100%",
                 background: "#FFFFFF",
                 position: "relative",
                 overflow: "hidden",
@@ -172,7 +173,7 @@ export default function TestDiffCardStack() {
                   height: "100%",
                   objectFit: "cover",
                   objectPosition: "center 18%",
-                  transform: "translateY(36px) scale(1.12)",
+                  transform: "translateY(56px) scale(1.12)",
                 }}
               />
             </div>
@@ -180,20 +181,19 @@ export default function TestDiffCardStack() {
             {/* Info Container */}
             <div
               style={{
-                flex: 1,
-                padding: "10px 14px",
+                padding: "16px 14px",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
                 textAlign: "center",
-                gap: 3,
+                gap: 4,
               }}
             >
               <div
                 style={{
                   fontWeight: 600,
-                  fontSize: 16,
+                  fontSize: 18,
                   lineHeight: 1.15,
                   margin: 0,
                   letterSpacing: "-0.3px",
@@ -204,7 +204,7 @@ export default function TestDiffCardStack() {
               </div>
               <div
                 style={{
-                  fontSize: 12.5,
+                  fontSize: 14,
                   fontWeight: 500,
                   color: c.specialtyColor || "rgba(17, 17, 17, 0.75)",
                   margin: 0,
@@ -215,7 +215,7 @@ export default function TestDiffCardStack() {
               </div>
               <div
                 style={{
-                  fontSize: 12,
+                  fontSize: 13.5,
                   fontWeight: 500,
                   display: "flex",
                   alignItems: "center",
@@ -229,21 +229,6 @@ export default function TestDiffCardStack() {
           </div>
         ))}
       </div>
-
-      {/* Side Fade Gradient Overlay */}
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          pointerEvents: "none",
-          background:
-            "linear-gradient(to right, rgba(219, 234, 254, 0.95) 0%, rgba(219, 234, 254, 0) 12%, rgba(219, 234, 254, 0) 88%, rgba(219, 234, 254, 0.95) 100%)",
-          zIndex: 10,
-        }}
-      />
     </div>
   );
 }
