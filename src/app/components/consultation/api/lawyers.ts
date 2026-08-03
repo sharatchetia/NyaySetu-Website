@@ -1,17 +1,18 @@
-/**
- * lawyers.ts — Lawyer Recommendation Backend Mock
- * ---------------------------------------------------------
- * Future implementation:
- *   return fetch(`/api/v1/lawyers?category=${category}`).then(r => r.json());
- */
-
 import { Lawyer, LegalCategory } from "../types";
+import lawyerWhite1 from "@/assets/lawyer_white_1.jpg";
+import lawyerWhite2 from "@/assets/lawyer_white_2.jpg";
+import lawyerWhite3 from "@/assets/lawyer_white_3.jpg";
+import lawyerWhite4 from "@/assets/lawyer_white_4.jpg";
+import lawyerWhite5 from "@/assets/lawyer_white_5.jpg";
+import lawyerWhite6 from "@/assets/lawyer_white_6.jpg";
+import lawyerWhite7 from "@/assets/lawyer_white_7.jpg";
+import lawyerWhite8 from "@/assets/lawyer_white_8.jpg";
 
 export const MOCK_LAWYERS: Lawyer[] = [
   {
     id: "lw-101",
     name: "Adv. Rahul Sharma",
-    profileImage: null, // Left null so placeholder silhouette SVG area renders dynamically
+    profileImage: lawyerWhite6,
     specialization: "Employment Law",
     practiceAreas: ["Employment", "HR Policy"],
     rating: 4.9,
@@ -24,7 +25,7 @@ export const MOCK_LAWYERS: Lawyer[] = [
   {
     id: "lw-102",
     name: "Adv. Priya Singh",
-    profileImage: null,
+    profileImage: lawyerWhite7,
     specialization: "Property & Lease Law",
     practiceAreas: ["Property Law", "Lease Disputes"],
     rating: 4.8,
@@ -37,7 +38,7 @@ export const MOCK_LAWYERS: Lawyer[] = [
   {
     id: "lw-103",
     name: "Adv. Arjun Mehta",
-    profileImage: null,
+    profileImage: lawyerWhite8,
     specialization: "Corporate Law",
     practiceAreas: ["Corporate Law", "M&A"],
     rating: 4.7,
@@ -50,7 +51,7 @@ export const MOCK_LAWYERS: Lawyer[] = [
   {
     id: "lw-104",
     name: "Adv. Neha Verma",
-    profileImage: null,
+    profileImage: lawyerWhite1,
     specialization: "Contract Law",
     practiceAreas: ["Contract Drafting", "Agreements"],
     rating: 4.8,
@@ -63,7 +64,7 @@ export const MOCK_LAWYERS: Lawyer[] = [
   {
     id: "lw-105",
     name: "Adv. Karan Malhotra",
-    profileImage: null,
+    profileImage: lawyerWhite2,
     specialization: "Intellectual Property Law",
     practiceAreas: ["IP Law", "Trademarks"],
     rating: 4.9,
@@ -76,7 +77,7 @@ export const MOCK_LAWYERS: Lawyer[] = [
   {
     id: "lw-106",
     name: "Adv. Ananya Roy",
-    profileImage: null,
+    profileImage: lawyerWhite3,
     specialization: "Family Law",
     practiceAreas: ["Divorce", "Child Custody"],
     rating: 4.7,
@@ -89,7 +90,7 @@ export const MOCK_LAWYERS: Lawyer[] = [
   {
     id: "lw-107",
     name: "Adv. Sandeep Iyer",
-    profileImage: null,
+    profileImage: lawyerWhite4,
     specialization: "Criminal Law",
     practiceAreas: ["Criminal Defense", "Bail Matters"],
     rating: 4.6,
@@ -102,7 +103,7 @@ export const MOCK_LAWYERS: Lawyer[] = [
   {
     id: "lw-108",
     name: "Adv. Meera Nair",
-    profileImage: null,
+    profileImage: lawyerWhite5,
     specialization: "Tax Law",
     practiceAreas: ["Tax Litigation", "GST Matters"],
     rating: 4.8,
@@ -120,14 +121,36 @@ export interface LawyersResponse {
   lawyers: Lawyer[];
 }
 
+const CATEGORY_SPECIALIZATION_MAP: Record<LegalCategory, string[]> = {
+  employment: ["Employment Law", "Contract Law"],
+  lease: ["Property & Lease Law", "Contract Law"],
+  credit_loan: ["Corporate Law", "Contract Law"],
+  license_ip: ["Intellectual Property Law", "Contract Law"],
+  merger_acquisition: ["Corporate Law"],
+  purchase_sale: ["Contract Law", "Property & Lease Law"],
+  service_supply: ["Contract Law", "Corporate Law"],
+  settlement_release: ["Contract Law", "Corporate Law"],
+  shareholder_rights: ["Corporate Law"],
+};
+
 export function getRecommendedLawyers(category?: LegalCategory): Promise<LawyersResponse> {
   return new Promise((resolve) => {
     setTimeout(() => {
+      let resultLawyers = [...MOCK_LAWYERS];
+      if (category && CATEGORY_SPECIALIZATION_MAP[category]) {
+        const targetSpecs = CATEGORY_SPECIALIZATION_MAP[category];
+        resultLawyers.sort((a, b) => {
+          const aMatch = targetSpecs.includes(a.specialization) ? 1 : 0;
+          const bMatch = targetSpecs.includes(b.specialization) ? 1 : 0;
+          return bMatch - aMatch;
+        });
+      }
       resolve({
         success: true,
         category,
-        lawyers: MOCK_LAWYERS,
+        lawyers: resultLawyers,
       });
     }, 700);
   });
 }
+
