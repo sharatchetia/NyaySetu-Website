@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import "./consultation.css";
 import { ChatMessage, DocumentContextState, Lawyer, ToastMessage } from "./types";
 import { ConsultationHeader } from "./ConsultationHeader";
@@ -27,6 +27,15 @@ interface ConsultationWorkspaceProps {
 export const ConsultationWorkspace: React.FC<ConsultationWorkspaceProps> = ({
   onBackToLanding,
 }) => {
+  const isMountedRef = useRef(true);
+
+  useEffect(() => {
+    isMountedRef.current = true;
+    return () => {
+      isMountedRef.current = false;
+    };
+  }, []);
+
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
   const [lawyersRevealed, setLawyersRevealed] = useState(false);
@@ -56,9 +65,12 @@ export const ConsultationWorkspace: React.FC<ConsultationWorkspaceProps> = ({
 
   const addToast = useCallback((message: string, type: "success" | "error" | "info" = "info") => {
     const id = "toast_" + Math.random().toString(36).slice(2, 9);
+    if (!isMountedRef.current) return;
     setToasts((prev) => [...prev, { id, message, type }]);
     setTimeout(() => {
-      setToasts((prev) => prev.filter((t) => t.id !== id));
+      if (isMountedRef.current) {
+        setToasts((prev) => prev.filter((t) => t.id !== id));
+      }
     }, 3600);
   }, []);
 
@@ -79,6 +91,7 @@ export const ConsultationWorkspace: React.FC<ConsultationWorkspaceProps> = ({
     if (!docState.documentReady) {
       setIsTyping(true);
       setTimeout(() => {
+        if (!isMountedRef.current) return;
         setIsTyping(false);
         setMessages((prev) => [
           ...prev,
@@ -100,6 +113,7 @@ export const ConsultationWorkspace: React.FC<ConsultationWorkspaceProps> = ({
         summary: docState.summary,
         categoryLabel: docState.categoryLabel,
       });
+      if (!isMountedRef.current) return;
       setIsTyping(false);
       setMessages((prev) => [
         ...prev,
@@ -111,6 +125,7 @@ export const ConsultationWorkspace: React.FC<ConsultationWorkspaceProps> = ({
         },
       ]);
     } catch {
+      if (!isMountedRef.current) return;
       setIsTyping(false);
       setMessages((prev) => [
         ...prev,
@@ -144,12 +159,15 @@ export const ConsultationWorkspace: React.FC<ConsultationWorkspaceProps> = ({
     try {
       // Step 2: Upload document + simulate progress fill
       const progressPromise = simulateProgress((pct) => {
-        setMessages((prev) =>
-          prev.map((m) => (m.id === fileMsgId ? { ...m, progressPct: pct } : m))
-        );
+        if (isMountedRef.current) {
+          setMessages((prev) =>
+            prev.map((m) => (m.id === fileMsgId ? { ...m, progressPct: pct } : m))
+          );
+        }
       });
 
       await Promise.all([uploadDocument(file), progressPromise]);
+      if (!isMountedRef.current) return;
 
       // Step 3: Update status to analyzing and call summarize
       setMessages((prev) =>
@@ -159,9 +177,11 @@ export const ConsultationWorkspace: React.FC<ConsultationWorkspaceProps> = ({
       );
 
       const summaryRes = await summarizeDocument(file);
+      if (!isMountedRef.current) return;
 
       // Step 4: Classify document
       const classifyRes = await classifyDocument(summaryRes.summary);
+      if (!isMountedRef.current) return;
 
       setIsTyping(false);
 
@@ -202,12 +222,14 @@ export const ConsultationWorkspace: React.FC<ConsultationWorkspaceProps> = ({
 
       // Step 8: Fetch recommended lawyers & reveal right panel
       const lawyersRes = await getRecommendedLawyers(classifyRes.category);
+      if (!isMountedRef.current) return;
       if (lawyersRes.lawyers && lawyersRes.lawyers.length > 0) {
         setLawyers(lawyersRes.lawyers);
       }
       setLawyersRevealed(true);
       addToast("Document analyzed successfully.", "success");
     } catch {
+      if (!isMountedRef.current) return;
       setIsTyping(false);
       setMessages((prev) =>
         prev.map((m) =>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Lawyer } from "./types";
-import { Dialog, DialogContent } from "../ui/dialog";
-import { Calendar, MapPin, Tag, X } from "lucide-react";
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from "../ui/dialog";
+import { Calendar, MapPin, Tag } from "lucide-react";
 
 interface LawyerProfileModalProps {
   lawyer: Lawyer | null;
@@ -32,24 +32,6 @@ export const LawyerProfileModal: React.FC<LawyerProfileModalProps> = ({
         }}
       >
         <div style={{ padding: "28px 28px 24px", position: "relative" }}>
-          {/* Close button */}
-          <button
-            type="button"
-            className="icon-btn"
-            style={{
-              position: "absolute",
-              top: 20,
-              right: 20,
-              zIndex: 10,
-              width: 32,
-              height: 32,
-            }}
-            onClick={onClose}
-            aria-label="Close profile"
-          >
-            <X size={16} />
-          </button>
-
           {/* Header row */}
           <div style={{ display: "flex", gap: 20, alignItems: "center", marginBottom: 24 }}>
             <div
@@ -88,9 +70,9 @@ export const LawyerProfileModal: React.FC<LawyerProfileModalProps> = ({
 
             <div>
               <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                <h2 style={{ fontSize: "1.25rem", fontWeight: 700, margin: 0, color: "#111827" }}>
+                <DialogTitle style={{ fontSize: "1.25rem", fontWeight: 700, margin: 0, color: "#111827" }}>
                   {lawyer.name}
-                </h2>
+                </DialogTitle>
                 {lawyer.verified && (
                   <span title="Verified lawyer" style={{ color: "#E8AE68", display: "inline-flex" }}>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
@@ -106,9 +88,9 @@ export const LawyerProfileModal: React.FC<LawyerProfileModalProps> = ({
                   </span>
                 )}
               </div>
-              <p style={{ fontSize: "0.8125rem", fontWeight: 600, color: "#7A4A12", margin: "2px 0 6px" }}>
+              <DialogDescription style={{ fontSize: "0.8125rem", fontWeight: 600, color: "#7A4A12", margin: "2px 0 6px" }}>
                 {lawyer.specialization}
-              </p>
+              </DialogDescription>
               <div style={{ fontSize: "0.8125rem", display: "flex", gap: 6, alignItems: "center" }}>
                 <strong style={{ color: "#111827" }}>★ {lawyer.rating.toFixed(1)}</strong>
                 <span style={{ color: "#9CA3AF" }}>({lawyer.reviewCount} reviews)</span>
