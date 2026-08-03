@@ -12,6 +12,7 @@ import {
 import FigmaBentoGrid from "./components/FigmaBentoGrid";
 import TestDiffCardStack from "./components/TestDiffCardStack";
 import TestDiff1LoadingBar from "./components/TestDiff1LoadingBar";
+import { ConsultationWorkspace } from "./components/consultation";
 import lawyerWorkplace from "../assets/lawyer_white_6.jpg";
 import lawyerRealEstate from "../assets/lawyer_white_7.jpg";
 import lawyerFinance from "../assets/lawyer_white_8.jpg";
@@ -1098,6 +1099,7 @@ function TeamSection() {
 }
 
 export default function App() {
+  const [showConsultation, setShowConsultation] = useState(false);
   const [mobileOpen, setMobileOpen]       = useState(false);
   const [scrolled, setScrolled]           = useState(false);
   const [docHovered, setDocHovered]       = useState<string | null>(null);
@@ -1114,6 +1116,10 @@ export default function App() {
     }
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  if (showConsultation) {
+    return <ConsultationWorkspace onBackToLanding={() => setShowConsultation(false)} />;
+  }
 
   return (
     <div style={{ fontFamily: "'Switzer', sans-serif", color: C.charcoal, WebkitFontSmoothing: "antialiased", overflowX: "hidden" }}>
@@ -1150,10 +1156,10 @@ export default function App() {
             </div>
             <div style={{ display: "flex", gap: 36, fontSize: "0.9rem", color: C.charcoalSoft, alignItems: "center" }}>
               {["Analyze", "Lawyers", "Resources", "About"].map(l => (
-                <a key={l} href="#" style={{ textDecoration: "none", color: "inherit", fontWeight: 500 }}>{l}</a>
+                <a key={l} href="#" onClick={(e) => { if (l === "Analyze" || l === "Lawyers") { e.preventDefault(); setShowConsultation(true); } }} style={{ textDecoration: "none", color: "inherit", fontWeight: 500 }}>{l}</a>
               ))}
             </div>
-            <button className="nyay-btn" style={{ display: "flex", alignItems: "center", justifyContent: "center", background: "#000000", color: "#ffffff", border: "none", height: 40, padding: "0 20px", fontSize: "0.88rem", fontWeight: 600, cursor: "pointer", fontFamily: "inherit" }}>
+            <button className="nyay-btn" onClick={() => setShowConsultation(true)} style={{ display: "flex", alignItems: "center", justifyContent: "center", background: "#000000", color: "#ffffff", border: "none", height: 40, padding: "0 20px", fontSize: "0.88rem", fontWeight: 600, cursor: "pointer", fontFamily: "inherit" }}>
               Get Started
             </button>
           </div>
@@ -1285,7 +1291,7 @@ export default function App() {
                   we find who can act on it.
                 </p>
               </div>
-              <button className="nyay-btn" style={{
+              <button className="nyay-btn" onClick={() => setShowConsultation(true)} style={{
                 display: "inline-flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -1541,7 +1547,7 @@ export default function App() {
               Upload any legal document and understand exactly what you're signing.
             </p>
             <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
-              <button className="nyay-btn" style={{
+              <button className="nyay-btn" onClick={() => setShowConsultation(true)} style={{
                 background: "#000000",
                 color: "#ffffff",
                 border: "none",
@@ -1555,7 +1561,7 @@ export default function App() {
                 alignItems: "center",
                 justifyContent: "center",
               }}>Analyze Your Document →</button>
-              <button className="nyay-btn" style={{
+              <button className="nyay-btn" onClick={() => setShowConsultation(true)} style={{
                 background: "transparent",
                 color: "#000000",
                 border: "1px solid #000000",
