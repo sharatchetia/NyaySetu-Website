@@ -26,12 +26,14 @@ def generate_summary(text: str) -> str:
 
     prompt = (
         "You are an expert legal assistant. Analyze the provided legal document and generate "
-        "a concise legal summary covering the following four specific sections:\n\n"
+        "a simple-English summary (maximum 300 words total) using clear, plain, non-jargon language "
+        "that non-lawyers can easily understand.\n\n"
+        "Cover the following four specific sections:\n"
         "1. Purpose: The overall goal and nature of the contract/document.\n"
         "2. Important Clauses: Key terms, key dates, payment terms, or critical conditions.\n"
         "3. Risks: Key legal liabilities, penalties, indemnity, or risk exposure.\n"
         "4. Obligations: Core duties and legal obligations assigned to the parties.\n\n"
-        "Format the output clearly under headers for each section.\n\n"
+        "Ensure the summary is easy to understand and does not exceed 300 words. Format the output clearly under headers for each section.\n\n"
         f"--- Document Content ---\n{text}"
     )
 

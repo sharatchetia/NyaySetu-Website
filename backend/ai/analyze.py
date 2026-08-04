@@ -46,7 +46,11 @@ def analyze_document(file_path: Union[str, Path]) -> Dict[str, Any]:
     confidence = classification.get("confidence", 0.0)
 
     # 3. Gemini Summarization
-    summary = generate_summary(text)
+    try:
+        summary = generate_summary(text)
+    except Exception as e:
+        logger.error(f"Gemini summarization failed in analyze_document: {e}")
+        summary = f"Summary unavailable: {str(e)}"
 
     # 4. Construct Final Payload
     payload = {
