@@ -1,3 +1,4 @@
+import time
 import logging
 from typing import Dict, Any, Union
 from pathlib import Path
@@ -14,26 +15,31 @@ def analyze_document(file_path: Union[str, Path]) -> Dict[str, Any]:
     Primary public entrypoint for the AI Document Analysis Module.
 
     Workflow:
-        1. Extract text from document (.pdf or .docx)
-        2. Run ML text classification pipeline
-        3. Generate legal summary via Gemini API
-        4. Return structured JSON outcome
+        1. Measure pipeline execution start time
+        2. Extract text from document (.pdf, .docx, .txt, .png, .jpg, .jpeg)
+        3. Run ML text classification pipeline
+        4. Generate legal summary via Gemini API (or return structured summary error)
+        5. Return consolidated JSON payload with processing metadata
 
     Args:
-        file_path (Union[str, Path]): Path to target .pdf, .docx, or .txt file.
+        file_path (Union[str, Path]): Path to target document or image file.
 
     Returns:
-        Dict[str, Any]: Consolidated dictionary:
+        Dict[str, Any]: Consolidated payload dictionary containing:
             - category (str): Predicted document category.
-            - confidence (float): Classification confidence score.
-            - summary (str): Generated legal summary (Purpose, Clauses, Risks, Obligations).
+            - confidence (float): Classification confidence score percentage.
+            - summary (Optional[str]): Generated simple-English summary or None if failed.
+            - summaryError (Optional[str]): Error reason string if summarization failed, or None.
             - textLength (int): Character count of extracted plain text.
+            - processingTime (str): Total execution time string (e.g. '0.45s').
+            - modelVersion (str): Model version identifier ('v1').
 
     Raises:
         FileNotFoundError: If the document file does not exist.
         ValueError: If file type is unsupported or text extraction produces empty text.
-        RuntimeError: If critical failures occur during document processing.
+        RuntimeError: If critical failures occur during document text extraction or parsing.
     """
+    start_time = time.perf_counter()
     logger.info(f"Initiating analyze_document pipeline for: {file_path}")
 
     # 1. Extract Text
@@ -45,22 +51,39 @@ def analyze_document(file_path: Union[str, Path]) -> Dict[str, Any]:
     category = classification.get("category", "Unknown")
     confidence = classification.get("confidence", 0.0)
 
-    # 3. Gemini Summarization
+    # 3. Gemini Summarization (Fault-Tolerant)
     try:
-        summary = generate_summary(text)
+        summarization_res = generate_summary(text)
+        if isinstance(summarization_res, dict):
+            summary = summarization_res.get("summary")
+            summary_error = summarization_res.get("summaryError")
+        else:
+            summary = str(summarization_res) if summarization_res else None
+            summary_error = None
     except Exception as e:
         logger.error(f"Gemini summarization failed in analyze_document: {e}")
-        summary = f"Summary unavailable: {str(e)}"
+        summary = None
+        summary_error = f"Summarization failed due to unexpected error: {str(e)}"
 
-    # 4. Construct Final Payload
+    # 4. Processing Time Metadata
+    elapsed = time.perf_counter() - start_time
+    processing_time_str = f"{elapsed:.2f}s"
+
+    # 5. Construct Final Payload
     payload = {
         "category": category,
         "confidence": confidence,
         "summary": summary,
+        "summaryError": summary_error,
         "textLength": text_length,
+        "processingTime": processing_time_str,
+        "modelVersion": "v1",
     }
 
-    logger.info(f"Successfully analyzed document '{file_path}'. Category: {category}, Length: {text_length}")
+    logger.info(
+        f"Successfully analyzed document '{file_path}'. Category: {category}, "
+        f"Length: {text_length}, Time: {processing_time_str}"
+    )
     return payload
 
 

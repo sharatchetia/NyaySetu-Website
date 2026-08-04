@@ -1,28 +1,54 @@
 import os
 import logging
-from typing import Dict
+from typing import Dict, Any, Optional
 
 logger = logging.getLogger(__name__)
 
+# Intelligent truncation limit (~2500-3000 words) to avoid Gemini token limits
+MAX_TEXT_CHARACTERS = 12000
 
-def generate_summary(text: str) -> str:
+
+def generate_summary(text: str) -> Dict[str, Optional[str]]:
     """
     Generate a legal document summary using the Gemini API.
     Covers: Purpose, Important Clauses, Risks, Obligations.
+
+    Handles size checking, intelligent truncation, and structured error responses.
 
     Args:
         text (str): Document text to summarize.
 
     Returns:
-        str: Summarized document text.
+        Dict[str, Optional[str]]: Dictionary with structure:
+            - summary: Summarized text or None if failed.
+            - summaryError: Error reason string if failed, or None if successful.
     """
     if not text or not isinstance(text, str) or not text.strip():
-        return "Unable to generate summary: Extracted document text is empty."
+        return {
+            "summary": None,
+            "summaryError": "Extracted document text is empty."
+        }
 
     api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
         logger.warning("GEMINI_API_KEY environment variable is not configured.")
-        return "Summary unavailable: GEMINI_API_KEY environment variable is not set."
+        return {
+            "summary": None,
+            "summaryError": "GEMINI_API_KEY environment variable is not configured."
+        }
+
+    # Intelligently truncate large documents while preserving the beginning
+    if len(text) > MAX_TEXT_CHARACTERS:
+        logger.info(
+            f"Extracted text length ({len(text)} chars) exceeds limit ({MAX_TEXT_CHARACTERS} chars). "
+            "Intelligently truncating text before summarization."
+        )
+        truncated_text = (
+            text[:MAX_TEXT_CHARACTERS]
+            + "\n\n[Note: Document text truncated for summarization due to size limit.]"
+        )
+    else:
+        truncated_text = text
 
     prompt = (
         "You are an expert legal assistant. Analyze the provided legal document and generate "
@@ -34,14 +60,21 @@ def generate_summary(text: str) -> str:
         "3. Risks: Key legal liabilities, penalties, indemnity, or risk exposure.\n"
         "4. Obligations: Core duties and legal obligations assigned to the parties.\n\n"
         "Ensure the summary is easy to understand and does not exceed 300 words. Format the output clearly under headers for each section.\n\n"
-        f"--- Document Content ---\n{text}"
+        f"--- Document Content ---\n{truncated_text}"
     )
 
     try:
-        return _call_gemini_api(prompt, api_key)
+        summary_text = _call_gemini_api(prompt, api_key)
+        return {
+            "summary": summary_text,
+            "summaryError": None
+        }
     except Exception as e:
         logger.error(f"Gemini API summarization failed: {e}")
-        return f"Summary generation failed due to error: {str(e)}"
+        return {
+            "summary": None,
+            "summaryError": f"Gemini API summarization failed: {str(e)}"
+        }
 
 
 def _call_gemini_api(prompt: str, api_key: str) -> str:

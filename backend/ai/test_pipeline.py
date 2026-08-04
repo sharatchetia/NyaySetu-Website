@@ -3,15 +3,14 @@ import json
 import tempfile
 from pathlib import Path
 
-# Ensure project root directory is in sys.path for backend.ai imports
+# Ensure project root directory is in sys.path
 root_dir = Path(__file__).resolve().parent.parent.parent
 if str(root_dir) not in sys.path:
     sys.path.insert(0, str(root_dir))
 
 from backend.ai.analyze import analyze_document
 
-
-SAMPLE_LEGAL_DOCUMENT = """
+SAMPLE_LEGAL_TEXT = """
 NON-DISCLOSURE AND CONFIDENTIALITY AGREEMENT
 
 This Non-Disclosure Agreement ("Agreement") is entered into as of January 1, 2026, by and between TechCorp Solutions Pvt. Ltd. ("Disclosing Party") and InnovateX Analytics ("Receiving Party").
@@ -34,34 +33,73 @@ The Disclosing Party agrees to share proprietary technical specifications, softw
 """
 
 
-def main():
-    """
-    Test script to invoke analyze_document with a sample legal document
-    and print the resulting JSON response.
-    """
-    # Check if a custom file path is provided as CLI argument
-    if len(sys.argv) > 1 and Path(sys.argv[1]).exists():
-        sample_path = Path(sys.argv[1])
-        cleanup_needed = False
-    else:
-        # Create a temporary sample text document
-        temp_dir = Path(tempfile.gettempdir())
-        sample_path = temp_dir / "sample_legal_document.txt"
-        sample_path.write_text(SAMPLE_LEGAL_DOCUMENT, encoding="utf-8")
-        cleanup_needed = True
+def create_sample_pdf(file_path: Path):
+    import fitz
+    doc = fitz.open()
+    page = doc.new_page()
+    rect = fitz.Rect(50, 50, 550, 750)
+    page.insert_textbox(rect, SAMPLE_LEGAL_TEXT, fontsize=10)
+    doc.save(str(file_path))
+    doc.close()
 
-    print(f"Executing analyze_document() on sample document: {sample_path}\n")
+
+def create_sample_docx(file_path: Path):
+    from docx import Document
+    doc = Document()
+    doc.add_heading("NON-DISCLOSURE AGREEMENT", level=1)
+    for paragraph in SAMPLE_LEGAL_TEXT.strip().split("\n\n"):
+        doc.add_paragraph(paragraph)
+    doc.save(str(file_path))
+
+
+def create_sample_image(file_path: Path):
+    from PIL import Image, ImageDraw
+    img = Image.new("RGB", (900, 600), color=(255, 255, 255))
+    draw = ImageDraw.Draw(img)
+    lines = SAMPLE_LEGAL_TEXT.strip().split("\n")
+    y = 20
+    for line in lines[:20]:  # Draw first lines onto image canvas
+        draw.text((20, y), line, fill=(0, 0, 0))
+        y += 24
+    img.save(str(file_path))
+
+
+def test_format(format_name: str, file_path: Path):
+    print(f"==================================================")
+    print(f" Testing Format: {format_name} ({file_path.name})")
+    print(f"==================================================")
+    try:
+        result = analyze_document(file_path)
+        print("Returned JSON Response:")
+        print(json.dumps(result, indent=2))
+        print("\n")
+    except Exception as e:
+        print(f"Error testing format {format_name}: {e}\n")
+
+
+def main():
+    temp_dir = Path(tempfile.gettempdir())
+
+    pdf_path = temp_dir / "test_sample_agreement.pdf"
+    docx_path = temp_dir / "test_sample_agreement.docx"
+    png_path = temp_dir / "test_sample_agreement.png"
+
+    print("Generating sample test files (PDF, DOCX, PNG/JPG)...")
+    create_sample_pdf(pdf_path)
+    create_sample_docx(docx_path)
+    create_sample_image(png_path)
 
     try:
-        result = analyze_document(sample_path)
-        print("--- JSON Response ---")
-        print(json.dumps(result, indent=2))
+        test_format("PDF Document", pdf_path)
+        test_format("DOCX Document", docx_path)
+        test_format("Image Document (PNG/JPG)", png_path)
     finally:
-        if cleanup_needed and sample_path.exists():
-            try:
-                sample_path.unlink()
-            except Exception:
-                pass
+        for path in [pdf_path, docx_path, png_path]:
+            if path.exists():
+                try:
+                    path.unlink()
+                except Exception:
+                    pass
 
 
 if __name__ == "__main__":
