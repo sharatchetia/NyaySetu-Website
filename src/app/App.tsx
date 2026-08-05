@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
+import { Routes, Route, useNavigate, Navigate, Link } from "react-router-dom";
 import { Briefcase, Home, Users, Scale, Shield, FileText, Bot, Tag, UserCheck, Heart, Upload, MessageSquare, Scan } from "lucide-react";
 import tableUploadImg from "../assets/table-upload.png";
 import howItWorksVideo from "../assets/loop_nyaysetu_process.mp4";
@@ -13,9 +14,12 @@ import FigmaBentoGrid from "./components/FigmaBentoGrid";
 import TestDiffCardStack from "./components/TestDiffCardStack";
 import TestDiff1LoadingBar from "./components/TestDiff1LoadingBar";
 import { ConsultationWorkspace } from "./components/consultation";
+import LoginPage from "./auth/LoginPage";
+import SignupPage from "./auth/SignupPage";
 import lawyerWorkplace from "../assets/lawyer_white_6.jpg";
 import lawyerRealEstate from "../assets/lawyer_white_7.jpg";
 import lawyerFinance from "../assets/lawyer_white_8.jpg";
+
 
 /* ─── palette ─────────────────────────────────────── */
 const C = {
@@ -1098,8 +1102,8 @@ function TeamSection() {
   );
 }
 
-export default function App() {
-  const [showConsultation, setShowConsultation] = useState(false);
+function LandingPage() {
+  const navigate = useNavigate();
   const [mobileOpen, setMobileOpen]       = useState(false);
   const [scrolled, setScrolled]           = useState(false);
   const [docHovered, setDocHovered]       = useState<string | null>(null);
@@ -1116,10 +1120,6 @@ export default function App() {
     }
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  if (showConsultation) {
-    return <ConsultationWorkspace onBackToLanding={() => setShowConsultation(false)} />;
-  }
 
   return (
     <div style={{ fontFamily: "'Switzer', sans-serif", color: C.charcoal, WebkitFontSmoothing: "antialiased", overflowX: "hidden" }}>
@@ -1156,12 +1156,17 @@ export default function App() {
             </div>
             <div style={{ display: "flex", gap: 36, fontSize: "0.9rem", color: C.charcoalSoft, alignItems: "center" }}>
               {["Analyze", "Lawyers", "Resources", "About"].map(l => (
-                <a key={l} href="#" onClick={(e) => { if (l === "Analyze" || l === "Lawyers") { e.preventDefault(); setShowConsultation(true); } }} style={{ textDecoration: "none", color: "inherit", fontWeight: 500 }}>{l}</a>
+                <a key={l} href="#" onClick={(e) => { if (l === "Analyze" || l === "Lawyers") { e.preventDefault(); navigate("/signup"); } }} style={{ textDecoration: "none", color: "inherit", fontWeight: 500 }}>{l}</a>
               ))}
             </div>
-            <button className="nyay-btn" onClick={() => setShowConsultation(true)} style={{ display: "flex", alignItems: "center", justifyContent: "center", background: "#000000", color: "#ffffff", border: "none", height: 40, padding: "0 20px", fontSize: "0.88rem", fontWeight: 600, cursor: "pointer", fontFamily: "inherit" }}>
-              Get Started
-            </button>
+            <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+              <button onClick={() => navigate("/login")} style={{ background: "none", border: "none", color: C.charcoal, fontSize: "0.88rem", fontWeight: 600, cursor: "pointer", fontFamily: "inherit" }}>
+                Sign In
+              </button>
+              <button className="nyay-btn" onClick={() => navigate("/signup")} style={{ display: "flex", alignItems: "center", justifyContent: "center", background: "#000000", color: "#ffffff", border: "none", height: 40, padding: "0 20px", fontSize: "0.88rem", fontWeight: 600, cursor: "pointer", fontFamily: "inherit" }}>
+                Get Started
+              </button>
+            </div>
           </div>
         </nav>
       </div>
@@ -1221,7 +1226,7 @@ export default function App() {
             </h1>
           </div>
 
-          <div className="nyay-card" style={{
+          <div className="nyay-card" onClick={() => navigate("/signup")} style={{
             position: "relative",
             flex: "1 1 56%",
             minHeight: 0,
@@ -1291,7 +1296,7 @@ export default function App() {
                   we find who can act on it.
                 </p>
               </div>
-              <button className="nyay-btn" onClick={() => setShowConsultation(true)} style={{
+              <button className="nyay-btn" onClick={() => navigate("/signup")} style={{
                 display: "inline-flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -1471,7 +1476,7 @@ export default function App() {
                 <p style={{ color: C.charcoalSoft, fontSize: "0.95rem", lineHeight: 1.5, margin: "0 0 14px" }}>
                   Get instant classification, plain-language summaries,<br />and clause-level risk flags.
                 </p>
-                <a href="#" style={{
+                <a href="#" onClick={(e) => { e.preventDefault(); navigate("/signup"); }} style={{
                   color: C.charcoal,
                   fontSize: "0.95rem",
                   fontWeight: 500,
@@ -1500,7 +1505,7 @@ export default function App() {
                 <p style={{ color: C.charcoalSoft, fontSize: "0.95rem", lineHeight: 1.5, margin: "0 0 14px" }}>
                   Get matched with a vetted lawyer based on your<br />document's category and case type.
                 </p>
-                <a href="#" style={{
+                <a href="#" onClick={(e) => { e.preventDefault(); navigate("/signup"); }} style={{
                   color: C.charcoal,
                   fontSize: "0.95rem",
                   fontWeight: 500,
@@ -1547,7 +1552,7 @@ export default function App() {
               Upload any legal document and understand exactly what you're signing.
             </p>
             <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
-              <button className="nyay-btn" onClick={() => setShowConsultation(true)} style={{
+              <button className="nyay-btn" onClick={() => navigate("/signup")} style={{
                 background: "#000000",
                 color: "#ffffff",
                 border: "none",
@@ -1561,7 +1566,7 @@ export default function App() {
                 alignItems: "center",
                 justifyContent: "center",
               }}>Analyze Your Document →</button>
-              <button className="nyay-btn" onClick={() => setShowConsultation(true)} style={{
+              <button className="nyay-btn" onClick={() => navigate("/signup")} style={{
                 background: "transparent",
                 color: "#000000",
                 border: "1px solid #000000",
@@ -1600,9 +1605,17 @@ export default function App() {
               <div key={col.heading}>
                 <div style={{ color: "rgba(255,255,255,0.28)", fontSize: "0.76rem", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 16 }}>{col.heading}</div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                  {col.links.map(l => (
-                    <a key={l} href="#" style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.92rem", textDecoration: "none" }}>{l}</a>
-                  ))}
+                  {col.links.map(l => {
+                    const handleFooterClick = (e: React.MouseEvent) => {
+                      if (l === "Analyze Document" || l === "Find Lawyers" || l === "How it Works" || l === "Pricing") {
+                        e.preventDefault();
+                        navigate("/signup");
+                      }
+                    };
+                    return (
+                      <a key={l} href="#" onClick={handleFooterClick} style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.92rem", textDecoration: "none" }}>{l}</a>
+                    );
+                  })}
                 </div>
               </div>
             ))}
@@ -1617,3 +1630,21 @@ export default function App() {
     </div>
   );
 }
+
+function UploadWorkspaceWrapper() {
+  const navigate = useNavigate();
+  return <ConsultationWorkspace onBackToLanding={() => navigate("/")} />;
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/signup" element={<SignupPage />} />
+      <Route path="/upload" element={<UploadWorkspaceWrapper />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
+  );
+}
+
