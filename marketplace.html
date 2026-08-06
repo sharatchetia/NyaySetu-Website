@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matched Counsel Index — A specialist for every clause</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="grain"></div>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top">
+      <span class="brand-mark">§</span> Counsel<span class="brand-accent">Index</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#specializations">Specializations</a>
+      <a href="#directory">Directory</a>
+      <a href="#how">How it works</a>
+    </nav>
+    <button class="btn btn-ghost" data-action="open-signin">Sign in</button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="blob blob-1" aria-hidden="true"></div>
+    <div class="blob blob-2" aria-hidden="true"></div>
+    <div class="blob blob-3" aria-hidden="true"></div>
+    <div class="hero-copy">
+      <p class="eyebrow">MATCHED COUNSEL INDEX</p>
+      <h1 class="hero-title">
+        <span class="line reveal-line" style="--d:0">Find the counsel</span>
+        <span class="line reveal-line" style="--d:1">behind <em class="calligraphy">the clause.</em></span>
+      </h1>
+      <p class="hero-sub reveal-line" style="--d:2">
+        Find legal experts who have reviewed, negotiated, and closed thousands of terms exactly like yours.
+        Not a directory, a match.
+      </p>
+
+      <form class="search-bar reveal-line" style="--d:3" id="search-form">
+        <svg class="icon-search" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <input id="search-input" type="text" placeholder="Search by clause type, jurisdiction, or keyword" autocomplete="off">
+        <button type="submit" class="btn btn-primary">Search</button>
+      </form>
+
+      <div class="social-proof reveal-line" style="--d:4">
+        <div class="avatar-stack" id="avatar-stack"></div>
+        <p><strong id="expert-count">152 experts</strong> currently available</p>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal-line" style="--d:2">
+      <div class="hero-card" id="hero-card">
+        <div class="hero-card-top">
+          <span class="pill pill-live"><span class="dot"></span>MATCH FOUND</span>
+          <div class="context">
+            <span class="context-label">LEGAL CONTEXT</span>
+            <span class="context-value" id="typing-text"></span>
+          </div>
+        </div>
+        <div class="hero-card-photo">
+          <img src="" data-face="0" alt="Adv. Aryan Sharma">
+        </div>
+        <div class="hero-card-bottom">
+          <span class="hero-card-name">Adv. Aryan Sharma</span>
+          <span class="rating-chip">★ 4.9</span>
+        </div>
+      </div>
+      <div class="hero-glow"></div>
+    </div>
+  </section>
+
+  <!-- SPECIALIZATIONS -->
+  <section class="specializations" id="specializations">
+    <div class="blob blob-4" aria-hidden="true"></div>
+    <div class="section-head">
+      <p class="eyebrow">MARKETPLACE SPECIALIZATIONS</p>
+      <div class="carousel-controls">
+        <button class="arrow-btn" data-carousel="prev" aria-label="Scroll left">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="arrow-btn" data-carousel="next" aria-label="Scroll right">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="spec-track" id="spec-track"></div>
+  </section>
+
+  <!-- DIRECTORY -->
+  <section class="directory" id="directory">
+    <aside class="sidebar">
+      <p class="eyebrow">SPECIALIZATIONS</p>
+      <ul class="filter-list" id="filter-list"></ul>
+
+      <div class="divider"></div>
+
+      <p class="eyebrow">GLOBAL COVERAGE</p>
+      <div class="select-wrap">
+        <select id="jurisdiction-select">
+          <option>All Indian Jurisdictions</option>
+          <option>Mumbai</option>
+          <option>Delhi NCR</option>
+          <option>Bengaluru</option>
+          <option>Chennai</option>
+          <option>Hyderabad</option>
+        </select>
+        <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+
+      <div class="toggle-card">
+        <div>
+          <p class="toggle-title">Fast response</p>
+          <p class="toggle-sub">UNDER 2 HOURS</p>
+        </div>
+        <button class="switch" id="fast-toggle" role="switch" aria-checked="true">
+          <span class="switch-knob"></span>
+        </button>
+      </div>
+    </aside>
+
+    <div class="results">
+      <div class="results-head">
+        <div>
+          <h2 id="results-count">152 experts available</h2>
+          <p class="results-sub">Verified specialists for <u id="results-filter">All Clauses</u> in <u>India</u></p>
+        </div>
+        <div class="sort-wrap">
+          <span class="sort-label">SORT BY</span>
+          <div class="select-wrap select-sort">
+            <select id="sort-select">
+              <option value="relevance">Relevance</option>
+              <option value="rating">Highest rated</option>
+              <option value="experience">Most experienced</option>
+              <option value="response">Fastest response</option>
+              <option value="name">Name A–Z</option>
+            </select>
+            <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Featured expert -->
+      <article class="featured-card" id="featured-card"></article>
+
+      <!-- Grid -->
+      <div class="card-grid" id="card-grid"></div>
+
+      <div class="load-more-wrap">
+        <button class="btn btn-outline" id="load-more">
+          <span id="load-more-text">Load more specialists</span>
+          <span class="spinner" id="load-spinner" hidden></span>
+        </button>
+        <p class="showing-count" id="showing-count">Showing 6 of 152 experts</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>© 2026 CounselIndex. A specialist for every clause.</p>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal-panel" id="modal-panel" role="dialog" aria-modal="true">
+    <button class="modal-close" id="modal-close" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
