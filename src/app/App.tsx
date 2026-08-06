@@ -1291,7 +1291,7 @@ export default function App() {
                   we find who can act on it.
                 </p>
               </div>
-              <button className="nyay-btn" onClick={() => setShowConsultation(true)} style={{
+              <button className="nyay-btn" onClick={() => { window.location.href = "/marketplace/index.html"; }} style={{
                 display: "inline-flex",
                 alignItems: "center",
                 justifyContent: "center",

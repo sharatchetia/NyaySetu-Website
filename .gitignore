@@ -22,6 +22,7 @@ __pycache__/
 .DS_Store
 Thumbs.db
 
-# Archives
-*.zip
+# Backup / Reference
+changes/
+page3_bento_testing/
 
