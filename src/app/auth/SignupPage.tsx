@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { auth, db, googleProvider } from "./firebaseConfig";
@@ -9,6 +9,17 @@ type Step = "role" | "user" | "lawyer";
 
 export default function SignupPage() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const redirectTo = (location.state as { redirectTo?: string })?.redirectTo || "/upload";
+
+  const handleRedirect = () => {
+    if (redirectTo.endsWith(".html") || redirectTo.startsWith("http")) {
+      window.location.href = redirectTo;
+    } else {
+      navigate(redirectTo);
+    }
+  };
+
   const [step, setStep] = useState<Step>("role");
 
   // User form state
@@ -103,7 +114,7 @@ export default function SignupPage() {
 
       setStatus({ message: "Account created successfully! Redirecting…", isError: false });
       setTimeout(() => {
-        navigate("/upload");
+        handleRedirect();
       }, 500);
     } catch (err: any) {
       console.error(err);
@@ -149,7 +160,7 @@ export default function SignupPage() {
 
       setStatus({ message: "Lawyer profile created successfully! Redirecting…", isError: false });
       setTimeout(() => {
-        navigate("/upload");
+        handleRedirect();
       }, 500);
     } catch (err: any) {
       console.error(err);
@@ -174,7 +185,7 @@ export default function SignupPage() {
 
       setStatus({ message: "Signed in with Google! Redirecting…", isError: false });
       setTimeout(() => {
-        navigate("/upload");
+        handleRedirect();
       }, 500);
     } catch (err: any) {
       console.error(err);
@@ -195,7 +206,7 @@ export default function SignupPage() {
           </span>
           Nyay<span className="logo-accent">Setu</span>
         </Link>
-        <Link className="topbar-link" to="/login">
+        <Link className="topbar-link" to="/login" state={{ redirectTo }}>
           Already have an account? <strong>Sign in</strong>
         </Link>
       </header>
@@ -280,7 +291,7 @@ export default function SignupPage() {
                 </div>
 
                 <p className="form-foot">
-                  Already have an account? <Link to="/login">Sign in</Link>
+                  Already have an account? <Link to="/login" state={{ redirectTo }}>Sign in</Link>
                 </p>
               </div>
             )}

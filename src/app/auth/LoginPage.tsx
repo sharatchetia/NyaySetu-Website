@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import {
   setPersistence,
   browserLocalPersistence,
@@ -12,6 +12,17 @@ import "../../styles/auth.css";
 
 export default function LoginPage() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const redirectTo = (location.state as { redirectTo?: string })?.redirectTo || "/upload";
+
+  const handleRedirect = () => {
+    if (redirectTo.endsWith(".html") || redirectTo.startsWith("http")) {
+      window.location.href = redirectTo;
+    } else {
+      navigate(redirectTo);
+    }
+  };
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -51,7 +62,7 @@ export default function LoginPage() {
       await signInWithEmailAndPassword(auth, email, password);
       setStatus({ message: "Signed in! Redirecting you now…", isError: false });
       setTimeout(() => {
-        navigate("/upload");
+        handleRedirect();
       }, 500);
     } catch (err: any) {
       setStatus({ message: friendlyAuthError(err), isError: true });
@@ -67,7 +78,7 @@ export default function LoginPage() {
       await signInWithPopup(auth, googleProvider);
       setStatus({ message: "Signed in with Google! Redirecting you now…", isError: false });
       setTimeout(() => {
-        navigate("/upload");
+        handleRedirect();
       }, 500);
     } catch (err: any) {
       setStatus({ message: friendlyAuthError(err), isError: true });
@@ -87,7 +98,7 @@ export default function LoginPage() {
           </span>
           Nyay<span className="logo-accent">Setu</span>
         </Link>
-        <Link className="topbar-link" to="/signup">
+        <Link className="topbar-link" to="/signup" state={{ redirectTo }}>
           Need an account? <strong>Get started</strong>
         </Link>
       </header>
@@ -205,7 +216,7 @@ export default function LoginPage() {
               </button>
 
               <p className="form-foot">
-                New to NyaySetu? <Link to="/signup">Create an account</Link>
+                New to NyaySetu? <Link to="/signup" state={{ redirectTo }}>Create an account</Link>
               </p>
 
               <p className="secure-badge">
