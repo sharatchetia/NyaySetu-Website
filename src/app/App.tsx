@@ -231,6 +231,7 @@ function DocCard({ d, hovered, onHover, onLeave }: {
 
 /* ─── Specialization Card (Original Style with borderRadius: 0) ─────────────────────────── */
 function SpecCard({ s }: { s: typeof specializations[0] & { video?: string; useCardStack?: boolean; useLoadingBar?: boolean; hideText?: boolean; photoCard?: boolean; tag?: string; simpleButton?: boolean } }) {
+  const navigate = useNavigate();
   const [hov, setHov] = useState(false);
   const isTall = parseInt(s.row.split(" / ")[1]) - parseInt(s.row.split(" / ")[0]) >= 2;
   const hasVideo = Boolean(s.video);
@@ -243,6 +244,7 @@ function SpecCard({ s }: { s: typeof specializations[0] & { video?: string; useC
 
   return (
     <div
+      onClick={() => navigate("/login", { state: { redirectTo: "/marketplace/index.html" } })}
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
       style={{
@@ -1156,14 +1158,21 @@ function LandingPage() {
             </div>
             <div style={{ display: "flex", gap: 36, fontSize: "0.9rem", color: C.charcoalSoft, alignItems: "center" }}>
               {["Analyze", "Lawyers", "Resources", "About"].map(l => (
-                <a key={l} href="#" onClick={(e) => { if (l === "Analyze" || l === "Lawyers") { e.preventDefault(); navigate("/signup"); } }} style={{ textDecoration: "none", color: "inherit", fontWeight: 500 }}>{l}</a>
+                <a key={l} href="#" onClick={(e) => {
+                  e.preventDefault();
+                  if (l === "Lawyers") {
+                    navigate("/login", { state: { redirectTo: "/marketplace/index.html" } });
+                  } else {
+                    navigate("/login", { state: { redirectTo: "/upload" } });
+                  }
+                }} style={{ textDecoration: "none", color: "inherit", fontWeight: 500 }}>{l}</a>
               ))}
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
               <button onClick={() => navigate("/login")} style={{ background: "none", border: "none", color: C.charcoal, fontSize: "0.88rem", fontWeight: 600, cursor: "pointer", fontFamily: "inherit" }}>
                 Sign In
               </button>
-              <button className="nyay-btn" onClick={() => navigate("/signup")} style={{ display: "flex", alignItems: "center", justifyContent: "center", background: "#000000", color: "#ffffff", border: "none", height: 40, padding: "0 20px", fontSize: "0.88rem", fontWeight: 600, cursor: "pointer", fontFamily: "inherit" }}>
+              <button className="nyay-btn" onClick={() => navigate("/login", { state: { redirectTo: "/upload" } })} style={{ display: "flex", alignItems: "center", justifyContent: "center", background: "#000000", color: "#ffffff", border: "none", height: 40, padding: "0 20px", fontSize: "0.88rem", fontWeight: 600, cursor: "pointer", fontFamily: "inherit" }}>
                 Get Started
               </button>
             </div>
@@ -1226,7 +1235,7 @@ function LandingPage() {
             </h1>
           </div>
 
-          <div className="nyay-card" onClick={() => navigate("/signup")} style={{
+          <div className="nyay-card" onClick={() => navigate("/login", { state: { redirectTo: "/upload" } })} style={{
             position: "relative",
             flex: "1 1 56%",
             minHeight: 0,
@@ -1296,7 +1305,7 @@ function LandingPage() {
                   we find who can act on it.
                 </p>
               </div>
-              <button className="nyay-btn" onClick={() => { window.location.href = "/marketplace/index.html"; }} style={{
+              <button className="nyay-btn" onClick={() => navigate("/login", { state: { redirectTo: "/marketplace/index.html" } })} style={{
                 display: "inline-flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -1476,7 +1485,7 @@ function LandingPage() {
                 <p style={{ color: C.charcoalSoft, fontSize: "0.95rem", lineHeight: 1.5, margin: "0 0 14px" }}>
                   Get instant classification, plain-language summaries,<br />and clause-level risk flags.
                 </p>
-                <a href="#" onClick={(e) => { e.preventDefault(); navigate("/signup"); }} style={{
+                <a href="#" onClick={(e) => { e.preventDefault(); navigate("/login", { state: { redirectTo: "/upload" } }); }} style={{
                   color: C.charcoal,
                   fontSize: "0.95rem",
                   fontWeight: 500,
@@ -1505,7 +1514,7 @@ function LandingPage() {
                 <p style={{ color: C.charcoalSoft, fontSize: "0.95rem", lineHeight: 1.5, margin: "0 0 14px" }}>
                   Get matched with a vetted lawyer based on your<br />document's category and case type.
                 </p>
-                <a href="#" onClick={(e) => { e.preventDefault(); navigate("/signup"); }} style={{
+                <a href="#" onClick={(e) => { e.preventDefault(); navigate("/login", { state: { redirectTo: "/marketplace/index.html" } }); }} style={{
                   color: C.charcoal,
                   fontSize: "0.95rem",
                   fontWeight: 500,
@@ -1552,7 +1561,7 @@ function LandingPage() {
               Upload any legal document and understand exactly what you're signing.
             </p>
             <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
-              <button className="nyay-btn" onClick={() => navigate("/signup")} style={{
+              <button className="nyay-btn" onClick={() => navigate("/login", { state: { redirectTo: "/upload" } })} style={{
                 background: "#000000",
                 color: "#ffffff",
                 border: "none",
@@ -1566,7 +1575,7 @@ function LandingPage() {
                 alignItems: "center",
                 justifyContent: "center",
               }}>Analyze Your Document →</button>
-              <button className="nyay-btn" onClick={() => navigate("/signup")} style={{
+              <button className="nyay-btn" onClick={() => navigate("/login", { state: { redirectTo: "/marketplace/index.html" } })} style={{
                 background: "transparent",
                 color: "#000000",
                 border: "1px solid #000000",
@@ -1609,7 +1618,11 @@ function LandingPage() {
                     const handleFooterClick = (e: React.MouseEvent) => {
                       if (l === "Analyze Document" || l === "Find Lawyers" || l === "How it Works" || l === "Pricing") {
                         e.preventDefault();
-                        navigate("/signup");
+                        if (l === "Find Lawyers") {
+                          navigate("/login", { state: { redirectTo: "/marketplace/index.html" } });
+                        } else {
+                          navigate("/login", { state: { redirectTo: "/upload" } });
+                        }
                       }
                     };
                     return (
