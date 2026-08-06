@@ -43,11 +43,10 @@ Ensure you have the following installed on your machine:
 
 ## 💻 Frontend Installation & Setup
 
-1. **Install Frontend Dependencies**
-
-```bash
-npm install
-```
+1. **Install Frontend Dependencies**:
+   ```bash
+   npm install
+   ```
 
 2. **Run Frontend Development Server**
 
