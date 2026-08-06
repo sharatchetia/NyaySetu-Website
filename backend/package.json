@@ -1,0 +1,14 @@
+{
+  "name": "nyaysetu-backend",
+  "version": "1.0.0",
+  "description": "NyaySetu Backend Services - MongoDB Atlas Integration Module",
+  "type": "module",
+  "main": "config/db.js",
+  "scripts": {
+    "test:db": "node testConnection.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "mongodb": "^6.13.0"
+  }
+}
