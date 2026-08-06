@@ -1296,7 +1296,7 @@ function LandingPage() {
                   we find who can act on it.
                 </p>
               </div>
-              <button className="nyay-btn" onClick={() => navigate("/signup")} style={{
+              <button className="nyay-btn" onClick={() => { window.location.href = "/marketplace/index.html"; }} style={{
                 display: "inline-flex",
                 alignItems: "center",
                 justifyContent: "center",

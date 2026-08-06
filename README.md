@@ -236,3 +236,17 @@ Contribution areas:
 - Created lawyer recommendation UI components.
 - Implemented modular React component architecture.
 - Added API abstraction layer for future AI and backend integrations.
+
+---
+
+## Marketplace Frontend
+
+Implemented by:
+
+- @riihaaa (sprihagogoi27@gmail.com)
+
+Contribution areas:
+
+- Designed and implemented the CounselIndex Legal Specialist Marketplace frontend (`public/marketplace/`).
+- Created responsive HTML layout, CSS styling, interactive filtering, category tags, search, and lawyer detail modals.
+- Integrated marketplace navigation with main landing page.
